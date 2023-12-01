@@ -1,0 +1,41 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+//  {
+//     question:
+//       "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.",
+//     questionType: "True or False",
+//     options: ["True", "False"],
+//     isImage: true,
+//     images: ["", "", "", "", ""],
+//     boardType: "SSC",
+//     toghness: "Easy",
+//     subject: "Science",
+//     topicName: "Earth Science Discoveries",
+//     grade: "Class 10",
+//   },
+
+model Questions {
+  id          Int @id @default(autoincrement())
+  question    String  @db.Text()
+  questionType String
+  options     String[] @db.Text()
+  isImage     Boolean @db.Boolean()
+  images      String[] @db.Text()
+  boardType   String
+  toughness   String
+  subject     String
+  topicName   String
+  grade       String
+  createdDate String
+  updatedDate String
+}
