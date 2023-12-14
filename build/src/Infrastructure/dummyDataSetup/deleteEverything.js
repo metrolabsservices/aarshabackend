@@ -13,13 +13,24 @@ exports.deleteEverything = void 0;
 const client_1 = require("@prisma/client");
 const deleteEverything = () => __awaiter(void 0, void 0, void 0, function* () {
     const prisma = new client_1.PrismaClient();
+    const deleteList = [
+        "of Questions deleted",
+        "of Fee Details deleted",
+        "of Students deleted",
+    ];
+    const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
+    const studentLinkedFeedetails = prisma.feeDetail.deleteMany();
     const questionsDelete = prisma.questions.deleteMany();
-    const deletedData = yield prisma.$transaction([questionsDelete]);
-    var counter = 0;
-    deletedData.map((i) => {
-        counter = counter + i.count;
+    const studentUnlinkedData = prisma.student.deleteMany();
+    const deletedData = yield prisma.$transaction([
+        studentLinkedSubjectStatics,
+        questionsDelete,
+        studentLinkedFeedetails,
+        studentUnlinkedData,
+    ]);
+    deletedData.map((i, j) => {
+        console.log(i.count, deleteList[j]);
     });
-    console.log(`\n\n${counter} Previous Records were DELETED\n`);
     return deletedData;
 });
 exports.deleteEverything = deleteEverything;

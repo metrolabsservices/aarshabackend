@@ -39,3 +39,39 @@ model Questions {
   createdDate String
   updatedDate String
 }
+
+model Student {
+  id          Int       @id @default(autoincrement())
+  name        String
+  gradeNumber String
+  schoolName  String
+  boardType   String    // CBSE - SSC - IBSE
+  status      String    // away - regular - inactive
+  previousScore Int
+  subjectsAcquired String[]
+  joiningDate DateTime
+  duration    String
+  guardianName String
+  guardianPhoneNumber String
+  feeCharge   Int
+  feeDetails  FeeDetail[]
+  subjectStatistics SubjectStatistics[]
+}
+
+model FeeDetail {
+  id          Int       @id @default(autoincrement())
+  amount      Int
+  dateOfPaid  DateTime
+  paidBy      String
+  student     Student   @relation(fields: [studentId], references: [id])
+  studentId   Int
+}
+
+model SubjectStatistics {
+  id          Int       @id @default(autoincrement())
+  subjectName String
+  subjectScores String[]  // scoredMarks^^^maxMarks^^^DateOfTest^^^GradeNumber^^^
+  student     Student   @relation(fields: [studentId], references: [id])
+  studentId   Int
+}
+

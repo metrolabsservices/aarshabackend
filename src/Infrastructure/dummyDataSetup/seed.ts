@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { deleteEverything } from "./deleteEverything";
 import { questions } from "./questionBank";
+import { feeData, studentData, subjectStatics } from "./studentDeatils";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -8,12 +9,25 @@ async function main() {
   const questionsCreate = await prisma.questions.createMany({
     data: questions,
   });
-  // console.log(`${questionsCreate.count} records of Questions created.\n`);
-  return questionsCreate;
+  const studentCreate = await prisma.student.createMany({
+    data: studentData,
+  });
+  const studentFeeDetails = await prisma.feeDetail.createMany({
+    data: feeData,
+  });
+  const studentsubjectStatics = await prisma.subjectStatistics.createMany({
+    data: subjectStatics,
+  });
+
+  console.log(`
+  ${questionsCreate.count} records of Questions created.\n
+  ${studentCreate.count} records of Student created.\n
+  ${studentFeeDetails.count} records of Student Fee details created.\n
+  ${studentsubjectStatics.count} records of Student Subject details created.\n
+  `);
 }
 main()
-  .then(async (x) => {
-    console.log(x.count, "Questions created");
+  .then(async () => {
     await prisma.$disconnect();
   })
   .catch(async (e) => {

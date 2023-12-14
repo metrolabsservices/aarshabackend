@@ -1,3 +1,4 @@
+"use strict";
 // import { Questions } from "@prisma/client";
 // import { ErrorStore } from "../Interfaces/errorHandling";
 // import {
@@ -29,7 +30,6 @@
 //     }
 //     return out;
 //   }
-
 //   @Get("getproduct/all")
 //   public async getAllProducts(
 //     @Query() Filters?: string,
@@ -55,7 +55,6 @@
 //     }
 //     return out;
 //   }
-
 //   @Post("addproduct")
 //   public async addProduct(
 //     @Body() data: ProductData
@@ -69,7 +68,6 @@
 //     }
 //     return out;
 //   }
-
 //   @Post("addproduct/all")
 //   public async addProducts(
 //     @UploadedFile() file: Express.Multer.File,
@@ -85,7 +83,6 @@
 //     }
 //     return out;
 //   }
-
 //   @Put("{id}")
 //   public async updateProduct(
 //     @Path() id: number,
@@ -100,7 +97,6 @@
 //     }
 //     return out;
 //   }
-
 //   @Delete("{id}")
 //   public async deleteProduct(@Path() id: number): Promise<ErrorStore | string> {
 //     const productService = new ProductServices();
@@ -112,7 +108,6 @@
 //     }
 //     return out;
 //   }
-
 //   @Delete("deleteproduct/all")
 //   public async deleteAllProduct(): Promise<String | ErrorStore> {
 //     const productService = new ProductServices();

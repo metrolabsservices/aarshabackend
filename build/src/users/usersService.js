@@ -1,18 +1,22 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.UsersService = void 0;
-class UsersService {
-    get(id, name) {
-        return {
-            id,
-            email: "jane@doe.com",
-            name: name !== null && name !== void 0 ? name : "Jane Doe",
-            status: "Happy",
-            phoneNumbers: [],
-        };
-    }
-    create(userCreationParams) {
-        return Object.assign({ id: Math.floor(Math.random() * 10000), status: "Happy" }, userCreationParams);
-    }
-}
-exports.UsersService = UsersService;
+// import { User } from "./user";
+// // A post request should not contain an id.
+// export type UserCreationParams = Pick<User, "email" | "name" | "phoneNumbers">;
+// export class UsersService {
+//   public get(id: number, name?: string): User {
+//     return {
+//       id,
+//       email: "jane@doe.com",
+//       name: name ?? "Jane Doe",
+//       status: "Happy",
+//       phoneNumbers: [],
+//     };
+//   }
+//   public create(userCreationParams: UserCreationParams): User {
+//     return {
+//       id: Math.floor(Math.random() * 10000), // Random
+//       status: "Happy",
+//       ...userCreationParams,
+//     };
+//   }
+// }

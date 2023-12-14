@@ -1,12 +1,25 @@
 import { PrismaClient } from "@prisma/client";
 export const deleteEverything = async () => {
   const prisma = new PrismaClient();
+  const deleteList = [
+    "of Questions deleted",
+    "of Fee Details deleted",
+    "of Students deleted",
+  ];
+  const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
+  const studentLinkedFeedetails = prisma.feeDetail.deleteMany();
   const questionsDelete = prisma.questions.deleteMany();
-  const deletedData = await prisma.$transaction([questionsDelete]);
-  var counter = 0;
-  deletedData.map((i) => {
-    counter = counter + i.count;
+  const studentUnlinkedData = prisma.student.deleteMany();
+  const deletedData = await prisma.$transaction([
+    studentLinkedSubjectStatics,
+    questionsDelete,
+    studentLinkedFeedetails,
+    studentUnlinkedData,
+  ]);
+
+  deletedData.map((i, j) => {
+    console.log(i.count, deleteList[j]);
   });
-  console.log(`\n\n${counter} Previous Records were DELETED\n`);
+
   return deletedData;
 };
