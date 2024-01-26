@@ -3,6 +3,7 @@
 
 generator client {
   provider = "prisma-client-js"
+  previewFeatures = ["fullTextSearch"]
 }
 
 datasource db {
@@ -46,7 +47,7 @@ model Student {
   gradeNumber String
   schoolName  String
   boardType   String    // CBSE - SSC - IBSE
-  status      String    // away - regular - inactive
+  status      String    // AWAY - REGULAR - IN-ACTIVE
   previousScore Int
   subjectsAcquired String[]
   joiningDate DateTime

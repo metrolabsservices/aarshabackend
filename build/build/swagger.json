@@ -5,7 +5,300 @@
         "parameters": {},
         "requestBodies": {},
         "responses": {},
-        "schemas": {},
+        "schemas": {
+            "feeDetailsInterface": {
+                "properties": {
+                    "studentId": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "paidBy": {
+                        "type": "string"
+                    },
+                    "dateOfPaid": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "studentId",
+                    "paidBy",
+                    "dateOfPaid",
+                    "amount",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "subjectStatisticsInterface": {
+                "properties": {
+                    "subjectScores": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "studentId": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "subjectName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "subjectScores",
+                    "studentId",
+                    "subjectName",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "studentInterface": {
+                "properties": {
+                    "subjectStatistics": {
+                        "items": {
+                            "$ref": "#/components/schemas/subjectStatisticsInterface"
+                        },
+                        "type": "array",
+                        "nullable": true
+                    },
+                    "feeDetails": {
+                        "items": {
+                            "$ref": "#/components/schemas/feeDetailsInterface"
+                        },
+                        "type": "array",
+                        "nullable": true
+                    },
+                    "feeCharge": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "guardianPhoneNumber": {
+                        "type": "string"
+                    },
+                    "guardianName": {
+                        "type": "string"
+                    },
+                    "duration": {
+                        "type": "string"
+                    },
+                    "joiningDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "subjectsAcquired": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "previousScore": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "boardType": {
+                        "type": "string"
+                    },
+                    "schoolName": {
+                        "type": "string"
+                    },
+                    "gradeNumber": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "subjectStatistics",
+                    "feeDetails",
+                    "feeCharge",
+                    "guardianPhoneNumber",
+                    "guardianName",
+                    "duration",
+                    "joiningDate",
+                    "subjectsAcquired",
+                    "previousScore",
+                    "status",
+                    "boardType",
+                    "schoolName",
+                    "gradeNumber",
+                    "name",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "PageResponse_studentInterface_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/studentInterface"
+                        },
+                        "type": "array"
+                    },
+                    "totalCount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "items",
+                    "totalCount"
+                ],
+                "type": "object"
+            },
+            "ErrorStore": {
+                "properties": {
+                    "ErrorMessage": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ErrorMessage"
+                ],
+                "type": "object"
+            },
+            "ServiceResponse": {
+                "properties": {
+                    "data": {},
+                    "response": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "data",
+                    "response"
+                ],
+                "type": "object"
+            },
+            "studentCreateInterface": {
+                "properties": {
+                    "feeCharge": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "guardianPhoneNumber": {
+                        "type": "string"
+                    },
+                    "guardianName": {
+                        "type": "string"
+                    },
+                    "duration": {
+                        "type": "string"
+                    },
+                    "joiningDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "subjectsAcquired": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "previousScore": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "boardType": {
+                        "type": "string"
+                    },
+                    "schoolName": {
+                        "type": "string"
+                    },
+                    "gradeNumber": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "feeCharge",
+                    "guardianPhoneNumber",
+                    "guardianName",
+                    "duration",
+                    "joiningDate",
+                    "subjectsAcquired",
+                    "previousScore",
+                    "status",
+                    "boardType",
+                    "schoolName",
+                    "gradeNumber",
+                    "name"
+                ],
+                "type": "object"
+            },
+            "studentUpdateInterface": {
+                "properties": {
+                    "feeCharge": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "guardianPhoneNumber": {
+                        "type": "string"
+                    },
+                    "guardianName": {
+                        "type": "string"
+                    },
+                    "duration": {
+                        "type": "string"
+                    },
+                    "joiningDate": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "subjectsAcquired": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "previousScore": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "status": {
+                        "type": "string"
+                    },
+                    "boardType": {
+                        "type": "string"
+                    },
+                    "schoolName": {
+                        "type": "string"
+                    },
+                    "gradeNumber": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
+            }
+        },
         "securitySchemes": {}
     },
     "info": {
@@ -21,6 +314,53 @@
     },
     "openapi": "3.0.0",
     "paths": {
+        "/student/all/items": {
+            "get": {
+                "operationId": "GetAllStudents",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/PageResponse_studentInterface_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Student Management"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "Pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "Filters",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {}
+                        }
+                    }
+                ]
+            }
+        },
         "/student/{id}": {
             "get": {
                 "operationId": "GetStudentById",
@@ -29,7 +369,16 @@
                         "description": "Ok",
                         "content": {
                             "application/json": {
-                                "schema": {}
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/studentInterface"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
                             }
                         }
                     }
@@ -49,6 +398,129 @@
                         }
                     }
                 ]
+            },
+            "put": {
+                "operationId": "UpdateStudentById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Student Management"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/studentUpdateInterface"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DeleteStudentById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Student Management"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ]
+            }
+        },
+        "/student/create": {
+            "post": {
+                "operationId": "CreateStudent",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ServiceResponse"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Student Management"
+                ],
+                "security": [],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/studentCreateInterface"
+                            }
+                        }
+                    }
+                }
             }
         }
     },

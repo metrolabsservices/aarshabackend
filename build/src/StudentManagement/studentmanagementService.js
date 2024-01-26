@@ -11,6 +11,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.StudentmanagementService = void 0;
 const client_1 = require("@prisma/client");
+const pageOptimization_1 = require("../HelpingFunctions/pageOptimization");
+const filterOptimization_1 = require("../HelpingFunctions/filterOptimization");
 class StudentmanagementService {
     getStudentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -28,15 +30,134 @@ class StudentmanagementService {
                 return studentDeatilsById;
             });
             return getById()
-                .then((result) => __awaiter(this, void 0, void 0, function* () {
-                console.log(result);
-                yield prisma.$disconnect();
+                .then((result) => {
+                if (!result) {
+                    return new Error("Data Not Found");
+                }
                 return result;
-            }))
-                .catch((e) => __awaiter(this, void 0, void 0, function* () {
+            })
+                .catch((e) => {
                 console.error(e);
+                return new Error("Error retrieving student details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
                 yield prisma.$disconnect();
-                process.exit(1);
+            }));
+        });
+    }
+    getAllStudents(pageInfo) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const getAll = () => __awaiter(this, void 0, void 0, function* () {
+                var pagination = (0, pageOptimization_1.paginationOptimization)(pageInfo.Pagination);
+                var filterSet = (0, filterOptimization_1.filterOptimization)(pageInfo.Filters);
+                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign(Object.assign({}, filterSet), pagination), { include: {
+                        feeDetails: true,
+                        subjectStatistics: true,
+                    } }));
+                return studentDeatilsAll;
+            });
+            return getAll()
+                .then((result) => __awaiter(this, void 0, void 0, function* () {
+                // console.log("output of Query -- ", result);
+                if (result.length === 0) {
+                    return new Error("Data Not Found");
+                }
+                const count = yield prisma.student.count();
+                return { items: result, totalCount: count };
+            }))
+                .catch((e) => {
+                console.error(e);
+                return new Error("Error retrieving student details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    createStudent(pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const createPerson = () => __awaiter(this, void 0, void 0, function* () {
+                const createStudent = yield prisma.student.create({
+                    data: pack,
+                });
+                return createStudent;
+            });
+            return createPerson()
+                .then((result) => {
+                console.log(result);
+                return { response: "Record Updated Successfully", data: result.id };
+            })
+                .catch((e) => {
+                console.error(e);
+                return new Error("Error retrieving student details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    updateStudentById(id, pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const updateById = () => __awaiter(this, void 0, void 0, function* () {
+                const studentDetailsById = yield prisma.student.update({
+                    where: {
+                        id: id,
+                    },
+                    data: pack,
+                });
+                return studentDetailsById;
+            });
+            return updateById()
+                .then((result) => {
+                console.log(result);
+                return "Record Updated Successfully";
+            })
+                .catch((e) => {
+                console.error(e);
+                return new Error("Error retrieving student details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    deleteStudentById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const deleteById = () => __awaiter(this, void 0, void 0, function* () {
+                const secondTable = yield prisma.feeDetail.deleteMany({
+                    where: {
+                        studentId: id,
+                    },
+                });
+                const thirdTable = yield prisma.subjectStatistics.deleteMany({
+                    where: {
+                        studentId: id,
+                    },
+                });
+                const studentDetailsById = yield prisma.student.delete({
+                    where: {
+                        id: id,
+                    },
+                });
+                console.log(studentDetailsById, secondTable, thirdTable);
+                return studentDetailsById;
+            });
+            return deleteById()
+                .then((result) => {
+                console.log(result);
+                return "Record Deleted Successfully";
+            })
+                .catch((e) => {
+                var _a;
+                console.error(e);
+                return new Error((_a = e.meta) === null || _a === void 0 ? void 0 : _a.cause);
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
             }));
         });
     }

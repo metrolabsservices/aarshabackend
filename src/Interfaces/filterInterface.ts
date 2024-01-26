@@ -1,7 +1,7 @@
 export type filterInterface = {
-  type: string;
+  operation: string;
   key: string;
-  value: string;
+  value: string | string[];
 };
 
 export type pageInfoInterface = {

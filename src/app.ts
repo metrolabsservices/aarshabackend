@@ -5,12 +5,13 @@ import express, {
   Response as ExResponse,
   Request as ExRequest,
 } from "express";
-
+const cors = require("cors");
 import { RegisterRoutes } from "../build/routes";
 import swaggerUi from "swagger-ui-express";
 export const app = express();
 
 // Use body parser to read sent json payloads
+app.use(cors());
 app.use(
   urlencoded({
     extended: true,

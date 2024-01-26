@@ -38,10 +38,12 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.app = void 0;
 // src/app.ts
 const express_1 = __importStar(require("express"));
+const cors = require("cors");
 const routes_1 = require("../build/routes");
 const swagger_ui_express_1 = __importDefault(require("swagger-ui-express"));
 exports.app = (0, express_1.default)();
 // Use body parser to read sent json payloads
+exports.app.use(cors());
 exports.app.use((0, express_1.urlencoded)({
     extended: true,
 }));
