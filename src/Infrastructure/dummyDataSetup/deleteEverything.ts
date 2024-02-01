@@ -17,7 +17,7 @@ export const deleteEverything = async () => {
     studentUnlinkedData,
   ]);
 
-  deletedData.map((i, j) => {
+  deletedData.map((i: any, j: any) => {
     console.log(i.count, deleteList[j]);
   });
 

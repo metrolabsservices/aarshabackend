@@ -35,6 +35,19 @@ let StudentmanagementController = class StudentmanagementController extends tsoa
             return out;
         });
     }
+    getStudentByName(searchName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("------------- Controller is running ---------------");
+            const serv = new studentmanagementService_1.StudentmanagementService();
+            var out = yield serv.getAllByName(searchName);
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+        });
+    }
     getStudentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("------------- Controller is running ---------------");
@@ -94,6 +107,10 @@ __decorate([
     __param(0, (0, tsoa_1.Query)()),
     __param(1, (0, tsoa_1.Query)())
 ], StudentmanagementController.prototype, "getAllStudents", null);
+__decorate([
+    (0, tsoa_1.Post)("getbyname"),
+    __param(0, (0, tsoa_1.Body)())
+], StudentmanagementController.prototype, "getStudentByName", null);
 __decorate([
     (0, tsoa_1.Get)("{id}"),
     __param(0, (0, tsoa_1.Path)())

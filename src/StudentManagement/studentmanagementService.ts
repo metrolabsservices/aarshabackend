@@ -50,9 +50,58 @@ export class StudentmanagementService {
       const studentDeatilsAll = await prisma.student.findMany({
         ...filterSet,
         ...pagination,
+        orderBy: {
+          joiningDate: "desc",
+        },
         include: {
           feeDetails: true,
           subjectStatistics: true,
+        },
+      });
+      return studentDeatilsAll;
+    };
+    return getAll()
+      .then(async (result) => {
+        // console.log("output of Query -- ", result);
+        if (result.length === 0) {
+          return new Error("Data Not Found");
+        }
+        const count = await prisma.student.count();
+        return { items: result, totalCount: count };
+      })
+      .catch((e) => {
+        console.error(e);
+        return new Error("Error retrieving student details");
+      })
+      .finally(async () => {
+        await prisma.$disconnect();
+      });
+  }
+
+  public async getAllByName(searchName: string): Promise<any | Error> {
+    const prisma = new PrismaClient();
+    const getAll = async () => {
+      const studentDeatilsAll = await prisma.student.findMany({
+        where: {
+          OR: [
+            {
+              name: {
+                contains: searchName,
+              },
+            },
+            {
+              guardianName: {
+                contains: searchName,
+              },
+            },
+          ],
+        },
+
+        select: {
+          name: true,
+          guardianName: true,
+          guardianPhoneNumber: true,
+          feeDetails: true,
         },
       });
       return studentDeatilsAll;
@@ -88,11 +137,11 @@ export class StudentmanagementService {
     return createPerson()
       .then((result) => {
         console.log(result);
-        return { response: "Record Updated Successfully", data: result.id };
+        return { response: "Record Created Successfully", data: result.id };
       })
       .catch((e) => {
         console.error(e);
-        return new Error("Error retrieving student details");
+        return new Error("Failed to create Student");
       })
       .finally(async () => {
         await prisma.$disconnect();

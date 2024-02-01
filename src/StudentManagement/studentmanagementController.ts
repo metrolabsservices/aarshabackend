@@ -40,6 +40,21 @@ export class StudentmanagementController extends Controller {
     return out;
   }
 
+  @Post("getbyname")
+  public async getStudentByName(
+    @Body() searchName: string
+  ): Promise<any | ErrorStore> {
+    console.log("------------- Controller is running ---------------");
+    const serv = new StudentmanagementService();
+    var out = await serv.getAllByName(searchName);
+    if (out instanceof Error) {
+      this.setStatus(404);
+      return { ErrorMessage: out.message };
+    }
+    this.setStatus(201);
+    return out;
+  }
+
   @Get("{id}")
   public async getStudentById(
     @Path() id: number

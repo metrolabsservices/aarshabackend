@@ -51,10 +51,58 @@ class StudentmanagementService {
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
                 var pagination = (0, pageOptimization_1.paginationOptimization)(pageInfo.Pagination);
                 var filterSet = (0, filterOptimization_1.filterOptimization)(pageInfo.Filters);
-                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign(Object.assign({}, filterSet), pagination), { include: {
+                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign(Object.assign({}, filterSet), pagination), { orderBy: {
+                        joiningDate: "desc",
+                    }, include: {
                         feeDetails: true,
                         subjectStatistics: true,
                     } }));
+                return studentDeatilsAll;
+            });
+            return getAll()
+                .then((result) => __awaiter(this, void 0, void 0, function* () {
+                // console.log("output of Query -- ", result);
+                if (result.length === 0) {
+                    return new Error("Data Not Found");
+                }
+                const count = yield prisma.student.count();
+                return { items: result, totalCount: count };
+            }))
+                .catch((e) => {
+                console.error(e);
+                return new Error("Error retrieving student details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    getAllByName(searchName) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const getAll = () => __awaiter(this, void 0, void 0, function* () {
+                const studentDeatilsAll = yield prisma.student.findMany({
+                    where: {
+                        OR: [
+                            {
+                                name: {
+                                    contains: searchName,
+                                },
+                            },
+                            {
+                                guardianName: {
+                                    contains: searchName,
+                                },
+                            },
+                        ],
+                    },
+                    select: {
+                        name: true,
+                        guardianName: true,
+                        guardianPhoneNumber: true,
+                        feeDetails: true,
+                    },
+                });
                 return studentDeatilsAll;
             });
             return getAll()
@@ -87,11 +135,11 @@ class StudentmanagementService {
             return createPerson()
                 .then((result) => {
                 console.log(result);
-                return { response: "Record Updated Successfully", data: result.id };
+                return { response: "Record Created Successfully", data: result.id };
             })
                 .catch((e) => {
                 console.error(e);
-                return new Error("Error retrieving student details");
+                return new Error("Failed to create Student");
             })
                 .finally(() => __awaiter(this, void 0, void 0, function* () {
                 yield prisma.$disconnect();

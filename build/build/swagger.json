@@ -361,6 +361,43 @@
                 ]
             }
         },
+        "/student/getbyname": {
+            "post": {
+                "operationId": "GetStudentByName",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {},
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Student Management"
+                ],
+                "security": [],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/student/{id}": {
             "get": {
                 "operationId": "GetStudentById",

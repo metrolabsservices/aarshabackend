@@ -29,7 +29,7 @@ const filterOptimization = (data) => {
         console.log("AND set -- ", andSource);
         console.log("OR set -- ", orSource);
         let totalSource = {};
-        if (andSource.length > 1 && orSource.length > 1) {
+        if (andSource.length > 0 && orSource.length > 0) {
             totalSource["OR"] = orSource;
             totalSource["AND"] = andSource;
         }
