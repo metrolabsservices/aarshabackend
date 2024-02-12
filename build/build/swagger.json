@@ -6,6 +6,143 @@
         "requestBodies": {},
         "responses": {},
         "schemas": {
+            "JsonObject": {
+                "properties": {},
+                "type": "object",
+                "description": "From https://github.com/sindresorhus/type-fest/\nMatches a JSON object.\nThis type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from."
+            },
+            "JsonArray": {
+                "description": "From https://github.com/sindresorhus/type-fest/\nMatches a JSON array.",
+                "properties": {},
+                "type": "object",
+                "additionalProperties": false
+            },
+            "JsonValue": {
+                "anyOf": [
+                    {
+                        "type": "string"
+                    },
+                    {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    {
+                        "type": "boolean"
+                    },
+                    {
+                        "$ref": "#/components/schemas/JsonObject"
+                    },
+                    {
+                        "$ref": "#/components/schemas/JsonArray"
+                    }
+                ],
+                "nullable": true,
+                "description": "From https://github.com/sindresorhus/type-fest/\nMatches any valid JSON value."
+            },
+            "%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_": {
+                "properties": {
+                    "transactionTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionsCategoryTypes": {
+                        "$ref": "#/components/schemas/JsonValue"
+                    },
+                    "paymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "gradeTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "studentStatusTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "subjectTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "boardTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "transactionTypes",
+                    "transactionsCategoryTypes",
+                    "paymentTypes",
+                    "gradeTypes",
+                    "studentStatusTypes",
+                    "subjectTypes",
+                    "boardTypes",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "OptionsMaster": {
+                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_",
+                "description": "Model OptionsMaster"
+            },
+            "OptionsMasterUpdate": {
+                "properties": {
+                    "transactionTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionsCategoryTypes": {},
+                    "paymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "gradeTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "studentStatusTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "subjectTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "boardTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
             "feeDetailsInterface": {
                 "properties": {
                     "studentId": {
@@ -314,6 +451,79 @@
     },
     "openapi": "3.0.0",
     "paths": {
+        "/selector/getlist": {
+            "get": {
+                "operationId": "GetSelectorList",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {},
+                                        {
+                                            "$ref": "#/components/schemas/OptionsMaster"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Selectors Master List"
+                ],
+                "security": [],
+                "parameters": []
+            }
+        },
+        "/selector/update/{id}": {
+            "put": {
+                "operationId": "UpdateSelector",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {},
+                                        {
+                                            "$ref": "#/components/schemas/OptionsMaster"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Selectors Master List"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/OptionsMasterUpdate"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/student/all/items": {
             "get": {
                 "operationId": "GetAllStudents",
@@ -391,7 +601,15 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "type": "string"
+                                "properties": {
+                                    "searchIput": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "searchIput"
+                                ],
+                                "type": "object"
                             }
                         }
                     }

@@ -3,12 +3,46 @@
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { Controller, ValidationService, FieldErrors, ValidateError, TsoaRoute, HttpStatusCodeLiteral, TsoaResponse, fetchMiddlewares } from '@tsoa/runtime';
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+import { OptionmasterController } from './../src/OptionsMaster/optionsmasterController';
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 import { StudentmanagementController } from './../src/StudentManagement/studentmanagementController';
 import type { RequestHandler, Router } from 'express';
 
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 
 const models: TsoaRoute.Models = {
+    "JsonObject": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "JsonArray": {
+        "dataType": "refObject",
+        "properties": {
+        },
+        "additionalProperties": false,
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "JsonValue": {
+        "dataType": "refAlias",
+        "type": {"dataType":"union","subSchemas":[{"dataType":"string"},{"dataType":"double"},{"dataType":"boolean"},{"ref":"JsonObject"},{"ref":"JsonArray"},{"dataType":"enum","enums":[null]}],"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"transactionsCategoryTypes":{"ref":"JsonValue","required":true},"paymentTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"gradeTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"studentStatusTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"subjectTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"boardTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"id":{"dataType":"double","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "OptionsMaster": {
+        "dataType": "refAlias",
+        "type": {"ref":"%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_","validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "OptionsMasterUpdate": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionTypes":{"dataType":"array","array":{"dataType":"string"}},"transactionsCategoryTypes":{"dataType":"any"},"paymentTypes":{"dataType":"array","array":{"dataType":"string"}},"gradeTypes":{"dataType":"array","array":{"dataType":"string"}},"studentStatusTypes":{"dataType":"array","array":{"dataType":"string"}},"subjectTypes":{"dataType":"array","array":{"dataType":"string"}},"boardTypes":{"dataType":"array","array":{"dataType":"string"}}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "feeDetailsInterface": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"studentId":{"dataType":"double","required":true},"paidBy":{"dataType":"string","required":true},"dateOfPaid":{"dataType":"datetime","required":true},"amount":{"dataType":"double","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
@@ -59,6 +93,56 @@ export function RegisterRoutes(app: Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+        app.get('/selector/getlist',
+            ...(fetchMiddlewares<RequestHandler>(OptionmasterController)),
+            ...(fetchMiddlewares<RequestHandler>(OptionmasterController.prototype.getSelectorList)),
+
+            function OptionmasterController_getSelectorList(request: any, response: any, next: any) {
+            const args = {
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new OptionmasterController();
+
+
+              const promise = controller.getSelectorList.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.put('/selector/update/:id',
+            ...(fetchMiddlewares<RequestHandler>(OptionmasterController)),
+            ...(fetchMiddlewares<RequestHandler>(OptionmasterController.prototype.updateSelector)),
+
+            function OptionmasterController_updateSelector(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"string"},
+                    pack: {"in":"body","name":"pack","required":true,"ref":"OptionsMasterUpdate"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new OptionmasterController();
+
+
+              const promise = controller.updateSelector.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         app.get('/student/all/items',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.getAllStudents)),
@@ -91,7 +175,7 @@ export function RegisterRoutes(app: Router) {
 
             function StudentmanagementController_getStudentByName(request: any, response: any, next: any) {
             const args = {
-                    searchName: {"in":"body","name":"searchName","required":true,"dataType":"string"},
+                    vlv: {"in":"body","name":"vlv","required":true,"dataType":"nestedObjectLiteral","nestedProperties":{"searchIput":{"dataType":"string","required":true}}},
             };
 
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

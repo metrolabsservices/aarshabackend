@@ -42,6 +42,17 @@ model Questions {
   updatedDate String
 }
 
+model OptionsMaster {
+  id          Int       @id @default(autoincrement())
+  boardTypes String[] // CBSE - SSC - ICSE - OTHERS
+  subjectTypes String[] // Telugu - Hindi - English - Math - Physics - Chemistry - Biology - Social - OTHERS
+  studentStatusTypes String[] // AWAY - REGULAR - IN-ACTIVE - OTHERS
+  gradeTypes String[] // Class - (1 - 10) , OTHERS
+  paymentTypes String[] // CARD - CASH - PHONE_PAY - GOOGLE_PAY - PAYTM - CRED - BANKS_TANSFERS
+  transactionsCategoryTypes Json 
+  transactionTypes String[] // Pending - Processing - Completed - Failed - Refunded - Cancelled - On_Hold - Reversed - Pending Review
+}
+
 model Student {
   id          Int       @id @default(autoincrement())
   name        String
@@ -76,4 +87,5 @@ model SubjectStatistics {
   student     Student   @relation(fields: [studentId], references: [id])
   studentId   Int
 }
+
 

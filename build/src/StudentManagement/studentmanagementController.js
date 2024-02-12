@@ -35,11 +35,11 @@ let StudentmanagementController = class StudentmanagementController extends tsoa
             return out;
         });
     }
-    getStudentByName(searchName) {
+    getStudentByName(vlv) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("------------- Controller is running ---------------");
+            console.log("------------- Controller is running ---------------", vlv);
             const serv = new studentmanagementService_1.StudentmanagementService();
-            var out = yield serv.getAllByName(searchName);
+            var out = yield serv.getAllByName(vlv.searchIput);
             if (out instanceof Error) {
                 this.setStatus(404);
                 return { ErrorMessage: out.message };

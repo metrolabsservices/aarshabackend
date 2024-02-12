@@ -87,21 +87,25 @@ export class StudentmanagementService {
             {
               name: {
                 contains: searchName,
+                mode: "insensitive",
               },
             },
             {
               guardianName: {
                 contains: searchName,
+                mode: "insensitive",
               },
             },
           ],
         },
 
         select: {
+          id: true,
           name: true,
           guardianName: true,
           guardianPhoneNumber: true,
           feeDetails: true,
+          feeCharge: true,
         },
       });
       return studentDeatilsAll;
@@ -112,8 +116,8 @@ export class StudentmanagementService {
         if (result.length === 0) {
           return new Error("Data Not Found");
         }
-        const count = await prisma.student.count();
-        return { items: result, totalCount: count };
+        // const count = await prisma.student.count();
+        return result;
       })
       .catch((e) => {
         console.error(e);

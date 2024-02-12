@@ -42,11 +42,11 @@ export class StudentmanagementController extends Controller {
 
   @Post("getbyname")
   public async getStudentByName(
-    @Body() searchName: string
+    @Body() vlv: { searchIput: string }
   ): Promise<any | ErrorStore> {
-    console.log("------------- Controller is running ---------------");
+    console.log("------------- Controller is running ---------------", vlv);
     const serv = new StudentmanagementService();
-    var out = await serv.getAllByName(searchName);
+    var out = await serv.getAllByName(vlv.searchIput);
     if (out instanceof Error) {
       this.setStatus(404);
       return { ErrorMessage: out.message };
