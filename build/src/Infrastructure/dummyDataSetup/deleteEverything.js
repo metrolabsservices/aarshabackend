@@ -21,12 +21,14 @@ const deleteEverything = () => __awaiter(void 0, void 0, void 0, function* () {
         "of Students deleted",
     ];
     const optionsMaster = prisma.optionsMaster.deleteMany();
+    const transactionList = prisma.transactionsList.deleteMany();
     const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
     const studentLinkedFeedetails = prisma.feeDetail.deleteMany();
     const questionsDelete = prisma.questions.deleteMany();
     const studentUnlinkedData = prisma.student.deleteMany();
     const deletedData = yield prisma.$transaction([
         optionsMaster,
+        transactionList,
         studentLinkedSubjectStatics,
         questionsDelete,
         studentLinkedFeedetails,

@@ -10,6 +10,8 @@ const optionsmasterController_1 = require("./../src/OptionsMaster/optionsmasterC
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const studentmanagementController_1 = require("./../src/StudentManagement/studentmanagementController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const transactionlistController_1 = require("./../src/TransactionList/transactionlistController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const models = {
     "JsonObject": {
         "dataType": "refAlias",
@@ -80,6 +82,31 @@ const models = {
     "studentUpdateInterface": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "feeCharge": { "dataType": "double" }, "guardianPhoneNumber": { "dataType": "string" }, "guardianName": { "dataType": "string" }, "duration": { "dataType": "string" }, "joiningDate": { "dataType": "datetime" }, "subjectsAcquired": { "dataType": "array", "array": { "dataType": "string" } }, "previousScore": { "dataType": "double" }, "status": { "dataType": "string" }, "boardType": { "dataType": "string" }, "schoolName": { "dataType": "string" }, "gradeNumber": { "dataType": "string" }, "name": { "dataType": "string" } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "transactionMode": { "dataType": "string", "required": true }, "modeOfPayment": { "dataType": "string", "required": true }, "amount": { "dataType": "double", "required": true }, "dateOfPayment": { "dataType": "datetime", "required": true }, "category": { "dataType": "string", "required": true }, "description": { "dataType": "string", "required": true }, "itemName": { "dataType": "string", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionsList": {
+        "dataType": "refAlias",
+        "type": { "ref": "%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_", "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "PageResponse_TransactionsList_": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "items": { "dataType": "array", "array": { "dataType": "refAlias", "ref": "TransactionsList" }, "required": true }, "totalCount": { "dataType": "double", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "transactionlistInterface": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "transactionMode": { "dataType": "string", "required": true }, "modeOfPayment": { "dataType": "string", "required": true }, "amount": { "dataType": "double", "required": true }, "dateOfPayment": { "dataType": "datetime", "required": true }, "category": { "dataType": "string", "required": true }, "description": { "dataType": "string", "required": true }, "itemName": { "dataType": "string", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "transactionlistUpdateInterface": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "transactionMode": { "dataType": "string" }, "modeOfPayment": { "dataType": "string" }, "amount": { "dataType": "double" }, "dateOfPayment": { "dataType": "datetime" }, "category": { "dataType": "string" }, "description": { "dataType": "string" }, "itemName": { "dataType": "string" } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -219,6 +246,93 @@ function RegisterRoutes(app) {
         try {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new studentmanagementController_1.StudentmanagementController();
+            const promise = controller.deleteStudentById.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/transaction/all/items', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getAllTransaction)), function transactionlistController_getAllTransaction(request, response, next) {
+        const args = {
+            Pagination: { "in": "query", "name": "Pagination", "dataType": "any" },
+            Filters: { "in": "query", "name": "Filters", "dataType": "array", "array": { "dataType": "any" } },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new transactionlistController_1.transactionlistController();
+            const promise = controller.getAllTransaction.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getTransactionById)), function transactionlistController_getTransactionById(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new transactionlistController_1.transactionlistController();
+            const promise = controller.getTransactionById.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/transaction/create', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.createStudent)), function transactionlistController_createStudent(request, response, next) {
+        const args = {
+            pack: { "in": "body", "name": "pack", "required": true, "ref": "transactionlistInterface" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new transactionlistController_1.transactionlistController();
+            const promise = controller.createStudent.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.updateTransactionById)), function transactionlistController_updateTransactionById(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+            pack: { "in": "body", "name": "pack", "required": true, "ref": "transactionlistUpdateInterface" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new transactionlistController_1.transactionlistController();
+            const promise = controller.updateTransactionById.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.delete('/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.deleteStudentById)), function transactionlistController_deleteStudentById(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new transactionlistController_1.transactionlistController();
             const promise = controller.deleteStudentById.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }

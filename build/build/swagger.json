@@ -434,6 +434,136 @@
                     }
                 },
                 "type": "object"
+            },
+            "%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_": {
+                "properties": {
+                    "transactionMode": {
+                        "type": "string"
+                    },
+                    "modeOfPayment": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "dateOfPayment": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "itemName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "transactionMode",
+                    "modeOfPayment",
+                    "amount",
+                    "dateOfPayment",
+                    "category",
+                    "description",
+                    "itemName",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "TransactionsList": {
+                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_",
+                "description": "Model TransactionsList"
+            },
+            "PageResponse_TransactionsList_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/TransactionsList"
+                        },
+                        "type": "array"
+                    },
+                    "totalCount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "items",
+                    "totalCount"
+                ],
+                "type": "object"
+            },
+            "transactionlistInterface": {
+                "properties": {
+                    "transactionMode": {
+                        "type": "string"
+                    },
+                    "modeOfPayment": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "dateOfPayment": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "itemName": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "transactionMode",
+                    "modeOfPayment",
+                    "amount",
+                    "dateOfPayment",
+                    "category",
+                    "description",
+                    "itemName"
+                ],
+                "type": "object"
+            },
+            "transactionlistUpdateInterface": {
+                "properties": {
+                    "transactionMode": {
+                        "type": "string"
+                    },
+                    "modeOfPayment": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "dateOfPayment": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "itemName": {
+                        "type": "string"
+                    }
+                },
+                "type": "object"
             }
         },
         "securitySchemes": {}
@@ -772,6 +902,215 @@
                         "application/json": {
                             "schema": {
                                 "$ref": "#/components/schemas/studentCreateInterface"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transaction/all/items": {
+            "get": {
+                "operationId": "GetAllTransaction",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/PageResponse_TransactionsList_"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "Pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "Filters",
+                        "required": false,
+                        "schema": {
+                            "type": "array",
+                            "items": {}
+                        }
+                    }
+                ]
+            }
+        },
+        "/transaction/{id}": {
+            "get": {
+                "operationId": "GetTransactionById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/TransactionsList"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ]
+            },
+            "put": {
+                "operationId": "UpdateTransactionById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/transactionlistUpdateInterface"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DeleteStudentById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ]
+            }
+        },
+        "/transaction/create": {
+            "post": {
+                "operationId": "CreateStudent",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/ServiceResponse"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/transactionlistInterface"
                             }
                         }
                     }

@@ -14,6 +14,7 @@ const deleteEverything_1 = require("./deleteEverything");
 const questionBank_1 = require("./questionBank");
 const studentDeatils_1 = require("./studentDeatils");
 const optionsMasterSeed_1 = require("./optionsMasterSeed");
+const tansactionSeed_1 = require("./tansactionSeed");
 const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -33,8 +34,12 @@ function main() {
         const optionsMaster = yield prisma.optionsMaster.create({
             data: optionsMasterSeed_1.optionsMasterData,
         });
+        const transactionCreate = yield prisma.transactionsList.createMany({
+            data: tansactionSeed_1.transactionList,
+        });
         console.log(`
   ${{ optionsMaster }} records of Selectors created.\n
+  ${transactionCreate.count} records of Transaction details created.\n
   ${questionsCreate.count} records of Questions created.\n
   ${studentCreate.count} records of Student created.\n
   ${studentFeeDetails.count} records of Student Fee details created.\n

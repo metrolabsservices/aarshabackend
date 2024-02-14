@@ -31,8 +31,9 @@ export const optionsMasterData: any = {
     { category: "Salaries", transactionType: "debit" },
     { category: "Rent", transactionType: "debit" },
     { category: "Student Fee", transactionType: "credit" },
-    { category: "Library Membership", transactionType: "credit" },
-    { category: "Library Membership", transactionType: "credit" },
+    { category: "Electricity", transactionType: "debit" },
+    { category: "Water", transactionType: "debit" },
+    { category: "Maintenance", transactionType: "debit" },
   ],
   transactionTypes: [
     "Pending",

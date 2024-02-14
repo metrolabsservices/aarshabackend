@@ -2,7 +2,7 @@
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.optionsMasterData = void 0;
 exports.optionsMasterData = {
-    boardTypes: ["ICSE", "CBSE", "SSC", "OTHERS"],
+    boardTypes: ["ICSE", "CBSE", "SSC"],
     subjectTypes: [
         "Telugu",
         "Hindi",
@@ -13,16 +13,16 @@ exports.optionsMasterData = {
         "Biology",
         "Social",
     ],
-    studentStatusTypes: ["AWAY", "REGULAR", "IN-ACTIVE", "OTHERS"],
+    studentStatusTypes: ["away", "active", "in-active"],
     gradeTypes: Array.from({ length: 10 }, (_, index) => "Class-" + String(index + 1)),
     paymentTypes: [
-        "CARD",
-        "CASH",
-        "PHONE_PAY",
-        "GOOGLE_PAY",
-        "PAYTM",
-        "CRED",
-        "BANK_TRANSFER",
+        "Card",
+        "Cash",
+        "Phone Pay",
+        "Google Pay",
+        "Paytm",
+        "Cred",
+        "Bank Transfer",
     ],
     transactionsCategoryTypes: [
         { category: "Library Membership", transactionType: "credit" },
@@ -31,8 +31,9 @@ exports.optionsMasterData = {
         { category: "Salaries", transactionType: "debit" },
         { category: "Rent", transactionType: "debit" },
         { category: "Student Fee", transactionType: "credit" },
-        { category: "Library Membership", transactionType: "credit" },
-        { category: "Library Membership", transactionType: "credit" },
+        { category: "Electricity", transactionType: "debit" },
+        { category: "Water", transactionType: "debit" },
+        { category: "Maintenance", transactionType: "debit" },
     ],
     transactionTypes: [
         "Pending",
@@ -41,8 +42,8 @@ exports.optionsMasterData = {
         "Failed",
         "Refunded",
         "Cancelled",
-        "On_Hold",
+        "On Hold",
         "Reversed",
-        "Pending_Review",
+        "Pending Review",
     ],
 };
