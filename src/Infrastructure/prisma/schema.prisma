@@ -12,20 +12,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-//  {
-//     question:
-//       "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque. Quisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla.",
-//     questionType: "True or False",
-//     options: ["True", "False"],
-//     isImage: true,
-//     images: ["", "", "", "", ""],
-//     boardType: "SSC",
-//     toghness: "Easy",
-//     subject: "Science",
-//     topicName: "Earth Science Discoveries",
-//     grade: "Class 10",
-//   },
-
 model Questions {
   id          Int @id @default(autoincrement())
   question    String  @db.Text()
