@@ -15,10 +15,10 @@ import { ErrorStore } from "../Interfaces/errorHandling";
 import {
   ServiceResponse,
   studentCreateInterface,
-  studentInterface,
   studentUpdateInterface,
 } from "../Interfaces/studentsInterface";
 import { PageResponse } from "../Interfaces/PageInfo";
+import { Student } from "@prisma/client";
 
 @Tags("Student Management")
 @Route("student")
@@ -27,7 +27,7 @@ export class StudentmanagementController extends Controller {
   public async getAllStudents(
     @Query() Pagination?: any,
     @Query() Filters?: any[]
-  ): Promise<PageResponse<studentInterface> | ErrorStore> {
+  ): Promise<PageResponse<Student> | ErrorStore> {
     console.log("------------- Controller is running ---------------");
     const serv = new StudentmanagementService();
     var out = await serv.getAllStudents({ Pagination, Filters });
@@ -58,7 +58,7 @@ export class StudentmanagementController extends Controller {
   @Get("{id}")
   public async getStudentById(
     @Path() id: number
-  ): Promise<studentInterface | ErrorStore> {
+  ): Promise<Student | ErrorStore> {
     console.log("------------- Controller is running ---------------");
     const serv = new StudentmanagementService();
     var out = await serv.getStudentById(id);
@@ -90,7 +90,7 @@ export class StudentmanagementController extends Controller {
     @Path() id: number,
     @Body() pack: studentUpdateInterface
   ): Promise<String | ErrorStore> {
-    console.log("------------- Controller is running ---------------");
+    console.log("------------- Controller is running ---------------", pack);
     const serv = new StudentmanagementService();
     var out = await serv.updateStudentById(id, pack);
     if (out instanceof Error) {

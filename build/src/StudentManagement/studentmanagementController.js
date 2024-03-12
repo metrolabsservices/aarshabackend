@@ -76,7 +76,7 @@ let StudentmanagementController = class StudentmanagementController extends tsoa
     }
     updateStudentById(id, pack) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("------------- Controller is running ---------------");
+            console.log("------------- Controller is running ---------------", pack);
             const serv = new studentmanagementService_1.StudentmanagementService();
             var out = yield serv.updateStudentById(id, pack);
             if (out instanceof Error) {

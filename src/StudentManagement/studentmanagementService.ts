@@ -1,8 +1,7 @@
-import { PrismaClient } from "@prisma/client";
+import { PrismaClient, Student } from "@prisma/client";
 import {
   ServiceResponse,
   studentCreateInterface,
-  studentInterface,
   studentUpdateInterface,
 } from "../Interfaces/studentsInterface";
 import { PageInfo, PageResponse } from "../Interfaces/PageInfo";
@@ -10,7 +9,7 @@ import { paginationOptimization } from "../HelpingFunctions/pageOptimization";
 import { filterOptimization } from "../HelpingFunctions/filterOptimization";
 
 export class StudentmanagementService {
-  public async getStudentById(id: number): Promise<studentInterface | Error> {
+  public async getStudentById(id: number): Promise<Student | Error> {
     const prisma = new PrismaClient();
     const getById = async () => {
       const studentDeatilsById = await prisma.student.findUnique({
@@ -42,11 +41,12 @@ export class StudentmanagementService {
 
   public async getAllStudents(
     pageInfo: PageInfo
-  ): Promise<PageResponse<studentInterface> | Error> {
+  ): Promise<PageResponse<Student> | Error> {
     const prisma = new PrismaClient();
     const getAll = async () => {
       var pagination = paginationOptimization(pageInfo.Pagination);
       var filterSet = filterOptimization(pageInfo.Filters);
+
       const studentDeatilsAll = await prisma.student.findMany({
         ...filterSet,
         ...pagination,
@@ -91,21 +91,12 @@ export class StudentmanagementService {
               },
             },
             {
-              guardianName: {
+              parentName: {
                 contains: searchName,
                 mode: "insensitive",
               },
             },
           ],
-        },
-
-        select: {
-          id: true,
-          name: true,
-          guardianName: true,
-          guardianPhoneNumber: true,
-          feeDetails: true,
-          feeCharge: true,
         },
       });
       return studentDeatilsAll;

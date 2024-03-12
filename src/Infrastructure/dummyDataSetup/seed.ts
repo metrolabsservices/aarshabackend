@@ -4,10 +4,14 @@ import { questions } from "./questionBank";
 import { feeData, studentData, subjectStatics } from "./studentDeatils";
 import { optionsMasterData } from "./optionsMasterSeed";
 import { transactionList } from "./tansactionSeed";
+import { loginDetails } from "./loginSeedData";
 const prisma = new PrismaClient();
 
 async function main() {
   await deleteEverything();
+  const loginRegister = await prisma.loginRegister.createMany({
+    data: loginDetails,
+  });
   const questionsCreate = await prisma.questions.createMany({
     data: questions,
   });
@@ -28,7 +32,8 @@ async function main() {
   });
 
   console.log(`
-  ${{ optionsMaster }} records of Selectors created.\n
+  ${loginRegister} records of login register created.\n
+  ${optionsMaster} records of Selectors created.\n
   ${transactionCreate.count} records of Transaction details created.\n
   ${questionsCreate.count} records of Questions created.\n
   ${studentCreate.count} records of Student created.\n

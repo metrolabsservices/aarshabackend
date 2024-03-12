@@ -11,7 +11,7 @@
     "build": "tsoa spec-and-routes && tsc",
     "start": "node build/src/server.js",
     "push": "prisma db push",
-    "seed": "prisma db seed",
+    "seed": "prisma db push && prisma db seed",
     "reset": "prisma migrate reset"
   },
   "prisma": {

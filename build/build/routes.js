@@ -6,6 +6,8 @@ exports.RegisterRoutes = void 0;
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const runtime_1 = require("@tsoa/runtime");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+const loginregisterController_1 = require("./../src/LoginRegister/loginregisterController");
+// WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const optionsmasterController_1 = require("./../src/OptionsMaster/optionsmasterController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const studentmanagementController_1 = require("./../src/StudentManagement/studentmanagementController");
@@ -13,6 +15,16 @@ const studentmanagementController_1 = require("./../src/StudentManagement/studen
 const transactionlistController_1 = require("./../src/TransactionList/transactionlistController");
 // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 const models = {
+    "ErrorStore": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "ErrorMessage": { "dataType": "string", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "loginInterface": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "password": { "dataType": "string", "required": true }, "userMail": { "dataType": "string", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "JsonObject": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": {}, "validators": {} },
@@ -44,29 +56,19 @@ const models = {
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "transactionTypes": { "dataType": "array", "array": { "dataType": "string" } }, "transactionsCategoryTypes": { "dataType": "any" }, "paymentTypes": { "dataType": "array", "array": { "dataType": "string" } }, "gradeTypes": { "dataType": "array", "array": { "dataType": "string" } }, "studentStatusTypes": { "dataType": "array", "array": { "dataType": "string" } }, "subjectTypes": { "dataType": "array", "array": { "dataType": "string" } }, "boardTypes": { "dataType": "array", "array": { "dataType": "string" } } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "feeDetailsInterface": {
+    "%24Result.DefaultSelection_Prisma.%24StudentPayload_": {
         "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "studentId": { "dataType": "double", "required": true }, "paidBy": { "dataType": "string", "required": true }, "dateOfPaid": { "dataType": "datetime", "required": true }, "amount": { "dataType": "double", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "dueAmount": { "dataType": "double", "required": true }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "isDeleted": { "dataType": "boolean", "required": true }, "whatsappNo": { "dataType": "string", "required": true }, "parentPhnNo": { "dataType": "string", "required": true }, "parentName": { "dataType": "string", "required": true }, "timing": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "pastScore": { "dataType": "double", "required": true }, "studentStatus": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "classNo": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "subjectStatisticsInterface": {
+    "Student": {
         "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "subjectScores": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "studentId": { "dataType": "double", "required": true }, "subjectName": { "dataType": "string", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
+        "type": { "ref": "%24Result.DefaultSelection_Prisma.%24StudentPayload_", "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "studentInterface": {
+    "PageResponse_Student_": {
         "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "subjectStatistics": { "dataType": "union", "subSchemas": [{ "dataType": "array", "array": { "dataType": "refAlias", "ref": "subjectStatisticsInterface" } }, { "dataType": "enum", "enums": [null] }], "required": true }, "feeDetails": { "dataType": "union", "subSchemas": [{ "dataType": "array", "array": { "dataType": "refAlias", "ref": "feeDetailsInterface" } }, { "dataType": "enum", "enums": [null] }], "required": true }, "feeCharge": { "dataType": "double", "required": true }, "guardianPhoneNumber": { "dataType": "string", "required": true }, "guardianName": { "dataType": "string", "required": true }, "duration": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "subjectsAcquired": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "previousScore": { "dataType": "double", "required": true }, "status": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "gradeNumber": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "PageResponse_studentInterface_": {
-        "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "items": { "dataType": "array", "array": { "dataType": "refAlias", "ref": "studentInterface" }, "required": true }, "totalCount": { "dataType": "double", "required": true } }, "validators": {} },
-    },
-    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    "ErrorStore": {
-        "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "ErrorMessage": { "dataType": "string", "required": true } }, "validators": {} },
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "items": { "dataType": "array", "array": { "dataType": "refAlias", "ref": "Student" }, "required": true }, "totalCount": { "dataType": "double", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ServiceResponse": {
@@ -76,12 +78,12 @@ const models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "studentCreateInterface": {
         "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "feeCharge": { "dataType": "double", "required": true }, "guardianPhoneNumber": { "dataType": "string", "required": true }, "guardianName": { "dataType": "string", "required": true }, "duration": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "subjectsAcquired": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "previousScore": { "dataType": "double", "required": true }, "status": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "gradeNumber": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true } }, "validators": {} },
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "dueAmount": { "dataType": "double", "required": true }, "isDeleted": { "dataType": "boolean", "required": true }, "whatsappNo": { "dataType": "string", "required": true }, "parentPhnNo": { "dataType": "string", "required": true }, "parentName": { "dataType": "string", "required": true }, "timing": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "pastScore": { "dataType": "double", "required": true }, "studentStatus": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "classNo": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "studentUpdateInterface": {
         "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "feeCharge": { "dataType": "double" }, "guardianPhoneNumber": { "dataType": "string" }, "guardianName": { "dataType": "string" }, "duration": { "dataType": "string" }, "joiningDate": { "dataType": "datetime" }, "subjectsAcquired": { "dataType": "array", "array": { "dataType": "string" } }, "previousScore": { "dataType": "double" }, "status": { "dataType": "string" }, "boardType": { "dataType": "string" }, "schoolName": { "dataType": "string" }, "gradeNumber": { "dataType": "string" }, "name": { "dataType": "string" } }, "validators": {} },
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "dueAmount": { "dataType": "double" }, "isDeleted": { "dataType": "boolean" }, "whatsappNo": { "dataType": "string" }, "parentPhnNo": { "dataType": "string" }, "parentName": { "dataType": "string" }, "timing": { "dataType": "string" }, "joiningDate": { "dataType": "datetime" }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" } }, "pastScore": { "dataType": "double" }, "studentStatus": { "dataType": "string" }, "boardType": { "dataType": "string" }, "schoolName": { "dataType": "string" }, "classNo": { "dataType": "string" }, "name": { "dataType": "string" } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_": {
@@ -117,6 +119,23 @@ function RegisterRoutes(app) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
+    app.put('/loginregister/login', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.getSelectorList)), function LoginRegisterController_getSelectorList(request, response, next) {
+        const args = {
+            pack: { "in": "body", "name": "pack", "required": true, "ref": "loginInterface" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new loginregisterController_1.LoginRegisterController();
+            const promise = controller.getSelectorList.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.get('/selector/getlist', ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController)), ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController.prototype.getSelectorList)), function OptionmasterController_getSelectorList(request, response, next) {
         const args = {};
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa

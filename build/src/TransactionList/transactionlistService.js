@@ -136,7 +136,10 @@ class transactionlistService {
             return deleteById()
                 .then((result) => {
                 console.log(result);
-                return "Record Deleted Successfully";
+                if (result.count == 1) {
+                    return "Record Deleted Successfully";
+                }
+                return Error("Record Not Available to delete");
             })
                 .catch((e) => {
                 var _a;

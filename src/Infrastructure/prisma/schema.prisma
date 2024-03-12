@@ -12,6 +12,15 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model LoginRegister {
+  id          Int @id @default(autoincrement())
+  userName String
+  userMail    String  @unique() // mail id 
+  password String 
+  role String  // admin - superadmin - developer - receiptionist - generaluser
+  isApproved Boolean 
+}
+
 model Questions {
   id          Int @id @default(autoincrement())
   question    String  @db.Text()
@@ -53,26 +62,29 @@ model TransactionsList {
 model Student {
   id          Int       @id @default(autoincrement())
   name        String
-  gradeNumber String
+  classNo String
   schoolName  String
   boardType   String    // CBSE - SSC - IBSE
-  status      String    // AWAY - REGULAR - IN-ACTIVE
-  previousScore Int
-  subjectsAcquired String[]
+  studentStatus      String    // AWAY - REGULAR - IN-ACTIVE
+  pastScore Int
   joiningDate DateTime
-  duration    String
-  guardianName String
-  guardianPhoneNumber String
-  feeCharge   Int
+  timing    String
+  parentName String
+  parentPhnNo String
+  whatsappNo String
+  isDeleted Boolean
+  subjectsTaken String[]
+  dueAmount   Int
   feeDetails  FeeDetail[]
   subjectStatistics SubjectStatistics[]
 }
 
 model FeeDetail {
   id          Int       @id @default(autoincrement())
-  amount      Int
+  feeCharge      Int
+  paidAmount      Int
+  subjectsTaken String[]
   dateOfPaid  DateTime
-  paidBy      String
   student     Student   @relation(fields: [studentId], references: [id])
   studentId   Int
 }

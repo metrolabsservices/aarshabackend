@@ -2,12 +2,14 @@ import { PrismaClient } from "@prisma/client";
 export const deleteEverything = async () => {
   const prisma = new PrismaClient();
   const deleteList = [
+    "of Login Register deleted",
     "of Selector Options deleted",
     "of Subject Stats deleted",
     "of Questions deleted",
     "of Fee Details deleted",
     "of Students deleted",
   ];
+  const loginRegister = prisma.loginRegister.deleteMany();
   const optionsMaster = prisma.optionsMaster.deleteMany();
   const transactionList = prisma.transactionsList.deleteMany();
   const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
@@ -15,6 +17,7 @@ export const deleteEverything = async () => {
   const questionsDelete = prisma.questions.deleteMany();
   const studentUnlinkedData = prisma.student.deleteMany();
   const deletedData = await prisma.$transaction([
+    loginRegister,
     optionsMaster,
     transactionList,
     studentLinkedSubjectStatics,

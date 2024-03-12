@@ -14,12 +14,14 @@ const client_1 = require("@prisma/client");
 const deleteEverything = () => __awaiter(void 0, void 0, void 0, function* () {
     const prisma = new client_1.PrismaClient();
     const deleteList = [
+        "of Login Register deleted",
         "of Selector Options deleted",
         "of Subject Stats deleted",
         "of Questions deleted",
         "of Fee Details deleted",
         "of Students deleted",
     ];
+    const loginRegister = prisma.loginRegister.deleteMany();
     const optionsMaster = prisma.optionsMaster.deleteMany();
     const transactionList = prisma.transactionsList.deleteMany();
     const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
@@ -27,6 +29,7 @@ const deleteEverything = () => __awaiter(void 0, void 0, void 0, function* () {
     const questionsDelete = prisma.questions.deleteMany();
     const studentUnlinkedData = prisma.student.deleteMany();
     const deletedData = yield prisma.$transaction([
+        loginRegister,
         optionsMaster,
         transactionList,
         studentLinkedSubjectStatics,

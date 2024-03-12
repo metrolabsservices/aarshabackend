@@ -91,20 +91,12 @@ class StudentmanagementService {
                                 },
                             },
                             {
-                                guardianName: {
+                                parentName: {
                                     contains: searchName,
                                     mode: "insensitive",
                                 },
                             },
                         ],
-                    },
-                    select: {
-                        id: true,
-                        name: true,
-                        guardianName: true,
-                        guardianPhoneNumber: true,
-                        feeDetails: true,
-                        feeCharge: true,
                     },
                 });
                 return studentDeatilsAll;

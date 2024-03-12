@@ -6,6 +6,32 @@
         "requestBodies": {},
         "responses": {},
         "schemas": {
+            "ErrorStore": {
+                "properties": {
+                    "ErrorMessage": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "ErrorMessage"
+                ],
+                "type": "object"
+            },
+            "loginInterface": {
+                "properties": {
+                    "password": {
+                        "type": "string"
+                    },
+                    "userMail": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "password",
+                    "userMail"
+                ],
+                "type": "object"
+            },
             "JsonObject": {
                 "properties": {},
                 "type": "object",
@@ -143,109 +169,42 @@
                 },
                 "type": "object"
             },
-            "feeDetailsInterface": {
+            "%24Result.DefaultSelection_Prisma.%24StudentPayload_": {
                 "properties": {
-                    "studentId": {
+                    "dueAmount": {
                         "type": "number",
                         "format": "double"
                     },
-                    "paidBy": {
-                        "type": "string"
-                    },
-                    "dateOfPaid": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "id": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                },
-                "required": [
-                    "studentId",
-                    "paidBy",
-                    "dateOfPaid",
-                    "amount",
-                    "id"
-                ],
-                "type": "object"
-            },
-            "subjectStatisticsInterface": {
-                "properties": {
-                    "subjectScores": {
+                    "subjectsTaken": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "studentId": {
-                        "type": "number",
-                        "format": "double"
+                    "isDeleted": {
+                        "type": "boolean"
                     },
-                    "subjectName": {
+                    "whatsappNo": {
                         "type": "string"
                     },
-                    "id": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                },
-                "required": [
-                    "subjectScores",
-                    "studentId",
-                    "subjectName",
-                    "id"
-                ],
-                "type": "object"
-            },
-            "studentInterface": {
-                "properties": {
-                    "subjectStatistics": {
-                        "items": {
-                            "$ref": "#/components/schemas/subjectStatisticsInterface"
-                        },
-                        "type": "array",
-                        "nullable": true
-                    },
-                    "feeDetails": {
-                        "items": {
-                            "$ref": "#/components/schemas/feeDetailsInterface"
-                        },
-                        "type": "array",
-                        "nullable": true
-                    },
-                    "feeCharge": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "guardianPhoneNumber": {
+                    "parentPhnNo": {
                         "type": "string"
                     },
-                    "guardianName": {
+                    "parentName": {
                         "type": "string"
                     },
-                    "duration": {
+                    "timing": {
                         "type": "string"
                     },
                     "joiningDate": {
                         "type": "string",
                         "format": "date-time"
                     },
-                    "subjectsAcquired": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "previousScore": {
+                    "pastScore": {
                         "type": "number",
                         "format": "double"
                     },
-                    "status": {
+                    "studentStatus": {
                         "type": "string"
                     },
                     "boardType": {
@@ -254,7 +213,7 @@
                     "schoolName": {
                         "type": "string"
                     },
-                    "gradeNumber": {
+                    "classNo": {
                         "type": "string"
                     },
                     "name": {
@@ -266,29 +225,33 @@
                     }
                 },
                 "required": [
-                    "subjectStatistics",
-                    "feeDetails",
-                    "feeCharge",
-                    "guardianPhoneNumber",
-                    "guardianName",
-                    "duration",
+                    "dueAmount",
+                    "subjectsTaken",
+                    "isDeleted",
+                    "whatsappNo",
+                    "parentPhnNo",
+                    "parentName",
+                    "timing",
                     "joiningDate",
-                    "subjectsAcquired",
-                    "previousScore",
-                    "status",
+                    "pastScore",
+                    "studentStatus",
                     "boardType",
                     "schoolName",
-                    "gradeNumber",
+                    "classNo",
                     "name",
                     "id"
                 ],
                 "type": "object"
             },
-            "PageResponse_studentInterface_": {
+            "Student": {
+                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24StudentPayload_",
+                "description": "Model Student"
+            },
+            "PageResponse_Student_": {
                 "properties": {
                     "items": {
                         "items": {
-                            "$ref": "#/components/schemas/studentInterface"
+                            "$ref": "#/components/schemas/Student"
                         },
                         "type": "array"
                     },
@@ -300,17 +263,6 @@
                 "required": [
                     "items",
                     "totalCount"
-                ],
-                "type": "object"
-            },
-            "ErrorStore": {
-                "properties": {
-                    "ErrorMessage": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "ErrorMessage"
                 ],
                 "type": "object"
             },
@@ -329,34 +281,40 @@
             },
             "studentCreateInterface": {
                 "properties": {
-                    "feeCharge": {
+                    "dueAmount": {
                         "type": "number",
                         "format": "double"
                     },
-                    "guardianPhoneNumber": {
+                    "isDeleted": {
+                        "type": "boolean"
+                    },
+                    "whatsappNo": {
                         "type": "string"
                     },
-                    "guardianName": {
+                    "parentPhnNo": {
                         "type": "string"
                     },
-                    "duration": {
+                    "parentName": {
+                        "type": "string"
+                    },
+                    "timing": {
                         "type": "string"
                     },
                     "joiningDate": {
                         "type": "string",
                         "format": "date-time"
                     },
-                    "subjectsAcquired": {
+                    "subjectsTaken": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "previousScore": {
+                    "pastScore": {
                         "type": "number",
                         "format": "double"
                     },
-                    "status": {
+                    "studentStatus": {
                         "type": "string"
                     },
                     "boardType": {
@@ -365,7 +323,7 @@
                     "schoolName": {
                         "type": "string"
                     },
-                    "gradeNumber": {
+                    "classNo": {
                         "type": "string"
                     },
                     "name": {
@@ -373,51 +331,59 @@
                     }
                 },
                 "required": [
-                    "feeCharge",
-                    "guardianPhoneNumber",
-                    "guardianName",
-                    "duration",
+                    "dueAmount",
+                    "isDeleted",
+                    "whatsappNo",
+                    "parentPhnNo",
+                    "parentName",
+                    "timing",
                     "joiningDate",
-                    "subjectsAcquired",
-                    "previousScore",
-                    "status",
+                    "subjectsTaken",
+                    "pastScore",
+                    "studentStatus",
                     "boardType",
                     "schoolName",
-                    "gradeNumber",
+                    "classNo",
                     "name"
                 ],
                 "type": "object"
             },
             "studentUpdateInterface": {
                 "properties": {
-                    "feeCharge": {
+                    "dueAmount": {
                         "type": "number",
                         "format": "double"
                     },
-                    "guardianPhoneNumber": {
+                    "isDeleted": {
+                        "type": "boolean"
+                    },
+                    "whatsappNo": {
                         "type": "string"
                     },
-                    "guardianName": {
+                    "parentPhnNo": {
                         "type": "string"
                     },
-                    "duration": {
+                    "parentName": {
+                        "type": "string"
+                    },
+                    "timing": {
                         "type": "string"
                     },
                     "joiningDate": {
                         "type": "string",
                         "format": "date-time"
                     },
-                    "subjectsAcquired": {
+                    "subjectsTaken": {
                         "items": {
                             "type": "string"
                         },
                         "type": "array"
                     },
-                    "previousScore": {
+                    "pastScore": {
                         "type": "number",
                         "format": "double"
                     },
-                    "status": {
+                    "studentStatus": {
                         "type": "string"
                     },
                     "boardType": {
@@ -426,7 +392,7 @@
                     "schoolName": {
                         "type": "string"
                     },
-                    "gradeNumber": {
+                    "classNo": {
                         "type": "string"
                     },
                     "name": {
@@ -581,6 +547,43 @@
     },
     "openapi": "3.0.0",
     "paths": {
+        "/loginregister/login": {
+            "put": {
+                "operationId": "GetSelectorList",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {},
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Logins & Registers"
+                ],
+                "security": [],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/loginInterface"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/selector/getlist": {
             "get": {
                 "operationId": "GetSelectorList",
@@ -665,7 +668,7 @@
                                 "schema": {
                                     "anyOf": [
                                         {
-                                            "$ref": "#/components/schemas/PageResponse_studentInterface_"
+                                            "$ref": "#/components/schemas/PageResponse_Student_"
                                         },
                                         {
                                             "$ref": "#/components/schemas/ErrorStore"
@@ -757,7 +760,7 @@
                                 "schema": {
                                     "anyOf": [
                                         {
-                                            "$ref": "#/components/schemas/studentInterface"
+                                            "$ref": "#/components/schemas/Student"
                                         },
                                         {
                                             "$ref": "#/components/schemas/ErrorStore"

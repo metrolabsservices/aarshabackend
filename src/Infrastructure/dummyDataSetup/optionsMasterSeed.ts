@@ -9,8 +9,9 @@ export const optionsMasterData: any = {
     "Chemistry",
     "Biology",
     "Social",
+    "Science",
   ],
-  studentStatusTypes: ["away", "active", "in-active"],
+  studentStatusTypes: ["away", "active", "inactive"],
   gradeTypes: Array.from(
     { length: 10 },
     (_, index) => "Class-" + String(index + 1)

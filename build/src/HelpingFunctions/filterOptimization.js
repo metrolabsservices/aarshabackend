@@ -22,6 +22,9 @@ const filterOptimization = (data) => {
                     andSource.push({ [i.key]: { search: searchText } });
                 }
             }
+            else if (i.operation == "delete") {
+                andSource.push({ [i.key]: i.value === "false" ? false : true });
+            }
             else if (i.operation == "containsCombined") {
                 orSource.push({ [i.key]: { contains: i.value, mode: "insensitive" } });
             }

@@ -33,32 +33,36 @@ export type studentInterface = {
 
 export type studentUpdateInterface = {
   name?: string;
-  gradeNumber?: string;
+  classNo?: string;
   schoolName?: string;
   boardType?: string;
-  status?: string;
-  previousScore?: number;
-  subjectsAcquired?: string[];
+  studentStatus?: string;
+  pastScore?: number;
+  subjectsTaken?: string[];
   joiningDate?: Date;
-  duration?: string;
-  guardianName?: string;
-  guardianPhoneNumber?: string;
-  feeCharge?: number;
+  timing?: string;
+  parentName?: string;
+  parentPhnNo?: string;
+  whatsappNo?: string;
+  isDeleted?: boolean;
+  dueAmount?: number;
 };
 
 export type studentCreateInterface = {
   name: string;
-  gradeNumber: string;
+  classNo: string;
   schoolName: string;
   boardType: string;
-  status: string;
-  previousScore: number;
-  subjectsAcquired: string[];
+  studentStatus: string;
+  pastScore: number;
+  subjectsTaken: string[];
   joiningDate: Date;
-  duration: string;
-  guardianName: string;
-  guardianPhoneNumber: string;
-  feeCharge: number;
+  timing: string;
+  parentName: string;
+  parentPhnNo: string;
+  whatsappNo: string;
+  isDeleted: boolean;
+  dueAmount: number;
 };
 
 export type ServiceResponse = {
