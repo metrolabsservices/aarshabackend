@@ -7,9 +7,16 @@ export type subjectStatisticsInterface = {
 
 export type feeDetailsInterface = {
   id: number;
-  amount: number;
+  paidAmount: number;
+  subjectsTaken: string[];
   dateOfPaid: Date;
-  paidBy: string;
+  monthOfPaid: number;
+  studentId: number;
+};
+export type feeChargesInterface = {
+  id: number;
+  amount: number;
+  chargedMonth: number;
   studentId: number;
 };
 
@@ -26,7 +33,7 @@ export type studentInterface = {
   duration: string;
   guardianName: string;
   guardianPhoneNumber: string;
-  feeCharge: number;
+  feeCharge: feeChargesInterface[] | null;
   feeDetails: feeDetailsInterface[] | null;
   subjectStatistics: subjectStatisticsInterface[] | null;
 };
@@ -68,4 +75,22 @@ export type studentCreateInterface = {
 export type ServiceResponse = {
   response: string;
   data: any;
+};
+
+export type StudentFeeDataInterface = {
+  id: number;
+  name: string;
+  parentName: string;
+  feeCharge: {
+    id: number;
+    amount: number;
+    chargedMonth: number;
+  };
+  feeDetails: {
+    id: number;
+    subjectsTaken: string[];
+    paidAmount: number;
+    dateOfPaid: Date;
+    monthOfPaid: number;
+  };
 };

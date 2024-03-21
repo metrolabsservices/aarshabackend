@@ -5,8 +5,12 @@ import {
   studentUpdateInterface,
 } from "../Interfaces/studentsInterface";
 import { PageInfo, PageResponse } from "../Interfaces/PageInfo";
-import { paginationOptimization } from "../HelpingFunctions/pageOptimization";
+import {
+  paginationNewOptimizaation,
+  paginationOptimization,
+} from "../HelpingFunctions/pageOptimization";
 import { filterOptimization } from "../HelpingFunctions/filterOptimization";
+import { feeFilter } from "../HelpingFunctions/FilterOptimizations";
 
 export class StudentmanagementService {
   public async getStudentById(id: number): Promise<Student | Error> {
@@ -44,16 +48,17 @@ export class StudentmanagementService {
   ): Promise<PageResponse<Student> | Error> {
     const prisma = new PrismaClient();
     const getAll = async () => {
-      var pagination = paginationOptimization(pageInfo.Pagination);
+      var paginationSet = paginationOptimization(pageInfo.Pagination);
       var filterSet = filterOptimization(pageInfo.Filters);
 
       const studentDeatilsAll = await prisma.student.findMany({
         ...filterSet,
-        ...pagination,
+        ...paginationSet,
         orderBy: {
           joiningDate: "desc",
         },
         include: {
+          feeCharge: true,
           feeDetails: true,
           subjectStatistics: true,
         },
@@ -67,6 +72,62 @@ export class StudentmanagementService {
           return new Error("Data Not Found");
         }
         const count = await prisma.student.count();
+        return { items: result, totalCount: count };
+      })
+      .catch((e) => {
+        console.error(e);
+        return new Error("Error retrieving student details");
+      })
+      .finally(async () => {
+        await prisma.$disconnect();
+      });
+  }
+
+  public async getAllStudentsFeeData(
+    PageData?: any[],
+    Filters?: any
+  ): Promise<Error | any> {
+    const prisma = new PrismaClient();
+    const filterValues = await feeFilter(Filters);
+    const pageValues = paginationNewOptimizaation(PageData, filterValues.res);
+    const getAll = async () => {
+      console.log(Filters, "++++", PageData);
+      const studentDeatilsAll = await prisma.student.findMany({
+        where: { ...filterValues.where },
+        ...pageValues,
+        orderBy: {
+          id: "desc",
+        },
+
+        select: {
+          id: true,
+          name: true,
+          parentName: true,
+          feeCharge: {
+            select: { id: true, amount: true, dateOfCharged: true },
+          },
+          feeDetails: {
+            select: {
+              id: true,
+              paidAmount: true,
+              subjectsTaken: true,
+              dateOfPaid: true,
+            },
+          },
+        },
+      });
+      return studentDeatilsAll;
+    };
+    return getAll()
+      .then(async (result) => {
+        // console.log("output of Query -- ", result, result.length);
+        const filteredCount = await prisma.student.findMany({
+          where: { ...filterValues.where },
+        });
+        const count = filterValues.res
+          ? filteredCount.length
+          : await prisma.student.count();
+        // const pageResp = filterValues.res ? {current: 1, pageSize: };
         return { items: result, totalCount: count };
       })
       .catch((e) => {

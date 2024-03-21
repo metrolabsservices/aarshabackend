@@ -49,5 +49,86 @@ class LoginRegisterServices {
             }));
         });
     }
+    getAllLogins() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const getLogins = () => __awaiter(this, void 0, void 0, function* () {
+                return yield prisma.loginRegister.findMany({
+                    orderBy: {
+                        id: "asc",
+                    },
+                });
+            });
+            return getLogins()
+                .then((result) => {
+                if (result.length === 0) {
+                    return new Error("No Data Found");
+                }
+                return result;
+            })
+                .catch(() => {
+                // console.log("*******", err, "********");
+                return new Error("Failed to Get data");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    updateRecord(id, pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const updateId = () => __awaiter(this, void 0, void 0, function* () {
+                return yield prisma.loginRegister.updateMany({
+                    where: {
+                        id: id,
+                    },
+                    data: Object.assign({}, pack),
+                });
+            });
+            return updateId()
+                .then((result) => {
+                console.log(result);
+                if (result.count == 1) {
+                    return "Record Updated Successfully";
+                }
+                return Error("Record Not Available to update");
+            })
+                .catch(() => {
+                // console.log("*******", err, "********");
+                return new Error("Failed to Get data");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    deleteRecord(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const deleteId = () => __awaiter(this, void 0, void 0, function* () {
+                return yield prisma.loginRegister.deleteMany({
+                    where: {
+                        id: id,
+                    },
+                });
+            });
+            return deleteId()
+                .then((result) => {
+                console.log(result);
+                if (result.count == 1) {
+                    return "Record Deleted Successfully";
+                }
+                return Error("Record Not Available to delete");
+            })
+                .catch(() => {
+                // console.log("*******", err, "********");
+                return new Error("Failed to Get data");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
 }
 exports.LoginRegisterServices = LoginRegisterServices;

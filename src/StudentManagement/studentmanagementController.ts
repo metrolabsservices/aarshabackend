@@ -14,10 +14,11 @@ import { StudentmanagementService } from "./studentmanagementService";
 import { ErrorStore } from "../Interfaces/errorHandling";
 import {
   ServiceResponse,
+  StudentFeeDataInterface,
   studentCreateInterface,
   studentUpdateInterface,
 } from "../Interfaces/studentsInterface";
-import { PageResponse } from "../Interfaces/PageInfo";
+import { PageResponse, Pageresponse } from "../Interfaces/PageInfo";
 import { Student } from "@prisma/client";
 
 @Tags("Student Management")
@@ -31,6 +32,22 @@ export class StudentmanagementController extends Controller {
     console.log("------------- Controller is running ---------------");
     const serv = new StudentmanagementService();
     var out = await serv.getAllStudents({ Pagination, Filters });
+
+    if (out instanceof Error) {
+      this.setStatus(404);
+      return { ErrorMessage: out.message };
+    }
+    this.setStatus(201);
+    return out;
+  }
+
+  @Get("feedetails")
+  public async getAllFeeDeatails(
+    @Query() PageData?: any,
+    @Query() Filters?: any
+  ): Promise<Pageresponse<StudentFeeDataInterface> | ErrorStore> {
+    const serv = new StudentmanagementService();
+    var out = await serv.getAllStudentsFeeData(PageData, Filters);
 
     if (out instanceof Error) {
       this.setStatus(404);

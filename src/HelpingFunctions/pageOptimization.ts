@@ -9,3 +9,13 @@ export const paginationOptimization = (data: any) => {
       : 0,
   };
 };
+
+export const paginationNewOptimizaation = (data: any, res: boolean) => {
+  console.log(res);
+  return {
+    take: parseInt(data.pageSize) || 5,
+    skip: parseInt(data.current)
+      ? (parseInt(data.current) - 1) * (parseInt(data.pageSize) || 0)
+      : 0,
+  };
+};

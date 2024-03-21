@@ -25,6 +25,21 @@ const models = {
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "password": { "dataType": "string", "required": true }, "userMail": { "dataType": "string", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "%24Result.DefaultSelection_Prisma.%24LoginRegisterPayload_": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "isApproved": { "dataType": "boolean", "required": true }, "role": { "dataType": "string", "required": true }, "password": { "dataType": "string", "required": true }, "userMail": { "dataType": "string", "required": true }, "userName": { "dataType": "string", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "LoginRegister": {
+        "dataType": "refAlias",
+        "type": { "ref": "%24Result.DefaultSelection_Prisma.%24LoginRegisterPayload_", "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "loginregisterUpdateInterface": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "isApproved": { "dataType": "boolean" }, "role": { "dataType": "string" }, "password": { "dataType": "string" }, "userMail": { "dataType": "string" }, "userName": { "dataType": "string" } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "JsonObject": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": {}, "validators": {} },
@@ -69,6 +84,21 @@ const models = {
     "PageResponse_Student_": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "items": { "dataType": "array", "array": { "dataType": "refAlias", "ref": "Student" }, "required": true }, "totalCount": { "dataType": "double", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "StudentFeeDataInterface": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "feeDetails": { "dataType": "nestedObjectLiteral", "nestedProperties": { "monthOfPaid": { "dataType": "double", "required": true }, "dateOfPaid": { "dataType": "datetime", "required": true }, "paidAmount": { "dataType": "double", "required": true }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "id": { "dataType": "double", "required": true } }, "required": true }, "feeCharge": { "dataType": "nestedObjectLiteral", "nestedProperties": { "chargedMonth": { "dataType": "double", "required": true }, "amount": { "dataType": "double", "required": true }, "id": { "dataType": "double", "required": true } }, "required": true }, "parentName": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true }, "id": { "dataType": "double", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pagination": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "count": { "dataType": "double", "required": true }, "pageSize": { "dataType": "double", "required": true }, "curentPage": { "dataType": "double", "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "Pageresponse_StudentFeeDataInterface_": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "pagination": { "ref": "Pagination", "required": true }, "items": { "dataType": "array", "array": { "dataType": "refAlias", "ref": "StudentFeeDataInterface" }, "required": true }, "totalCount": { "dataType": "double", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "ServiceResponse": {
@@ -136,6 +166,56 @@ function RegisterRoutes(app) {
         }
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/loginregister/all', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.getAllLogins)), function LoginRegisterController_getAllLogins(request, response, next) {
+        const args = {};
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new loginregisterController_1.LoginRegisterController();
+            const promise = controller.getAllLogins.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.put('/loginregister/:id', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.updateLogin)), function LoginRegisterController_updateLogin(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+            pack: { "in": "body", "name": "pack", "required": true, "ref": "loginregisterUpdateInterface" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new loginregisterController_1.LoginRegisterController();
+            const promise = controller.updateLogin.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.delete('/loginregister/:id', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.deleteLogin)), function LoginRegisterController_deleteLogin(request, response, next) {
+        const args = {
+            id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new loginregisterController_1.LoginRegisterController();
+            const promise = controller.deleteLogin.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.get('/selector/getlist', ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController)), ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController.prototype.getSelectorList)), function OptionmasterController_getSelectorList(request, response, next) {
         const args = {};
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -180,6 +260,24 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new studentmanagementController_1.StudentmanagementController();
             const promise = controller.getAllStudents.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.get('/student/feedetails', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getAllFeeDeatails)), function StudentmanagementController_getAllFeeDeatails(request, response, next) {
+        const args = {
+            PageData: { "in": "query", "name": "PageData", "dataType": "any" },
+            Filters: { "in": "query", "name": "Filters", "dataType": "any" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new studentmanagementController_1.StudentmanagementController();
+            const promise = controller.getAllFeeDeatails.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

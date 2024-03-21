@@ -35,6 +35,18 @@ let StudentmanagementController = class StudentmanagementController extends tsoa
             return out;
         });
     }
+    getAllFeeDeatails(PageData, Filters) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const serv = new studentmanagementService_1.StudentmanagementService();
+            var out = yield serv.getAllStudentsFeeData(PageData, Filters);
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+        });
+    }
     getStudentByName(vlv) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("------------- Controller is running ---------------", vlv);
@@ -107,6 +119,11 @@ __decorate([
     __param(0, (0, tsoa_1.Query)()),
     __param(1, (0, tsoa_1.Query)())
 ], StudentmanagementController.prototype, "getAllStudents", null);
+__decorate([
+    (0, tsoa_1.Get)("feedetails"),
+    __param(0, (0, tsoa_1.Query)()),
+    __param(1, (0, tsoa_1.Query)())
+], StudentmanagementController.prototype, "getAllFeeDeatails", null);
 __decorate([
     (0, tsoa_1.Post)("getbyname"),
     __param(0, (0, tsoa_1.Body)())

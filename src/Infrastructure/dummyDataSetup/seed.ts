@@ -1,10 +1,12 @@
 import { PrismaClient } from "@prisma/client";
 import { deleteEverything } from "./deleteEverything";
 import { questions } from "./questionBank";
-import { feeData, studentData, subjectStatics } from "./studentDeatils";
+import { studentData, subjectStatics } from "./studentDeatils";
 import { optionsMasterData } from "./optionsMasterSeed";
 import { transactionList } from "./tansactionSeed";
 import { loginDetails } from "./loginSeedData";
+import { feeChargeDetails } from "./feechargeSeed";
+import { feePaidDetails } from "./feepaidSeed";
 const prisma = new PrismaClient();
 
 async function main() {
@@ -19,7 +21,10 @@ async function main() {
     data: studentData,
   });
   const studentFeeDetails = await prisma.feeDetail.createMany({
-    data: feeData,
+    data: feePaidDetails,
+  });
+  const studentFeeCharges = await prisma.feeCharge.createMany({
+    data: feeChargeDetails,
   });
   const studentsubjectStatics = await prisma.subjectStatistics.createMany({
     data: subjectStatics,
@@ -38,6 +43,7 @@ async function main() {
   ${questionsCreate.count} records of Questions created.\n
   ${studentCreate.count} records of Student created.\n
   ${studentFeeDetails.count} records of Student Fee details created.\n
+  ${studentFeeCharges.count} records of Student Fee Charges created.\n
   ${studentsubjectStatics.count} records of Student Subject details created.\n
   `);
 }

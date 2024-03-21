@@ -32,6 +32,62 @@
 				],
 				"type": "object"
 			},
+			"%24Result.DefaultSelection_Prisma.%24LoginRegisterPayload_": {
+				"properties": {
+					"isApproved": {
+						"type": "boolean"
+					},
+					"role": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"userMail": {
+						"type": "string"
+					},
+					"userName": {
+						"type": "string"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"isApproved",
+					"role",
+					"password",
+					"userMail",
+					"userName",
+					"id"
+				],
+				"type": "object"
+			},
+			"LoginRegister": {
+				"$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24LoginRegisterPayload_",
+				"description": "Model LoginRegister"
+			},
+			"loginregisterUpdateInterface": {
+				"properties": {
+					"isApproved": {
+						"type": "boolean"
+					},
+					"role": {
+						"type": "string"
+					},
+					"password": {
+						"type": "string"
+					},
+					"userMail": {
+						"type": "string"
+					},
+					"userName": {
+						"type": "string"
+					}
+				},
+				"type": "object"
+			},
 			"JsonObject": {
 				"properties": {},
 				"type": "object",
@@ -261,6 +317,129 @@
 					}
 				},
 				"required": [
+					"items",
+					"totalCount"
+				],
+				"type": "object"
+			},
+			"StudentFeeDataInterface": {
+				"properties": {
+					"feeDetails": {
+						"properties": {
+							"monthOfPaid": {
+								"type": "number",
+								"format": "double"
+							},
+							"dateOfPaid": {
+								"type": "string",
+								"format": "date-time"
+							},
+							"paidAmount": {
+								"type": "number",
+								"format": "double"
+							},
+							"subjectsTaken": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"monthOfPaid",
+							"dateOfPaid",
+							"paidAmount",
+							"subjectsTaken",
+							"id"
+						],
+						"type": "object"
+					},
+					"feeCharge": {
+						"properties": {
+							"chargedMonth": {
+								"type": "number",
+								"format": "double"
+							},
+							"amount": {
+								"type": "number",
+								"format": "double"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"chargedMonth",
+							"amount",
+							"id"
+						],
+						"type": "object"
+					},
+					"parentName": {
+						"type": "string"
+					},
+					"name": {
+						"type": "string"
+					},
+					"id": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"feeDetails",
+					"feeCharge",
+					"parentName",
+					"name",
+					"id"
+				],
+				"type": "object"
+			},
+			"Pagination": {
+				"properties": {
+					"count": {
+						"type": "number",
+						"format": "double"
+					},
+					"pageSize": {
+						"type": "number",
+						"format": "double"
+					},
+					"curentPage": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"count",
+					"pageSize",
+					"curentPage"
+				],
+				"type": "object"
+			},
+			"Pageresponse_StudentFeeDataInterface_": {
+				"properties": {
+					"pagination": {
+						"$ref": "#/components/schemas/Pagination"
+					},
+					"items": {
+						"items": {
+							"$ref": "#/components/schemas/StudentFeeDataInterface"
+						},
+						"type": "array"
+					},
+					"totalCount": {
+						"type": "number",
+						"format": "double"
+					}
+				},
+				"required": [
+					"pagination",
 					"items",
 					"totalCount"
 				],
@@ -584,6 +763,124 @@
 				}
 			}
 		},
+		"/loginregister/all": {
+			"get": {
+				"operationId": "GetAllLogins",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"items": {
+												"$ref": "#/components/schemas/LoginRegister"
+											},
+											"type": "array"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Logins & Registers"
+				],
+				"security": [],
+				"parameters": []
+			}
+		},
+		"/loginregister/{id}": {
+			"put": {
+				"operationId": "UpdateLogin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"type": "string"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Logins & Registers"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/loginregisterUpdateInterface"
+							}
+						}
+					}
+				}
+			},
+			"delete": {
+				"operationId": "DeleteLogin",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"type": "string"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Logins & Registers"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				]
+			}
+		},
 		"/selector/getlist": {
 			"get": {
 				"operationId": "GetSelectorList",
@@ -699,6 +996,52 @@
 						"schema": {
 							"type": "array",
 							"items": {}
+						}
+					}
+				]
+			}
+		},
+		"/student/feedetails": {
+			"get": {
+				"operationId": "GetAllFeeDeatails",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"$ref": "#/components/schemas/Pageresponse_StudentFeeDataInterface_"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Student Management"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "query",
+						"name": "PageData",
+						"required": false,
+						"schema": {
+							"type": "string"
+						}
+					},
+					{
+						"in": "query",
+						"name": "Filters",
+						"required": false,
+						"schema": {
+							"type": "string"
 						}
 					}
 				]

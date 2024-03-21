@@ -35,12 +35,60 @@ let LoginRegisterController = class LoginRegisterController extends tsoa_1.Contr
             return out;
         });
     }
+    getAllLogins() {
+        return __awaiter(this, void 0, void 0, function* () {
+            const serv = new loginregisterService_1.LoginRegisterServices();
+            var out = yield serv.getAllLogins();
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+        });
+    }
+    updateLogin(id, pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const serv = new loginregisterService_1.LoginRegisterServices();
+            var out = yield serv.updateRecord(id, pack);
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+        });
+    }
+    deleteLogin(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const serv = new loginregisterService_1.LoginRegisterServices();
+            var out = yield serv.deleteRecord(id);
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+        });
+    }
 };
 exports.LoginRegisterController = LoginRegisterController;
 __decorate([
     (0, tsoa_1.Put)("login"),
     __param(0, (0, tsoa_1.Body)())
 ], LoginRegisterController.prototype, "getSelectorList", null);
+__decorate([
+    (0, tsoa_1.Get)("all")
+], LoginRegisterController.prototype, "getAllLogins", null);
+__decorate([
+    (0, tsoa_1.Put)("{id}"),
+    __param(0, (0, tsoa_1.Path)()),
+    __param(1, (0, tsoa_1.Body)())
+], LoginRegisterController.prototype, "updateLogin", null);
+__decorate([
+    (0, tsoa_1.Delete)("{id}"),
+    __param(0, (0, tsoa_1.Path)())
+], LoginRegisterController.prototype, "deleteLogin", null);
 exports.LoginRegisterController = LoginRegisterController = __decorate([
     (0, tsoa_1.Tags)("Logins & Registers"),
     (0, tsoa_1.Route)("loginregister")

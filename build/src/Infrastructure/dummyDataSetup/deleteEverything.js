@@ -26,6 +26,7 @@ const deleteEverything = () => __awaiter(void 0, void 0, void 0, function* () {
     const transactionList = prisma.transactionsList.deleteMany();
     const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
     const studentLinkedFeedetails = prisma.feeDetail.deleteMany();
+    const studentLinkedFeechrages = prisma.feeCharge.deleteMany();
     const questionsDelete = prisma.questions.deleteMany();
     const studentUnlinkedData = prisma.student.deleteMany();
     const deletedData = yield prisma.$transaction([
@@ -35,6 +36,7 @@ const deleteEverything = () => __awaiter(void 0, void 0, void 0, function* () {
         studentLinkedSubjectStatics,
         questionsDelete,
         studentLinkedFeedetails,
+        studentLinkedFeechrages,
         studentUnlinkedData,
     ]);
     deletedData.map((i, j) => {

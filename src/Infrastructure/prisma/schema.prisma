@@ -75,13 +75,21 @@ model Student {
   isDeleted Boolean
   subjectsTaken String[]
   dueAmount   Int
+  feeCharge   FeeCharge[]
   feeDetails  FeeDetail[]
   subjectStatistics SubjectStatistics[]
 }
 
+model FeeCharge {
+  id          Int       @id @default(autoincrement())
+  amount      Int
+  dateOfCharged  DateTime
+  student     Student   @relation(fields: [studentId], references: [id])
+  studentId   Int
+}
+
 model FeeDetail {
   id          Int       @id @default(autoincrement())
-  feeCharge      Int
   paidAmount      Int
   subjectsTaken String[]
   dateOfPaid  DateTime

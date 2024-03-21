@@ -14,6 +14,7 @@ export const deleteEverything = async () => {
   const transactionList = prisma.transactionsList.deleteMany();
   const studentLinkedSubjectStatics = prisma.subjectStatistics.deleteMany();
   const studentLinkedFeedetails = prisma.feeDetail.deleteMany();
+  const studentLinkedFeechrages = prisma.feeCharge.deleteMany();
   const questionsDelete = prisma.questions.deleteMany();
   const studentUnlinkedData = prisma.student.deleteMany();
   const deletedData = await prisma.$transaction([
@@ -23,6 +24,7 @@ export const deleteEverything = async () => {
     studentLinkedSubjectStatics,
     questionsDelete,
     studentLinkedFeedetails,
+    studentLinkedFeechrages,
     studentUnlinkedData,
   ]);
 

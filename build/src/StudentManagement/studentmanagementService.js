@@ -13,6 +13,7 @@ exports.StudentmanagementService = void 0;
 const client_1 = require("@prisma/client");
 const pageOptimization_1 = require("../HelpingFunctions/pageOptimization");
 const filterOptimization_1 = require("../HelpingFunctions/filterOptimization");
+const FilterOptimizations_1 = require("../HelpingFunctions/FilterOptimizations");
 class StudentmanagementService {
     getStudentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -49,11 +50,12 @@ class StudentmanagementService {
         return __awaiter(this, void 0, void 0, function* () {
             const prisma = new client_1.PrismaClient();
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
-                var pagination = (0, pageOptimization_1.paginationOptimization)(pageInfo.Pagination);
+                var paginationSet = (0, pageOptimization_1.paginationOptimization)(pageInfo.Pagination);
                 var filterSet = (0, filterOptimization_1.filterOptimization)(pageInfo.Filters);
-                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign(Object.assign({}, filterSet), pagination), { orderBy: {
+                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign(Object.assign({}, filterSet), paginationSet), { orderBy: {
                         joiningDate: "desc",
                     }, include: {
+                        feeCharge: true,
                         feeDetails: true,
                         subjectStatistics: true,
                     } }));
@@ -66,6 +68,54 @@ class StudentmanagementService {
                     return new Error("Data Not Found");
                 }
                 const count = yield prisma.student.count();
+                return { items: result, totalCount: count };
+            }))
+                .catch((e) => {
+                console.error(e);
+                return new Error("Error retrieving student details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    getAllStudentsFeeData(PageData, Filters) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const filterValues = yield (0, FilterOptimizations_1.feeFilter)(Filters);
+            const pageValues = (0, pageOptimization_1.paginationNewOptimizaation)(PageData, filterValues.res);
+            const getAll = () => __awaiter(this, void 0, void 0, function* () {
+                console.log(Filters, "++++", PageData);
+                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign({ where: Object.assign({}, filterValues.where) }, pageValues), { orderBy: {
+                        id: "desc",
+                    }, select: {
+                        id: true,
+                        name: true,
+                        parentName: true,
+                        feeCharge: {
+                            select: { id: true, amount: true, dateOfCharged: true },
+                        },
+                        feeDetails: {
+                            select: {
+                                id: true,
+                                paidAmount: true,
+                                subjectsTaken: true,
+                                dateOfPaid: true,
+                            },
+                        },
+                    } }));
+                return studentDeatilsAll;
+            });
+            return getAll()
+                .then((result) => __awaiter(this, void 0, void 0, function* () {
+                // console.log("output of Query -- ", result, result.length);
+                const filteredCount = yield prisma.student.findMany({
+                    where: Object.assign({}, filterValues.where),
+                });
+                const count = filterValues.res
+                    ? filteredCount.length
+                    : yield prisma.student.count();
+                // const pageResp = filterValues.res ? {current: 1, pageSize: };
                 return { items: result, totalCount: count };
             }))
                 .catch((e) => {

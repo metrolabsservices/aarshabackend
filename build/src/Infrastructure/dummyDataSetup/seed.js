@@ -16,6 +16,8 @@ const studentDeatils_1 = require("./studentDeatils");
 const optionsMasterSeed_1 = require("./optionsMasterSeed");
 const tansactionSeed_1 = require("./tansactionSeed");
 const loginSeedData_1 = require("./loginSeedData");
+const feechargeSeed_1 = require("./feechargeSeed");
+const feepaidSeed_1 = require("./feepaidSeed");
 const prisma = new client_1.PrismaClient();
 function main() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -30,7 +32,10 @@ function main() {
             data: studentDeatils_1.studentData,
         });
         const studentFeeDetails = yield prisma.feeDetail.createMany({
-            data: studentDeatils_1.feeData,
+            data: feepaidSeed_1.feePaidDetails,
+        });
+        const studentFeeCharges = yield prisma.feeCharge.createMany({
+            data: feechargeSeed_1.feeChargeDetails,
         });
         const studentsubjectStatics = yield prisma.subjectStatistics.createMany({
             data: studentDeatils_1.subjectStatics,
@@ -48,6 +53,7 @@ function main() {
   ${questionsCreate.count} records of Questions created.\n
   ${studentCreate.count} records of Student created.\n
   ${studentFeeDetails.count} records of Student Fee details created.\n
+  ${studentFeeCharges.count} records of Student Fee Charges created.\n
   ${studentsubjectStatics.count} records of Student Subject details created.\n
   `);
     });
