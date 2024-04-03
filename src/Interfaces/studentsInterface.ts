@@ -1,3 +1,5 @@
+import { FeeCharge, Student } from "@prisma/client";
+
 export type subjectStatisticsInterface = {
   id: number;
   subjectName: string;
@@ -92,5 +94,29 @@ export type StudentFeeDataInterface = {
     paidAmount: number;
     dateOfPaid: Date;
     monthOfPaid: number;
+  };
+};
+
+export type ModifiedStudentInterface = Omit<Student, "id">;
+export type NewStudent = {
+  name: string;
+  classNo: string;
+  schoolName: string;
+  boardType: string;
+  studentStatus: string;
+  pastScore: number;
+  joiningDate: Date;
+  timing: string;
+  parentName: string;
+  parentPhnNo: string;
+  whatsappNo: string;
+  isDeleted: boolean;
+  subjectsTaken: string[];
+  dueAmount: number;
+
+  feeCharge: {
+    amount: number;
+    dateOfCharged: Date;
+    studentId: number;
   };
 };

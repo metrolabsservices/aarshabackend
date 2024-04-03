@@ -458,8 +458,36 @@
                 ],
                 "type": "object"
             },
+            "FeeCharge": {
+                "properties": {
+                    "dateOfCharged": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "dateOfCharged",
+                    "amount"
+                ],
+                "type": "object"
+            },
             "studentCreateInterface": {
                 "properties": {
+                    "feeCharge": {
+                        "properties": {
+                            "create": {
+                                "$ref": "#/components/schemas/FeeCharge"
+                            }
+                        },
+                        "required": [
+                            "create"
+                        ],
+                        "type": "object"
+                    },
                     "dueAmount": {
                         "type": "number",
                         "format": "double"
@@ -510,6 +538,7 @@
                     }
                 },
                 "required": [
+                    "feeCharge",
                     "dueAmount",
                     "isDeleted",
                     "whatsappNo",

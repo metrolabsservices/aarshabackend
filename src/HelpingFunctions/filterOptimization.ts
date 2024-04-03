@@ -34,7 +34,8 @@ export const filterOptimization = (data: any[] | undefined) => {
     } else if (andSource.length == 0 && orSource.length > 0) {
       totalSource["OR"] = orSource;
     }
-    console.log({ totalSource });
-    return { where: { ...totalSource } };
+    // console.log({ totalSource });
+    let res = andSource.length + orSource.length > 1;
+    return { where: { ...totalSource }, res: res };
   }
 };

@@ -47,12 +47,11 @@ export class StudentmanagementService {
     pageInfo: PageInfo
   ): Promise<PageResponse<Student> | Error> {
     const prisma = new PrismaClient();
+    var filterSet = filterOptimization(pageInfo.Filters);
+    var paginationSet = paginationOptimization(pageInfo.Pagination);
     const getAll = async () => {
-      var paginationSet = paginationOptimization(pageInfo.Pagination);
-      var filterSet = filterOptimization(pageInfo.Filters);
-
       const studentDeatilsAll = await prisma.student.findMany({
-        ...filterSet,
+        where: { ...filterSet.where },
         ...paginationSet,
         orderBy: {
           joiningDate: "desc",
@@ -63,15 +62,21 @@ export class StudentmanagementService {
           subjectStatistics: true,
         },
       });
+
       return studentDeatilsAll;
     };
     return getAll()
       .then(async (result) => {
-        // console.log("output of Query -- ", result);
-        if (result.length === 0) {
-          return new Error("Data Not Found");
+        console.log("output of Query -- ", result);
+        let count = 0;
+        if (filterSet.res) {
+          let x = await prisma.student.findMany({
+            where: { ...filterSet.where },
+          });
+          count = x.length;
+        } else {
+          count = await prisma.student.count();
         }
-        const count = await prisma.student.count();
         return { items: result, totalCount: count };
       })
       .catch((e) => {

@@ -14,14 +14,9 @@ const paginationOptimization = (data) => {
 };
 exports.paginationOptimization = paginationOptimization;
 const paginationNewOptimizaation = (data, res) => {
-    if (res) {
-        return {
-            take: parseInt(data.pageSize) || 10,
-            skip: 0,
-        };
-    }
+    console.log(res);
     return {
-        take: parseInt(data.pageSize) || 10,
+        take: parseInt(data.pageSize) || 5,
         skip: parseInt(data.current)
             ? (parseInt(data.current) - 1) * (parseInt(data.pageSize) || 0)
             : 0,

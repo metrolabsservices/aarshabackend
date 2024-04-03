@@ -49,10 +49,10 @@ class StudentmanagementService {
     getAllStudents(pageInfo) {
         return __awaiter(this, void 0, void 0, function* () {
             const prisma = new client_1.PrismaClient();
+            var filterSet = (0, filterOptimization_1.filterOptimization)(pageInfo.Filters);
+            var paginationSet = (0, pageOptimization_1.paginationOptimization)(pageInfo.Pagination);
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
-                var paginationSet = (0, pageOptimization_1.paginationOptimization)(pageInfo.Pagination);
-                var filterSet = (0, filterOptimization_1.filterOptimization)(pageInfo.Filters);
-                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign(Object.assign({}, filterSet), paginationSet), { orderBy: {
+                const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign({ where: Object.assign({}, filterSet.where) }, paginationSet), { orderBy: {
                         joiningDate: "desc",
                     }, include: {
                         feeCharge: true,
@@ -63,11 +63,17 @@ class StudentmanagementService {
             });
             return getAll()
                 .then((result) => __awaiter(this, void 0, void 0, function* () {
-                // console.log("output of Query -- ", result);
-                if (result.length === 0) {
-                    return new Error("Data Not Found");
+                console.log("output of Query -- ", result);
+                let count = 0;
+                if (filterSet.res) {
+                    let x = yield prisma.student.findMany({
+                        where: Object.assign({}, filterSet.where),
+                    });
+                    count = x.length;
                 }
-                const count = yield prisma.student.count();
+                else {
+                    count = yield prisma.student.count();
+                }
                 return { items: result, totalCount: count };
             }))
                 .catch((e) => {
