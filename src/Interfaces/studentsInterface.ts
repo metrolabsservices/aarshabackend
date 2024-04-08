@@ -1,4 +1,4 @@
-import { FeeCharge, Student } from "@prisma/client";
+import { Student } from "@prisma/client";
 
 export type subjectStatisticsInterface = {
   id: number;

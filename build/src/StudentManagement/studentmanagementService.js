@@ -139,6 +139,11 @@ class StudentmanagementService {
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
                 const studentDeatilsAll = yield prisma.student.findMany({
                     where: {
+                        AND: [
+                            {
+                                isDeleted: false,
+                            },
+                        ],
                         OR: [
                             {
                                 name: {
@@ -154,15 +159,31 @@ class StudentmanagementService {
                             },
                         ],
                     },
+                    select: {
+                        id: true,
+                        name: true,
+                        classNo: true,
+                        parentName: true,
+                        parentPhnNo: true,
+                        dueAmount: true,
+                        feeCharge: {
+                            select: {
+                                amount: true,
+                                dateOfCharged: true,
+                            },
+                        },
+                        feeDetails: {
+                            select: {
+                                paidAmount: true,
+                                dateOfPaid: true,
+                            },
+                        },
+                    },
                 });
                 return studentDeatilsAll;
             });
             return getAll()
                 .then((result) => __awaiter(this, void 0, void 0, function* () {
-                // console.log("output of Query -- ", result);
-                if (result.length === 0) {
-                    return new Error("Data Not Found");
-                }
                 // const count = await prisma.student.count();
                 return result;
             }))

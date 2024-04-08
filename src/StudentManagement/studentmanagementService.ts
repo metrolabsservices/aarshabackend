@@ -149,6 +149,11 @@ export class StudentmanagementService {
     const getAll = async () => {
       const studentDeatilsAll = await prisma.student.findMany({
         where: {
+          AND: [
+            {
+              isDeleted: false,
+            },
+          ],
           OR: [
             {
               name: {
@@ -164,15 +169,33 @@ export class StudentmanagementService {
             },
           ],
         },
+        take: 5,
+        skip: 0,
+        select: {
+          id: true,
+          name: true,
+          classNo: true,
+          parentName: true,
+          parentPhnNo: true,
+          dueAmount: true,
+          feeCharge: {
+            select: {
+              amount: true,
+              dateOfCharged: true,
+            },
+          },
+          feeDetails: {
+            select: {
+              paidAmount: true,
+              dateOfPaid: true,
+            },
+          },
+        },
       });
       return studentDeatilsAll;
     };
     return getAll()
       .then(async (result) => {
-        // console.log("output of Query -- ", result);
-        if (result.length === 0) {
-          return new Error("Data Not Found");
-        }
         // const count = await prisma.student.count();
         return result;
       })
