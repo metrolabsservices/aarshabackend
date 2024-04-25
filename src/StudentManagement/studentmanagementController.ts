@@ -16,6 +16,7 @@ import {
   ServiceResponse,
   StudentFeeDataInterface,
   studentCreateInterface,
+  studentFeeInterface,
   studentUpdateInterface,
 } from "../Interfaces/studentsInterface";
 import { PageResponse, Pageresponse } from "../Interfaces/PageInfo";
@@ -100,6 +101,22 @@ export class StudentmanagementController extends Controller {
     }
     this.setStatus(201);
     return out;
+  }
+
+  @Post("newfee")
+  public async addStudentFee(
+    @Body() pack: studentFeeInterface
+  ): Promise<String | ErrorStore | any> {
+    console.log("------------- Controller is running ---------------", pack);
+    const serv = new StudentmanagementService();
+    var out = await serv.studentFeePayByID(pack);
+    if (out instanceof Error) {
+      this.setStatus(404);
+      return { ErrorMessage: out.message };
+    }
+    this.setStatus(201);
+    return out;
+    // return "failed";
   }
 
   @Put("{id}")

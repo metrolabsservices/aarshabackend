@@ -2,6 +2,7 @@ import { PrismaClient, Student } from "@prisma/client";
 import {
   ServiceResponse,
   studentCreateInterface,
+  studentFeeInterface,
   studentUpdateInterface,
 } from "../Interfaces/studentsInterface";
 import { PageInfo, PageResponse } from "../Interfaces/PageInfo";
@@ -11,6 +12,7 @@ import {
 } from "../HelpingFunctions/pageOptimization";
 import { filterOptimization } from "../HelpingFunctions/filterOptimization";
 import { feeFilter } from "../HelpingFunctions/FilterOptimizations";
+import { CustomObjectOptimize } from "../HelpingFunctions/objectCustomOptmization";
 
 export class StudentmanagementService {
   public async getStudentById(id: number): Promise<Student | Error> {
@@ -290,6 +292,51 @@ export class StudentmanagementService {
       .catch((e) => {
         console.error(e);
         return new Error(e.meta?.cause);
+      })
+      .finally(async () => {
+        await prisma.$disconnect();
+      });
+  }
+
+  public async studentFeePayByID(
+    pack: studentFeeInterface
+  ): Promise<String | Error | any> {
+    const prisma = new PrismaClient();
+    const addFeeById = async () => {
+      const feeAdd = await prisma.feeDetail.create({
+        data: { ...pack.data },
+      });
+      const transactionAddon = await prisma.transactionsList.create({
+        data: {
+          itemName: `Tution Fee Payment - Fee ID( ${feeAdd.id} )`,
+          description: `${pack.info.name} with student ID( ${pack.info.id} ) Fee Paid`,
+          category: "Student Fee",
+          dateOfPayment: pack.data.dateOfPaid,
+          amount: pack.data.paidAmount,
+          modeOfPayment: pack.info.modeOfPayment,
+          transactionMode: "Credit",
+        },
+      });
+      const studentDetailsById = await prisma.student.update({
+        where: {
+          id: pack.info.id,
+        },
+        data: {
+          subjectsTaken: pack.data.subjectsTaken,
+          dueAmount: pack.info.dueAmount,
+        },
+      });
+      return { feeAdd, transactionAddon, studentDetailsById };
+      // return feeAdd;
+    };
+    return addFeeById()
+      .then(async (result) => {
+        console.log("---------", result, "-----------");
+        return await CustomObjectOptimize(result);
+      })
+      .catch((e) => {
+        console.error(e);
+        return new Error("Enable to Enroll Fee Data");
       })
       .finally(async () => {
         await prisma.$disconnect();

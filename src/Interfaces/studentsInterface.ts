@@ -120,3 +120,18 @@ export type NewStudent = {
     studentId: number;
   };
 };
+
+export type studentFeeInterface = {
+  data: {
+    dateOfPaid: Date;
+    paidAmount: number;
+    studentId: number;
+    subjectsTaken: string[];
+  };
+  info: {
+    id: number;
+    dueAmount: number;
+    modeOfPayment: string;
+    name: string;
+  };
+};

@@ -527,6 +527,69 @@
 				],
 				"type": "object"
 			},
+			"studentFeeInterface": {
+				"properties": {
+					"info": {
+						"properties": {
+							"name": {
+								"type": "string"
+							},
+							"modeOfPayment": {
+								"type": "string"
+							},
+							"dueAmount": {
+								"type": "number",
+								"format": "double"
+							},
+							"id": {
+								"type": "number",
+								"format": "double"
+							}
+						},
+						"required": [
+							"name",
+							"modeOfPayment",
+							"dueAmount",
+							"id"
+						],
+						"type": "object"
+					},
+					"data": {
+						"properties": {
+							"subjectsTaken": {
+								"items": {
+									"type": "string"
+								},
+								"type": "array"
+							},
+							"studentId": {
+								"type": "number",
+								"format": "double"
+							},
+							"paidAmount": {
+								"type": "number",
+								"format": "double"
+							},
+							"dateOfPaid": {
+								"type": "string",
+								"format": "date-time"
+							}
+						},
+						"required": [
+							"subjectsTaken",
+							"studentId",
+							"paidAmount",
+							"dateOfPaid"
+						],
+						"type": "object"
+					}
+				},
+				"required": [
+					"info",
+					"data"
+				],
+				"type": "object"
+			},
 			"studentUpdateInterface": {
 				"properties": {
 					"dueAmount": {
@@ -1248,6 +1311,46 @@
 						"application/json": {
 							"schema": {
 								"$ref": "#/components/schemas/studentCreateInterface"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/student/newfee": {
+			"post": {
+				"operationId": "AddStudentFee",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"type": "string"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										},
+										{}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Student Management"
+				],
+				"security": [],
+				"parameters": [],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/studentFeeInterface"
 							}
 						}
 					}

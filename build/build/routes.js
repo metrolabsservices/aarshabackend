@@ -111,6 +111,11 @@ const models = {
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "dueAmount": { "dataType": "double", "required": true }, "isDeleted": { "dataType": "boolean", "required": true }, "whatsappNo": { "dataType": "string", "required": true }, "parentPhnNo": { "dataType": "string", "required": true }, "parentName": { "dataType": "string", "required": true }, "timing": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "pastScore": { "dataType": "double", "required": true }, "studentStatus": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "classNo": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "studentFeeInterface": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "info": { "dataType": "nestedObjectLiteral", "nestedProperties": { "name": { "dataType": "string", "required": true }, "modeOfPayment": { "dataType": "string", "required": true }, "dueAmount": { "dataType": "double", "required": true }, "id": { "dataType": "double", "required": true } }, "required": true }, "data": { "dataType": "nestedObjectLiteral", "nestedProperties": { "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "studentId": { "dataType": "double", "required": true }, "paidAmount": { "dataType": "double", "required": true }, "dateOfPaid": { "dataType": "datetime", "required": true } }, "required": true } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "studentUpdateInterface": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "dueAmount": { "dataType": "double" }, "isDeleted": { "dataType": "boolean" }, "whatsappNo": { "dataType": "string" }, "parentPhnNo": { "dataType": "string" }, "parentName": { "dataType": "string" }, "timing": { "dataType": "string" }, "joiningDate": { "dataType": "datetime" }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" } }, "pastScore": { "dataType": "double" }, "studentStatus": { "dataType": "string" }, "boardType": { "dataType": "string" }, "schoolName": { "dataType": "string" }, "classNo": { "dataType": "string" }, "name": { "dataType": "string" } }, "validators": {} },
@@ -329,6 +334,23 @@ function RegisterRoutes(app) {
             validatedArgs = getValidatedArgs(args, request, response);
             const controller = new studentmanagementController_1.StudentmanagementController();
             const promise = controller.createStudent.apply(controller, validatedArgs);
+            promiseHandler(controller, promise, response, undefined, next);
+        }
+        catch (err) {
+            return next(err);
+        }
+    });
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    app.post('/student/newfee', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.addStudentFee)), function StudentmanagementController_addStudentFee(request, response, next) {
+        const args = {
+            pack: { "in": "body", "name": "pack", "required": true, "ref": "studentFeeInterface" },
+        };
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        let validatedArgs = [];
+        try {
+            validatedArgs = getValidatedArgs(args, request, response);
+            const controller = new studentmanagementController_1.StudentmanagementController();
+            const promise = controller.addStudentFee.apply(controller, validatedArgs);
             promiseHandler(controller, promise, response, undefined, next);
         }
         catch (err) {

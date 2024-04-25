@@ -14,6 +14,7 @@ const client_1 = require("@prisma/client");
 const pageOptimization_1 = require("../HelpingFunctions/pageOptimization");
 const filterOptimization_1 = require("../HelpingFunctions/filterOptimization");
 const FilterOptimizations_1 = require("../HelpingFunctions/FilterOptimizations");
+const objectCustomOptmization_1 = require("../HelpingFunctions/objectCustomOptmization");
 class StudentmanagementService {
     getStudentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -159,6 +160,8 @@ class StudentmanagementService {
                             },
                         ],
                     },
+                    take: 5,
+                    skip: 0,
                     select: {
                         id: true,
                         name: true,
@@ -276,6 +279,50 @@ class StudentmanagementService {
                 var _a;
                 console.error(e);
                 return new Error((_a = e.meta) === null || _a === void 0 ? void 0 : _a.cause);
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
+    studentFeePayByID(pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const addFeeById = () => __awaiter(this, void 0, void 0, function* () {
+                const feeAdd = yield prisma.feeDetail.create({
+                    data: Object.assign({}, pack.data),
+                });
+                const transactionAddon = yield prisma.transactionsList.create({
+                    data: {
+                        itemName: `Tution Fee Payment - Fee ID( ${feeAdd.id} )`,
+                        description: `${pack.info.name} with student ID( ${pack.info.id} ) Fee Paid`,
+                        category: "Student Fee",
+                        dateOfPayment: pack.data.dateOfPaid,
+                        amount: pack.data.paidAmount,
+                        modeOfPayment: pack.info.modeOfPayment,
+                        transactionMode: "Credit",
+                    },
+                });
+                const studentDetailsById = yield prisma.student.update({
+                    where: {
+                        id: pack.info.id,
+                    },
+                    data: {
+                        subjectsTaken: pack.data.subjectsTaken,
+                        dueAmount: pack.info.dueAmount,
+                    },
+                });
+                return { feeAdd, transactionAddon, studentDetailsById };
+                // return feeAdd;
+            });
+            return addFeeById()
+                .then((result) => __awaiter(this, void 0, void 0, function* () {
+                console.log("---------", result, "-----------");
+                return yield (0, objectCustomOptmization_1.CustomObjectOptimize)(result);
+            }))
+                .catch((e) => {
+                console.error(e);
+                return new Error("Enable to Enroll Fee Data");
             })
                 .finally(() => __awaiter(this, void 0, void 0, function* () {
                 yield prisma.$disconnect();

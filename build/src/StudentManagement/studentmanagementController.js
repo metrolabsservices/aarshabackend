@@ -86,6 +86,20 @@ let StudentmanagementController = class StudentmanagementController extends tsoa
             return out;
         });
     }
+    addStudentFee(pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            console.log("------------- Controller is running ---------------", pack);
+            const serv = new studentmanagementService_1.StudentmanagementService();
+            var out = yield serv.studentFeePayByID(pack);
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+            // return "failed";
+        });
+    }
     updateStudentById(id, pack) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("------------- Controller is running ---------------", pack);
@@ -136,6 +150,10 @@ __decorate([
     (0, tsoa_1.Post)("create"),
     __param(0, (0, tsoa_1.Body)())
 ], StudentmanagementController.prototype, "createStudent", null);
+__decorate([
+    (0, tsoa_1.Post)("newfee"),
+    __param(0, (0, tsoa_1.Body)())
+], StudentmanagementController.prototype, "addStudentFee", null);
 __decorate([
     (0, tsoa_1.Put)("{id}"),
     __param(0, (0, tsoa_1.Path)()),

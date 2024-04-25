@@ -52,11 +52,11 @@ model TransactionsList {
   id          Int       @id @default(autoincrement())
   itemName String
   description String
-  category String
+  category String // Library Membership, Stationary Parchase, Stationary Sale, Electricity, Salaries, Rent, Student Fee, Water, Maintenance
   dateOfPayment DateTime
   amount Int
-  modeOfPayment String
-  transactionMode String
+  modeOfPayment String // Phone Pay, Google Pay, Paytm, Cred, Bank Transfer, Card, Cash
+  transactionMode String // Debit, Credit
 }
 
 model Student {
