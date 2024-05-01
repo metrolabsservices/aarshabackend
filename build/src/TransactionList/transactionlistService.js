@@ -61,9 +61,6 @@ class transactionlistService {
                             status: true,
                         };
             }
-            else {
-                isFiltered = { data: { where: {} }, status: false };
-            }
             console.log("--------- Serivice Running --------------", Filters, isFiltered);
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
                 const transactionDeatilsAll = yield prisma.transactionsList.findMany(Object.assign(Object.assign(Object.assign({}, isFiltered.data), pageValues), { orderBy: {
