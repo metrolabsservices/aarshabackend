@@ -4,9 +4,9 @@ import { PageResponse } from "../Interfaces/PageInfo";
 import {
   transactionlistInterface,
   transactionlistUpdateInterface,
-} from "src/Interfaces/transactionlistInterface";
+} from "../Interfaces/transactionlistInterface";
 import { ServiceResponse } from "../Interfaces/studentsInterface";
-// import { transactionlistInterface } from "src/Interfaces/transactionlistInterface";
+import { paginationNewOptimizaation } from "../HelpingFunctions/pageOptimization";
 
 export class transactionlistService {
   public async getTransactionById(
@@ -37,16 +37,40 @@ export class transactionlistService {
       });
   }
 
-  public async getAllTransactions(): Promise<
-    PageResponse<TransactionsList> | Error
-  > {
+  public async getAllTransactions(
+    Filters?: any,
+    PageData?: any
+  ): Promise<PageResponse<TransactionsList> | Error> {
     const prisma = new PrismaClient();
+    const pageValues = paginationNewOptimizaation(PageData);
+
+    let isFiltered = { data: { where: {} }, status: false };
+    if (Filters !== "undefined") {
+      isFiltered =
+        Filters.type === "number"
+          ? {
+              data: { where: { id: { equals: parseInt(Filters.value) } } },
+              status: true,
+            }
+          : {
+              data: {
+                where: {
+                  itemName: { contains: Filters.value, mode: "insensitive" },
+                },
+              },
+              status: true,
+            };
+    }
+
+    console.log(
+      "--------- Serivice Running --------------",
+      Filters,
+      isFiltered
+    );
     const getAll = async () => {
-      //   var pagination = paginationOptimization(pageInfo.Pagination);
-      //   var filterSet = filterOptimization(pageInfo.Filters);
       const transactionDeatilsAll = await prisma.transactionsList.findMany({
-        // ...filterSet,
-        // ...pagination,
+        ...isFiltered.data,
+        ...pageValues,
         orderBy: {
           dateOfPayment: "desc",
         },
@@ -57,9 +81,14 @@ export class transactionlistService {
       .then(async (result) => {
         // console.log("output of Query -- ", result);
         if (result.length === 0) {
-          return new Error("Data Not Found");
+          return { items: [], totalCount: 0 };
         }
-        const count = await prisma.transactionsList.count();
+        const filteredCount = await prisma.transactionsList.findMany({
+          ...isFiltered.data,
+        });
+        const count = isFiltered.status
+          ? filteredCount.length
+          : await prisma.transactionsList.count();
         return { items: result, totalCount: count };
       })
       .catch((e) => {

@@ -22,7 +22,7 @@ const CustomObjectOptimize = (data) => __awaiter(void 0, void 0, void 0, functio
     return {
         "1": String(data.feeAdd.id),
         "2": String(data.transactionAddon.id),
-        "3": data.transactionAddon.dateOfPayment,
+        "3": new Date(data.transactionAddon.dateOfPayment).toDateString(),
         "4": data.studentDetailsById.name,
         "5": data.studentDetailsById.classNo,
         "6": data.studentDetailsById.timing + "Hrs",

@@ -13,8 +13,7 @@ const paginationOptimization = (data) => {
     };
 };
 exports.paginationOptimization = paginationOptimization;
-const paginationNewOptimizaation = (data, res) => {
-    console.log(res);
+const paginationNewOptimizaation = (data) => {
     return {
         take: parseInt(data.pageSize) || 5,
         skip: parseInt(data.current)

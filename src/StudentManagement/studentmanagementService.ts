@@ -96,7 +96,7 @@ export class StudentmanagementService {
   ): Promise<Error | any> {
     const prisma = new PrismaClient();
     const filterValues = await feeFilter(Filters);
-    const pageValues = paginationNewOptimizaation(PageData, filterValues.res);
+    const pageValues = paginationNewOptimizaation(PageData);
     const getAll = async () => {
       console.log(Filters, "++++", PageData);
       const studentDeatilsAll = await prisma.student.findMany({

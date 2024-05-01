@@ -11,7 +11,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.transactionlistService = void 0;
 const client_1 = require("@prisma/client");
-// import { transactionlistInterface } from "src/Interfaces/transactionlistInterface";
+const pageOptimization_1 = require("../HelpingFunctions/pageOptimization");
 class transactionlistService {
     getTransactionById(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -40,28 +40,47 @@ class transactionlistService {
             }));
         });
     }
-    getAllTransactions() {
+    getAllTransactions(Filters, PageData) {
         return __awaiter(this, void 0, void 0, function* () {
             const prisma = new client_1.PrismaClient();
+            const pageValues = (0, pageOptimization_1.paginationNewOptimizaation)(PageData);
+            let isFiltered = { data: { where: {} }, status: false };
+            if (Filters !== "undefined") {
+                isFiltered =
+                    Filters.type === "number"
+                        ? {
+                            data: { where: { id: { equals: parseInt(Filters.value) } } },
+                            status: true,
+                        }
+                        : {
+                            data: {
+                                where: {
+                                    itemName: { contains: Filters.value, mode: "insensitive" },
+                                },
+                            },
+                            status: true,
+                        };
+            }
+            else {
+                isFiltered = { data: { where: {} }, status: false };
+            }
+            console.log("--------- Serivice Running --------------", Filters, isFiltered);
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
-                //   var pagination = paginationOptimization(pageInfo.Pagination);
-                //   var filterSet = filterOptimization(pageInfo.Filters);
-                const transactionDeatilsAll = yield prisma.transactionsList.findMany({
-                    // ...filterSet,
-                    // ...pagination,
-                    orderBy: {
+                const transactionDeatilsAll = yield prisma.transactionsList.findMany(Object.assign(Object.assign(Object.assign({}, isFiltered.data), pageValues), { orderBy: {
                         dateOfPayment: "desc",
-                    },
-                });
+                    } }));
                 return transactionDeatilsAll;
             });
             return getAll()
                 .then((result) => __awaiter(this, void 0, void 0, function* () {
                 // console.log("output of Query -- ", result);
                 if (result.length === 0) {
-                    return new Error("Data Not Found");
+                    return { items: [], totalCount: 0 };
                 }
-                const count = yield prisma.transactionsList.count();
+                const filteredCount = yield prisma.transactionsList.findMany(Object.assign({}, isFiltered.data));
+                const count = isFiltered.status
+                    ? filteredCount.length
+                    : yield prisma.transactionsList.count();
                 return { items: result, totalCount: count };
             }))
                 .catch((e) => {

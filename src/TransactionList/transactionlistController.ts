@@ -26,15 +26,15 @@ export class transactionlistController extends Controller {
   @Get("all/items")
   public async getAllTransaction(
     @Query() Pagination?: any,
-    @Query() Filters?: any[]
+    @Query() Filters?: any
   ): Promise<PageResponse<TransactionsList> | ErrorStore> {
     console.log(
       "------------- Controller is running ---------------",
-      Pagination,
-      Filters
+      Filters,
+      Pagination
     );
     const serv = new transactionlistService();
-    var out = await serv.getAllTransactions();
+    var out = await serv.getAllTransactions(Filters, Pagination);
 
     if (out instanceof Error) {
       this.setStatus(404);

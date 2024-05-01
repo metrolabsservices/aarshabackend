@@ -90,7 +90,7 @@ class StudentmanagementService {
         return __awaiter(this, void 0, void 0, function* () {
             const prisma = new client_1.PrismaClient();
             const filterValues = yield (0, FilterOptimizations_1.feeFilter)(Filters);
-            const pageValues = (0, pageOptimization_1.paginationNewOptimizaation)(PageData, filterValues.res);
+            const pageValues = (0, pageOptimization_1.paginationNewOptimizaation)(PageData);
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
                 console.log(Filters, "++++", PageData);
                 const studentDeatilsAll = yield prisma.student.findMany(Object.assign(Object.assign({ where: Object.assign({}, filterValues.where) }, pageValues), { orderBy: {

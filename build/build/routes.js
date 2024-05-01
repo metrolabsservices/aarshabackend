@@ -396,7 +396,7 @@ function RegisterRoutes(app) {
     app.get('/transaction/all/items', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getAllTransaction)), function transactionlistController_getAllTransaction(request, response, next) {
         const args = {
             Pagination: { "in": "query", "name": "Pagination", "dataType": "any" },
-            Filters: { "in": "query", "name": "Filters", "dataType": "array", "array": { "dataType": "any" } },
+            Filters: { "in": "query", "name": "Filters", "dataType": "any" },
         };
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         let validatedArgs = [];

@@ -24,9 +24,9 @@ const transactionlistService_1 = require("./transactionlistService");
 let transactionlistController = class transactionlistController extends tsoa_1.Controller {
     getAllTransaction(Pagination, Filters) {
         return __awaiter(this, void 0, void 0, function* () {
-            console.log("------------- Controller is running ---------------", Pagination, Filters);
+            console.log("------------- Controller is running ---------------", Filters, Pagination);
             const serv = new transactionlistService_1.transactionlistService();
-            var out = yield serv.getAllTransactions();
+            var out = yield serv.getAllTransactions(Filters, Pagination);
             if (out instanceof Error) {
                 this.setStatus(404);
                 return { ErrorMessage: out.message };

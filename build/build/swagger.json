@@ -1397,8 +1397,7 @@
                         "name": "Filters",
                         "required": false,
                         "schema": {
-                            "type": "array",
-                            "items": {}
+                            "type": "string"
                         }
                     }
                 ]

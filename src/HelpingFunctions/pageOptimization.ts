@@ -10,8 +10,7 @@ export const paginationOptimization = (data: any) => {
   };
 };
 
-export const paginationNewOptimizaation = (data: any, res: boolean) => {
-  console.log(res);
+export const paginationNewOptimizaation = (data: any) => {
   return {
     take: parseInt(data.pageSize) || 5,
     skip: parseInt(data.current)
