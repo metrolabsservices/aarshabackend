@@ -12,6 +12,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.transactionlistService = void 0;
 const client_1 = require("@prisma/client");
 const pageOptimization_1 = require("../HelpingFunctions/pageOptimization");
+const FilterOptimizations_1 = require("../HelpingFunctions/FilterOptimizations");
 class transactionlistService {
     getTransactionById(id) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -44,26 +45,9 @@ class transactionlistService {
         return __awaiter(this, void 0, void 0, function* () {
             const prisma = new client_1.PrismaClient();
             const pageValues = (0, pageOptimization_1.paginationNewOptimizaation)(PageData);
-            let isFiltered = { data: { where: {} }, status: false };
-            if (Filters !== "undefined") {
-                isFiltered =
-                    Filters.type === "number"
-                        ? {
-                            data: { where: { id: { equals: parseInt(Filters.value) } } },
-                            status: true,
-                        }
-                        : {
-                            data: {
-                                where: {
-                                    itemName: { contains: Filters.value, mode: "insensitive" },
-                                },
-                            },
-                            status: true,
-                        };
-            }
-            console.log("--------- Serivice Running --------------", Filters, isFiltered);
+            const FilterData = yield (0, FilterOptimizations_1.trxFilter)(Filters);
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
-                const transactionDeatilsAll = yield prisma.transactionsList.findMany(Object.assign(Object.assign(Object.assign({}, isFiltered.data), pageValues), { orderBy: {
+                const transactionDeatilsAll = yield prisma.transactionsList.findMany(Object.assign(Object.assign(Object.assign({}, FilterData.data), pageValues), { orderBy: {
                         dateOfPayment: "desc",
                     } }));
                 return transactionDeatilsAll;
@@ -71,11 +55,8 @@ class transactionlistService {
             return getAll()
                 .then((result) => __awaiter(this, void 0, void 0, function* () {
                 // console.log("output of Query -- ", result);
-                if (result.length === 0) {
-                    return { items: [], totalCount: 0 };
-                }
-                const filteredCount = yield prisma.transactionsList.findMany(Object.assign({}, isFiltered.data));
-                const count = isFiltered.status
+                const filteredCount = yield prisma.transactionsList.findMany(Object.assign({}, FilterData.data));
+                const count = FilterData.status
                     ? filteredCount.length
                     : yield prisma.transactionsList.count();
                 return { items: result, totalCount: count };

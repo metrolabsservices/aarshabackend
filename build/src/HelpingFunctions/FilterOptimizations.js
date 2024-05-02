@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.feeFilter = void 0;
+exports.trxFilter = exports.feeFilter = void 0;
 const feeFilter = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (typeof data == "undefined") {
         return { where: {}, res: false };
@@ -25,3 +25,27 @@ const feeFilter = (data) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.feeFilter = feeFilter;
+const trxFilter = (data) => __awaiter(void 0, void 0, void 0, function* () {
+    if (typeof data == "undefined") {
+        return { data: { where: {} }, status: false };
+    }
+    else {
+        let isFiltered = { data: { where: {} }, status: false };
+        isFiltered =
+            data.type === "number"
+                ? {
+                    data: { where: { id: { equals: parseInt(data.value) } } },
+                    status: true,
+                }
+                : {
+                    data: {
+                        where: {
+                            itemName: { contains: data.value, mode: "insensitive" },
+                        },
+                    },
+                    status: true,
+                };
+        return isFiltered;
+    }
+});
+exports.trxFilter = trxFilter;
