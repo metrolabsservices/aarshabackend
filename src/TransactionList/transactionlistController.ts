@@ -15,6 +15,7 @@ import { TransactionsList } from "@prisma/client";
 import { PageResponse } from "../Interfaces/PageInfo";
 import { ErrorStore } from "../Interfaces/errorHandling";
 import {
+  TransactionChartFilters,
   transactionlistInterface,
   transactionlistUpdateInterface,
 } from "../Interfaces/transactionlistInterface";
@@ -82,6 +83,20 @@ export class transactionlistController extends Controller {
     console.log("------------- Controller is running ---------------");
     const serv = new transactionlistService();
     var out = await serv.updateTransactionById(id, pack);
+    if (out instanceof Error) {
+      this.setStatus(404);
+      return { ErrorMessage: out.message };
+    }
+    this.setStatus(201);
+    return out;
+  }
+
+  @Post("chartdata")
+  public async pieChartTransactionData(
+    @Body() pack: TransactionChartFilters[]
+  ): Promise<any> {
+    const serv = new transactionlistService();
+    var out = await serv.getPaiChartData(pack);
     if (out instanceof Error) {
       this.setStatus(404);
       return { ErrorMessage: out.message };

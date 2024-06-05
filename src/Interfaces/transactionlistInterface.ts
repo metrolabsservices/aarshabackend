@@ -28,3 +28,13 @@ export type transactionlistUpdateInterface = {
   modeOfPayment?: string;
   transactionMode?: string;
 };
+
+export type TransactionChartFilter = {
+  type: string;
+  key: string;
+  value: string | string[] | Date[];
+};
+
+export type TransactionChartFilters = {
+  [index: number]: TransactionChartFilter;
+};

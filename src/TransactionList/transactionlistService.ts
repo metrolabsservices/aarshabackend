@@ -7,7 +7,10 @@ import {
 } from "../Interfaces/transactionlistInterface";
 import { ServiceResponse } from "../Interfaces/studentsInterface";
 import { paginationNewOptimizaation } from "../HelpingFunctions/pageOptimization";
-import { trxFilter } from "../HelpingFunctions/FilterOptimizations";
+import {
+  trxChartFilter,
+  trxFilter,
+} from "../HelpingFunctions/FilterOptimizations";
 
 export class transactionlistService {
   public async getTransactionById(
@@ -71,6 +74,30 @@ export class transactionlistService {
       .catch((e) => {
         console.error(e);
         return new Error("Error retrieving Transaction details");
+      })
+      .finally(async () => {
+        await prisma.$disconnect();
+      });
+  }
+
+  public async getPaiChartData(pack: any): Promise<any> {
+    const prisma = new PrismaClient();
+    trxChartFilter(pack);
+    const transactiondata = async () => {
+      return 1;
+      // const transactionAddon = await prisma.transactionsList.findMany({
+      //   where: data,
+      // });
+      // return transactionAddon;
+    };
+    return transactiondata()
+      .then((result) => {
+        console.log(result);
+        return "Record Created Successfully";
+      })
+      .catch((e) => {
+        console.error(e);
+        return new Error("Failed to create Student");
       })
       .finally(async () => {
         await prisma.$disconnect();

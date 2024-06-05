@@ -70,6 +70,31 @@ class transactionlistService {
             }));
         });
     }
+    getPaiChartData(pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            (0, FilterOptimizations_1.trxChartFilter)(pack);
+            const transactiondata = () => __awaiter(this, void 0, void 0, function* () {
+                return 1;
+                // const transactionAddon = await prisma.transactionsList.findMany({
+                //   where: data,
+                // });
+                // return transactionAddon;
+            });
+            return transactiondata()
+                .then((result) => {
+                console.log(result);
+                return "Record Created Successfully";
+            })
+                .catch((e) => {
+                console.error(e);
+                return new Error("Failed to create Student");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
+        });
+    }
     createTransaction(pack) {
         return __awaiter(this, void 0, void 0, function* () {
             const prisma = new client_1.PrismaClient();

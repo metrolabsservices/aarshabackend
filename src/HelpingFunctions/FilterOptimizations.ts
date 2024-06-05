@@ -36,3 +36,7 @@ export const trxFilter = async (data: any | undefined) => {
     return isFiltered;
   }
 };
+
+export const trxChartFilter = async (pack: any) => {
+  console.log(pack, "data in Pie Chart ");
+};

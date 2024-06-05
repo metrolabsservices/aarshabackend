@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.trxFilter = exports.feeFilter = void 0;
+exports.trxChartFilter = exports.trxFilter = exports.feeFilter = void 0;
 const feeFilter = (data) => __awaiter(void 0, void 0, void 0, function* () {
     if (typeof data == "undefined") {
         return { where: {}, res: false };
@@ -49,3 +49,7 @@ const trxFilter = (data) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.trxFilter = trxFilter;
+const trxChartFilter = (pack) => __awaiter(void 0, void 0, void 0, function* () {
+    console.log(pack, "data in Pie Chart ");
+});
+exports.trxChartFilter = trxChartFilter;

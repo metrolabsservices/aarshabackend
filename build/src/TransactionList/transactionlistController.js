@@ -74,6 +74,18 @@ let transactionlistController = class transactionlistController extends tsoa_1.C
             return out;
         });
     }
+    pieChartTransactionData(pack) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const serv = new transactionlistService_1.transactionlistService();
+            var out = yield serv.getPaiChartData(pack);
+            if (out instanceof Error) {
+                this.setStatus(404);
+                return { ErrorMessage: out.message };
+            }
+            this.setStatus(201);
+            return out;
+        });
+    }
     deleteStudentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("------------- Controller is running ---------------");
@@ -107,6 +119,10 @@ __decorate([
     __param(0, (0, tsoa_1.Path)()),
     __param(1, (0, tsoa_1.Body)())
 ], transactionlistController.prototype, "updateTransactionById", null);
+__decorate([
+    (0, tsoa_1.Post)("chartdata"),
+    __param(0, (0, tsoa_1.Body)())
+], transactionlistController.prototype, "pieChartTransactionData", null);
 __decorate([
     (0, tsoa_1.Delete)("{id}"),
     __param(0, (0, tsoa_1.Path)())
