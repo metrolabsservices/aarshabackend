@@ -96,6 +96,12 @@ export class transactionlistService {
           },
         },
       });
+
+      console.log(
+        "-------------------------\n \tlist of records filtered based on selected date range\n",
+        transactionList,
+        "\n----------------------------------------------"
+      );
       const modifiedResult = (transactions: TransactionsList[]) => {
         const categoryMap: any = {};
         const predefinedCategories = [
