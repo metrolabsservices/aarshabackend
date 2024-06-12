@@ -460,6 +460,7 @@
 			},
 			"studentCreateInterface": {
 				"properties": {
+					"feeCharge": {},
 					"dueAmount": {
 						"type": "number",
 						"format": "double"
@@ -510,6 +511,7 @@
 					}
 				},
 				"required": [
+					"feeCharge",
 					"dueAmount",
 					"isDeleted",
 					"whatsappNo",
@@ -771,6 +773,27 @@
 						"type": "string"
 					}
 				},
+				"type": "object"
+			},
+			"TransactionCategory": {
+				"properties": {
+					"debit": {
+						"type": "number",
+						"format": "double"
+					},
+					"credit": {
+						"type": "number",
+						"format": "double"
+					},
+					"category": {
+						"type": "string"
+					}
+				},
+				"required": [
+					"debit",
+					"credit",
+					"category"
+				],
 				"type": "object"
 			}
 		},
@@ -1293,7 +1316,8 @@
 										},
 										{
 											"$ref": "#/components/schemas/ErrorStore"
-										}
+										},
+										{}
 									]
 								}
 							}
@@ -1573,7 +1597,20 @@
 						"description": "Ok",
 						"content": {
 							"application/json": {
-								"schema": {}
+								"schema": {
+									"anyOf": [
+										{
+											"items": {
+												"$ref": "#/components/schemas/TransactionCategory"
+											},
+											"type": "array"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										},
+										{}
+									]
+								}
 							}
 						}
 					}
@@ -1587,7 +1624,21 @@
 					"required": true,
 					"content": {
 						"application/json": {
-							"schema": {}
+							"schema": {
+								"properties": {
+									"to": {
+										"type": "string"
+									},
+									"from": {
+										"type": "string"
+									}
+								},
+								"required": [
+									"to",
+									"from"
+								],
+								"type": "object"
+							}
 						}
 					}
 				}

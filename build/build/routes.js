@@ -108,7 +108,7 @@ const models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "studentCreateInterface": {
         "dataType": "refAlias",
-        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "dueAmount": { "dataType": "double", "required": true }, "isDeleted": { "dataType": "boolean", "required": true }, "whatsappNo": { "dataType": "string", "required": true }, "parentPhnNo": { "dataType": "string", "required": true }, "parentName": { "dataType": "string", "required": true }, "timing": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "pastScore": { "dataType": "double", "required": true }, "studentStatus": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "classNo": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true } }, "validators": {} },
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "feeCharge": { "dataType": "any", "required": true }, "dueAmount": { "dataType": "double", "required": true }, "isDeleted": { "dataType": "boolean", "required": true }, "whatsappNo": { "dataType": "string", "required": true }, "parentPhnNo": { "dataType": "string", "required": true }, "parentName": { "dataType": "string", "required": true }, "timing": { "dataType": "string", "required": true }, "joiningDate": { "dataType": "datetime", "required": true }, "subjectsTaken": { "dataType": "array", "array": { "dataType": "string" }, "required": true }, "pastScore": { "dataType": "double", "required": true }, "studentStatus": { "dataType": "string", "required": true }, "boardType": { "dataType": "string", "required": true }, "schoolName": { "dataType": "string", "required": true }, "classNo": { "dataType": "string", "required": true }, "name": { "dataType": "string", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "studentFeeInterface": {
@@ -144,6 +144,11 @@ const models = {
     "transactionlistUpdateInterface": {
         "dataType": "refAlias",
         "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "transactionMode": { "dataType": "string" }, "modeOfPayment": { "dataType": "string" }, "amount": { "dataType": "double" }, "dateOfPayment": { "dataType": "datetime" }, "category": { "dataType": "string" }, "description": { "dataType": "string" }, "itemName": { "dataType": "string" } }, "validators": {} },
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionCategory": {
+        "dataType": "refAlias",
+        "type": { "dataType": "nestedObjectLiteral", "nestedProperties": { "debit": { "dataType": "double", "required": true }, "credit": { "dataType": "double", "required": true }, "category": { "dataType": "string", "required": true } }, "validators": {} },
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -465,7 +470,7 @@ function RegisterRoutes(app) {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     app.post('/transaction/chartdata', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.pieChartTransactionData)), function transactionlistController_pieChartTransactionData(request, response, next) {
         const args = {
-            pack: { "in": "body", "name": "pack", "required": true, "dataType": "any" },
+            pack: { "in": "body", "name": "pack", "required": true, "dataType": "nestedObjectLiteral", "nestedProperties": { "to": { "dataType": "string", "required": true }, "from": { "dataType": "string", "required": true } } },
         };
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
         let validatedArgs = [];

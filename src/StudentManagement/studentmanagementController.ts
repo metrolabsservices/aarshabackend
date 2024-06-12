@@ -91,8 +91,8 @@ export class StudentmanagementController extends Controller {
   @Post("create")
   public async createStudent(
     @Body() pack: studentCreateInterface
-  ): Promise<ServiceResponse | ErrorStore> {
-    console.log("------------- Controller is running ---------------");
+  ): Promise<ServiceResponse | ErrorStore | any> {
+    console.log("------------- Controller is running ---------------", pack);
     const serv = new StudentmanagementService();
     var out = await serv.createStudent(pack);
     if (out instanceof Error) {
@@ -101,6 +101,7 @@ export class StudentmanagementController extends Controller {
     }
     this.setStatus(201);
     return out;
+    return 0;
   }
 
   @Post("newfee")

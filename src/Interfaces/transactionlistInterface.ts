@@ -35,6 +35,8 @@ export type TransactionChartFilter = {
   value: string | string[] | Date[];
 };
 
-export type TransactionChartFilters = {
-  [index: number]: TransactionChartFilter;
+export type TransactionCategory = {
+  category: string;
+  credit: number;
+  debit: number;
 };

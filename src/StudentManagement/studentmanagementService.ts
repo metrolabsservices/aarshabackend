@@ -179,6 +179,7 @@ export class StudentmanagementService {
           classNo: true,
           parentName: true,
           parentPhnNo: true,
+          subjectsTaken: true,
           dueAmount: true,
           feeCharge: {
             select: {
@@ -223,7 +224,7 @@ export class StudentmanagementService {
     return createPerson()
       .then((result) => {
         console.log(result);
-        return { response: "Record Created Successfully", data: result.id };
+        return { response: "Record Created Successfully", data: result };
       })
       .catch((e) => {
         console.error(e);
@@ -308,8 +309,8 @@ export class StudentmanagementService {
       });
       const transactionAddon = await prisma.transactionsList.create({
         data: {
-          itemName: `Tution Fee Payment - Fee ID( ${feeAdd.id} )`,
-          description: `${pack.info.name} with student ID( ${pack.info.id} ) Fee Paid`,
+          itemName: `Tution Fee Payment - Fee ID - (${feeAdd.id})`,
+          description: `${pack.info.name} with student ID - (${pack.info.id}) Fee Paid`,
           category: "Student Fee",
           dateOfPayment: pack.data.dateOfPaid,
           amount: pack.data.paidAmount,

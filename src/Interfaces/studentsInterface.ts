@@ -72,6 +72,7 @@ export type studentCreateInterface = {
   whatsappNo: string;
   isDeleted: boolean;
   dueAmount: number;
+  feeCharge: any;
 };
 
 export type ServiceResponse = {

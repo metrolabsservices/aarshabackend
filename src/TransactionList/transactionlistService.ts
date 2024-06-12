@@ -2,15 +2,13 @@ import { PrismaClient, TransactionsList } from "@prisma/client";
 
 import { PageResponse } from "../Interfaces/PageInfo";
 import {
+  TransactionCategory,
   transactionlistInterface,
   transactionlistUpdateInterface,
 } from "../Interfaces/transactionlistInterface";
 import { ServiceResponse } from "../Interfaces/studentsInterface";
 import { paginationNewOptimizaation } from "../HelpingFunctions/pageOptimization";
-import {
-  trxChartFilter,
-  trxFilter,
-} from "../HelpingFunctions/FilterOptimizations";
+import { trxFilter } from "../HelpingFunctions/FilterOptimizations";
 
 export class transactionlistService {
   public async getTransactionById(
@@ -80,24 +78,76 @@ export class transactionlistService {
       });
   }
 
-  public async getPaiChartData(pack: any): Promise<any> {
+  public async getPaiChartData(pack: {
+    from: string;
+    to: string;
+  }): Promise<TransactionCategory[] | Error | any> {
     const prisma = new PrismaClient();
-    trxChartFilter(pack);
+
     const transactiondata = async () => {
-      return 1;
-      // const transactionAddon = await prisma.transactionsList.findMany({
-      //   where: data,
-      // });
-      // return transactionAddon;
+      const startDate = pack.from;
+      const endDate = pack.to;
+
+      const transactionList = await prisma.transactionsList.findMany({
+        where: {
+          dateOfPayment: {
+            gte: startDate,
+            lte: endDate,
+          },
+        },
+      });
+      const modifiedResult = (transactions: TransactionsList[]) => {
+        const categoryMap: any = {};
+        const predefinedCategories = [
+          "Tuition",
+          "Stationery",
+          "Activity",
+          "Library",
+          "Donations",
+          "Salaries",
+          "Utilities",
+          "Repairs",
+          "Furniture",
+          "Technology",
+          "Marketing",
+          "Events",
+          "Others",
+          "Refund",
+        ];
+
+        // Initialize the map with predefined categories and zero amounts
+        predefinedCategories.forEach((category) => {
+          categoryMap[category] = { credit: 0, debit: 0 };
+        });
+
+        // Process transactions and update the map
+        transactions.forEach((transaction) => {
+          const { category, amount, transactionMode } = transaction;
+          if (transactionMode === "Credit") {
+            categoryMap[category].credit += amount;
+          } else if (transactionMode === "Debit") {
+            categoryMap[category].debit += amount;
+          }
+        });
+
+        // Convert the map to the desired array format
+        return predefinedCategories.map((category) => ({
+          category,
+          credit: categoryMap[category].credit,
+          debit: categoryMap[category].debit,
+        }));
+      };
+      const result = modifiedResult(transactionList);
+      return result;
     };
+
     return transactiondata()
       .then((result) => {
-        console.log(result);
-        return "Record Created Successfully";
+        return result;
       })
       .catch((e) => {
         console.error(e);
-        return new Error("Failed to create Student");
+        return new Error("Failed to retrieve transaction data");
       })
       .finally(async () => {
         await prisma.$disconnect();

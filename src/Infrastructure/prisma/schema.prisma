@@ -52,8 +52,8 @@ model TransactionsList {
   id          Int       @id @default(autoincrement())
   itemName String
   description String
-  category String // Library Membership, Stationary Parchase, Stationary Sale, Electricity, Salaries, Rent, Student Fee, Water, Maintenance
-  dateOfPayment DateTime
+  category String // Tuition-Stationery-Activity-Library-Donations-Salaries-Utilities-Repairs-Furniture-Technology-Marketing-Events-Others-Refund
+  dateOfPayment DateTime 
   amount Int
   modeOfPayment String // Phone Pay, Google Pay, Paytm, Cred, Bank Transfer, Card, Cash
   transactionMode String // Debit, Credit

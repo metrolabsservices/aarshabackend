@@ -15,7 +15,7 @@ import { TransactionsList } from "@prisma/client";
 import { PageResponse } from "../Interfaces/PageInfo";
 import { ErrorStore } from "../Interfaces/errorHandling";
 import {
-  TransactionChartFilters,
+  TransactionCategory,
   transactionlistInterface,
   transactionlistUpdateInterface,
 } from "../Interfaces/transactionlistInterface";
@@ -93,8 +93,8 @@ export class transactionlistController extends Controller {
 
   @Post("chartdata")
   public async pieChartTransactionData(
-    @Body() pack: TransactionChartFilters[]
-  ): Promise<any> {
+    @Body() pack: { from: string; to: string }
+  ): Promise<TransactionCategory[] | ErrorStore | any> {
     const serv = new transactionlistService();
     var out = await serv.getPaiChartData(pack);
     if (out instanceof Error) {
