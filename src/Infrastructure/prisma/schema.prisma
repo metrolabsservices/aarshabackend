@@ -46,6 +46,7 @@ model OptionsMaster {
   paymentTypes String[] // CARD - CASH - PHONE_PAY - GOOGLE_PAY - PAYTM - CRED - BANKS_TANSFERS
   transactionsCategoryTypes Json 
   transactionTypes String[] // Pending - Processing - Completed - Failed - Refunded - Cancelled - On_Hold - Reversed - Pending Review
+  transactionCategories String[] // Tuition - Stationery - Activity - Library - Salaries - Utilities - Repairs - Furniture - Technology - Events - Others - Refund
 }
 
 model TransactionsList {

@@ -47,4 +47,18 @@ export const optionsMasterData: any = {
     "Reversed",
     "Pending Review",
   ],
+  transactionCategories: [
+    "Tuition",
+    "Stationery",
+    "Activity",
+    "Library",
+    "Salaries",
+    "Utilities",
+    "Repairs",
+    "Furniture",
+    "Technology",
+    "Events",
+    "Others",
+    "Refund",
+  ],
 };

@@ -98,7 +98,6 @@ let StudentmanagementController = class StudentmanagementController extends tsoa
             }
             this.setStatus(201);
             return out;
-            // return "failed";
         });
     }
     updateStudentById(id, pack) {

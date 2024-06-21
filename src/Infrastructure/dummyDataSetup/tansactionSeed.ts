@@ -59,7 +59,7 @@ export const transactionList = [
     dateOfPayment: "2023-06-10T10:15:00Z",
     amount: 10000,
     modeOfPayment: "Bank Transfer",
-    category: "Donations",
+    category: "Activity",
     transactionMode: "Credit",
   },
   {
@@ -68,7 +68,7 @@ export const transactionList = [
     dateOfPayment: "2023-06-20T10:15:00Z",
     amount: 5000,
     modeOfPayment: "Bank Transfer",
-    category: "Donations",
+    category: "Activity",
     transactionMode: "Credit",
   },
   {
@@ -167,7 +167,7 @@ export const transactionList = [
     dateOfPayment: "2023-04-20T12:00:00Z",
     amount: 2000,
     modeOfPayment: "Google Pay",
-    category: "Marketing",
+    category: "Others",
     transactionMode: "Debit",
   },
   {
@@ -176,7 +176,7 @@ export const transactionList = [
     dateOfPayment: "2023-04-25T12:00:00Z",
     amount: 500,
     modeOfPayment: "Google Pay",
-    category: "Marketing",
+    category: "Others",
     transactionMode: "Debit",
   },
 ];

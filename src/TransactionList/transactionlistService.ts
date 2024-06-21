@@ -97,11 +97,11 @@ export class transactionlistService {
         },
       });
 
-      console.log(
-        "-------------------------\n \tlist of records filtered based on selected date range\n",
-        transactionList,
-        "\n----------------------------------------------"
-      );
+      // console.log(
+      //   "-------------------------\n \tlist of records filtered based on selected date range\n",
+      //   transactionList,
+      //   "\n----------------------------------------------"
+      // );
       const modifiedResult = (transactions: TransactionsList[]) => {
         const categoryMap: any = {};
         const predefinedCategories = [
@@ -109,13 +109,11 @@ export class transactionlistService {
           "Stationery",
           "Activity",
           "Library",
-          "Donations",
           "Salaries",
           "Utilities",
           "Repairs",
           "Furniture",
           "Technology",
-          "Marketing",
           "Events",
           "Others",
           "Refund",

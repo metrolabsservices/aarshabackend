@@ -117,7 +117,6 @@ export class StudentmanagementController extends Controller {
     }
     this.setStatus(201);
     return out;
-    // return "failed";
   }
 
   @Put("{id}")
