@@ -40,3 +40,7 @@ export type TransactionCategory = {
   credit: number;
   debit: number;
 };
+
+export type TransactionSoftDelete = {
+  isDeleted: boolean;
+};

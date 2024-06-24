@@ -11,6 +11,7 @@ export type OptionsMaster = {
   paymentTypes: string[];
   transactionsCategoryTypes: TransactionsCategoryType[];
   transactionTypes: string[];
+  transactionMode: string[];
 };
 
 export type OptionsMasterUpdate = {
@@ -21,4 +22,5 @@ export type OptionsMasterUpdate = {
   paymentTypes?: string[];
   transactionsCategoryTypes?: any;
   transactionTypes?: string[];
+  transactionMode?: string[];
 };

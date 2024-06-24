@@ -123,6 +123,12 @@
 			},
 			"%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_": {
 				"properties": {
+					"transactionCategories": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
 					"transactionTypes": {
 						"items": {
 							"type": "string"
@@ -168,6 +174,7 @@
 					}
 				},
 				"required": [
+					"transactionCategories",
 					"transactionTypes",
 					"transactionsCategoryTypes",
 					"paymentTypes",
@@ -185,6 +192,12 @@
 			},
 			"OptionsMasterUpdate": {
 				"properties": {
+					"transactionMode": {
+						"items": {
+							"type": "string"
+						},
+						"type": "array"
+					},
 					"transactionTypes": {
 						"items": {
 							"type": "string"
@@ -647,6 +660,9 @@
 			},
 			"%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_": {
 				"properties": {
+					"isDeleted": {
+						"type": "boolean"
+					},
 					"transactionMode": {
 						"type": "string"
 					},
@@ -676,6 +692,7 @@
 					}
 				},
 				"required": [
+					"isDeleted",
 					"transactionMode",
 					"modeOfPayment",
 					"amount",
@@ -793,6 +810,17 @@
 					"debit",
 					"credit",
 					"category"
+				],
+				"type": "object"
+			},
+			"TransactionSoftDelete": {
+				"properties": {
+					"isDeleted": {
+						"type": "boolean"
+					}
+				},
+				"required": [
+					"isDeleted"
 				],
 				"type": "object"
 			}
@@ -1638,6 +1666,55 @@
 									"from"
 								],
 								"type": "object"
+							}
+						}
+					}
+				}
+			}
+		},
+		"/transaction/softdelete/{id}": {
+			"delete": {
+				"operationId": "SoftDeleteStudentById",
+				"responses": {
+					"200": {
+						"description": "Ok",
+						"content": {
+							"application/json": {
+								"schema": {
+									"anyOf": [
+										{
+											"type": "string"
+										},
+										{
+											"$ref": "#/components/schemas/ErrorStore"
+										}
+									]
+								}
+							}
+						}
+					}
+				},
+				"tags": [
+					"Expanses Transactions"
+				],
+				"security": [],
+				"parameters": [
+					{
+						"in": "path",
+						"name": "id",
+						"required": true,
+						"schema": {
+							"format": "double",
+							"type": "number"
+						}
+					}
+				],
+				"requestBody": {
+					"required": true,
+					"content": {
+						"application/json": {
+							"schema": {
+								"$ref": "#/components/schemas/TransactionSoftDelete"
 							}
 						}
 					}

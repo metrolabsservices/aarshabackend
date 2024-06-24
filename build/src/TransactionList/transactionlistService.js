@@ -220,5 +220,29 @@ class transactionlistService {
             }));
         });
     }
+    softDeleteTransactionById(id, pack) {
+        const prisma = new client_1.PrismaClient();
+        const updateById = () => __awaiter(this, void 0, void 0, function* () {
+            const transactionDetailsById = yield prisma.transactionsList.update({
+                where: {
+                    id: id,
+                },
+                data: pack,
+            });
+            return transactionDetailsById;
+        });
+        return updateById()
+            .then((result) => {
+            console.log(result);
+            return "Record Deleted Successfully";
+        })
+            .catch((e) => {
+            console.error(e);
+            return new Error("failed to delete transaction details");
+        })
+            .finally(() => __awaiter(this, void 0, void 0, function* () {
+            yield prisma.$disconnect();
+        }));
+    }
 }
 exports.transactionlistService = transactionlistService;

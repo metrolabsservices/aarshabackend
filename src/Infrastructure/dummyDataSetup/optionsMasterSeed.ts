@@ -10,6 +10,7 @@ export const optionsMasterData: any = {
     "Biology",
     "Social",
     "Science",
+    "Others",
   ],
   studentStatusTypes: ["away", "active", "inactive"],
   gradeTypes: Array.from(
@@ -24,6 +25,7 @@ export const optionsMasterData: any = {
     "Paytm",
     "Cred",
     "Bank Transfer",
+    "Others",
   ],
   transactionsCategoryTypes: [
     { category: "Library Membership", transactionType: "credit" },
@@ -46,6 +48,7 @@ export const optionsMasterData: any = {
     "On Hold",
     "Reversed",
     "Pending Review",
+    "Others",
   ],
   transactionCategories: [
     "Tuition",
@@ -58,7 +61,8 @@ export const optionsMasterData: any = {
     "Furniture",
     "Technology",
     "Events",
-    "Others",
     "Refund",
+    "Others",
   ],
+  transactionMode: ["Debit", "Credit", "Others"],
 };

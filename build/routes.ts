@@ -59,7 +59,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"transactionsCategoryTypes":{"ref":"JsonValue","required":true},"paymentTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"gradeTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"studentStatusTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"subjectTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"boardTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"id":{"dataType":"double","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionCategories":{"dataType":"array","array":{"dataType":"string"},"required":true},"transactionTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"transactionsCategoryTypes":{"ref":"JsonValue","required":true},"paymentTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"gradeTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"studentStatusTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"subjectTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"boardTypes":{"dataType":"array","array":{"dataType":"string"},"required":true},"id":{"dataType":"double","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "OptionsMaster": {
@@ -69,7 +69,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "OptionsMasterUpdate": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionTypes":{"dataType":"array","array":{"dataType":"string"}},"transactionsCategoryTypes":{"dataType":"any"},"paymentTypes":{"dataType":"array","array":{"dataType":"string"}},"gradeTypes":{"dataType":"array","array":{"dataType":"string"}},"studentStatusTypes":{"dataType":"array","array":{"dataType":"string"}},"subjectTypes":{"dataType":"array","array":{"dataType":"string"}},"boardTypes":{"dataType":"array","array":{"dataType":"string"}}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionMode":{"dataType":"array","array":{"dataType":"string"}},"transactionTypes":{"dataType":"array","array":{"dataType":"string"}},"transactionsCategoryTypes":{"dataType":"any"},"paymentTypes":{"dataType":"array","array":{"dataType":"string"}},"gradeTypes":{"dataType":"array","array":{"dataType":"string"}},"studentStatusTypes":{"dataType":"array","array":{"dataType":"string"}},"subjectTypes":{"dataType":"array","array":{"dataType":"string"}},"boardTypes":{"dataType":"array","array":{"dataType":"string"}}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "%24Result.DefaultSelection_Prisma.%24StudentPayload_": {
@@ -124,7 +124,7 @@ const models: TsoaRoute.Models = {
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_": {
         "dataType": "refAlias",
-        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"transactionMode":{"dataType":"string","required":true},"modeOfPayment":{"dataType":"string","required":true},"amount":{"dataType":"double","required":true},"dateOfPayment":{"dataType":"datetime","required":true},"category":{"dataType":"string","required":true},"description":{"dataType":"string","required":true},"itemName":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"isDeleted":{"dataType":"boolean","required":true},"transactionMode":{"dataType":"string","required":true},"modeOfPayment":{"dataType":"string","required":true},"amount":{"dataType":"double","required":true},"dateOfPayment":{"dataType":"datetime","required":true},"category":{"dataType":"string","required":true},"description":{"dataType":"string","required":true},"itemName":{"dataType":"string","required":true},"id":{"dataType":"double","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
     "TransactionsList": {
@@ -150,6 +150,11 @@ const models: TsoaRoute.Models = {
     "TransactionCategory": {
         "dataType": "refAlias",
         "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"debit":{"dataType":"double","required":true},"credit":{"dataType":"double","required":true},"category":{"dataType":"string","required":true}},"validators":{}},
+    },
+    // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+    "TransactionSoftDelete": {
+        "dataType": "refAlias",
+        "type": {"dataType":"nestedObjectLiteral","nestedProperties":{"isDeleted":{"dataType":"boolean","required":true}},"validators":{}},
     },
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
 };
@@ -661,6 +666,32 @@ export function RegisterRoutes(app: Router) {
 
 
               const promise = controller.deleteStudentById.apply(controller, validatedArgs as any);
+              promiseHandler(controller, promise, response, undefined, next);
+            } catch (err) {
+                return next(err);
+            }
+        });
+        // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+        app.delete('/transaction/softdelete/:id',
+            ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
+            ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.softDeleteStudentById)),
+
+            function transactionlistController_softDeleteStudentById(request: any, response: any, next: any) {
+            const args = {
+                    id: {"in":"path","name":"id","required":true,"dataType":"double"},
+                    pack: {"in":"body","name":"pack","required":true,"ref":"TransactionSoftDelete"},
+            };
+
+            // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
+
+            let validatedArgs: any[] = [];
+            try {
+                validatedArgs = getValidatedArgs(args, request, response);
+
+                const controller = new transactionlistController();
+
+
+              const promise = controller.softDeleteStudentById.apply(controller, validatedArgs as any);
               promiseHandler(controller, promise, response, undefined, next);
             } catch (err) {
                 return next(err);

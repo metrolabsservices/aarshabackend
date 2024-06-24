@@ -13,6 +13,7 @@ exports.optionsMasterData = {
         "Biology",
         "Social",
         "Science",
+        "Others",
     ],
     studentStatusTypes: ["away", "active", "inactive"],
     gradeTypes: Array.from({ length: 10 }, (_, index) => "Class-" + String(index + 1)),
@@ -24,6 +25,7 @@ exports.optionsMasterData = {
         "Paytm",
         "Cred",
         "Bank Transfer",
+        "Others",
     ],
     transactionsCategoryTypes: [
         { category: "Library Membership", transactionType: "credit" },
@@ -46,6 +48,7 @@ exports.optionsMasterData = {
         "On Hold",
         "Reversed",
         "Pending Review",
+        "Others",
     ],
     transactionCategories: [
         "Tuition",
@@ -58,7 +61,8 @@ exports.optionsMasterData = {
         "Furniture",
         "Technology",
         "Events",
-        "Others",
         "Refund",
+        "Others",
     ],
+    transactionMode: ["Debit", "Credit", "Others"],
 };

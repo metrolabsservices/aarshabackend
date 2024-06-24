@@ -47,6 +47,7 @@ model OptionsMaster {
   transactionsCategoryTypes Json 
   transactionTypes String[] // Pending - Processing - Completed - Failed - Refunded - Cancelled - On_Hold - Reversed - Pending Review
   transactionCategories String[] // Tuition - Stationery - Activity - Library - Salaries - Utilities - Repairs - Furniture - Technology - Events - Others - Refund
+  transactionMode String[] // Debit -  Credit -  Others
 }
 
 model TransactionsList {
@@ -58,6 +59,7 @@ model TransactionsList {
   amount Int
   modeOfPayment String // Phone Pay, Google Pay, Paytm, Cred, Bank Transfer, Card, Cash
   transactionMode String // Debit, Credit
+  isDeleted Boolean @default(false)
 }
 
 model Student {

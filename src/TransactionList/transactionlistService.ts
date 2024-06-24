@@ -3,6 +3,7 @@ import { PrismaClient, TransactionsList } from "@prisma/client";
 import { PageResponse } from "../Interfaces/PageInfo";
 import {
   TransactionCategory,
+  TransactionSoftDelete,
   transactionlistInterface,
   transactionlistUpdateInterface,
 } from "../Interfaces/transactionlistInterface";
@@ -232,6 +233,35 @@ export class transactionlistService {
       .catch((e) => {
         // console.error(e);
         return new Error(e.meta?.cause);
+      })
+      .finally(async () => {
+        await prisma.$disconnect();
+      });
+  }
+
+  public softDeleteTransactionById(
+    id: number,
+    pack: TransactionSoftDelete
+  ): Promise<any | Error> {
+    const prisma = new PrismaClient();
+    const updateById = async () => {
+      const transactionDetailsById = await prisma.transactionsList.update({
+        where: {
+          id: id,
+        },
+        data: pack,
+      });
+      return transactionDetailsById;
+    };
+
+    return updateById()
+      .then((result) => {
+        console.log(result);
+        return "Record Deleted Successfully";
+      })
+      .catch((e) => {
+        console.error(e);
+        return new Error("failed to delete transaction details");
       })
       .finally(async () => {
         await prisma.$disconnect();
