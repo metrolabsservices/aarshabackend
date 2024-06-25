@@ -16,7 +16,6 @@ import { PageResponse } from "../Interfaces/PageInfo";
 import { ErrorStore } from "../Interfaces/errorHandling";
 import {
   TransactionCategory,
-  TransactionSoftDelete,
   transactionlistInterface,
   transactionlistUpdateInterface,
 } from "../Interfaces/transactionlistInterface";
@@ -123,12 +122,11 @@ export class transactionlistController extends Controller {
 
   @Delete("softdelete/{id}")
   public async softDeleteStudentById(
-    @Path() id: number,
-    @Body() pack: TransactionSoftDelete
+    @Path() id: number
   ): Promise<String | ErrorStore> {
     console.log("------------- Controller is running ---------------");
     const serv = new transactionlistService();
-    var out = await serv.softDeleteTransactionById(id, pack);
+    var out = await serv.softDeleteTransactionById(id);
     if (out instanceof Error) {
       this.setStatus(404);
       return { ErrorMessage: out.message };

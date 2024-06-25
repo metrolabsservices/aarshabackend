@@ -99,11 +99,11 @@ let transactionlistController = class transactionlistController extends tsoa_1.C
             return out;
         });
     }
-    softDeleteStudentById(id, pack) {
+    softDeleteStudentById(id) {
         return __awaiter(this, void 0, void 0, function* () {
             console.log("------------- Controller is running ---------------");
             const serv = new transactionlistService_1.transactionlistService();
-            var out = yield serv.softDeleteTransactionById(id, pack);
+            var out = yield serv.softDeleteTransactionById(id);
             if (out instanceof Error) {
                 this.setStatus(404);
                 return { ErrorMessage: out.message };
@@ -142,8 +142,7 @@ __decorate([
 ], transactionlistController.prototype, "deleteStudentById", null);
 __decorate([
     (0, tsoa_1.Delete)("softdelete/{id}"),
-    __param(0, (0, tsoa_1.Path)()),
-    __param(1, (0, tsoa_1.Body)())
+    __param(0, (0, tsoa_1.Path)())
 ], transactionlistController.prototype, "softDeleteStudentById", null);
 exports.transactionlistController = transactionlistController = __decorate([
     (0, tsoa_1.Tags)("Expanses Transactions"),

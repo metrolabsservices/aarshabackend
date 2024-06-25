@@ -47,7 +47,11 @@ class transactionlistService {
             const pageValues = (0, pageOptimization_1.paginationNewOptimizaation)(PageData);
             const FilterData = yield (0, FilterOptimizations_1.trxFilter)(Filters);
             const getAll = () => __awaiter(this, void 0, void 0, function* () {
-                const transactionDeatilsAll = yield prisma.transactionsList.findMany(Object.assign(Object.assign(Object.assign({}, FilterData.data), pageValues), { orderBy: {
+                const transactionDeatilsAll = yield prisma.transactionsList.findMany(Object.assign(Object.assign({ 
+                    // ...FilterData.data,
+                    where: {
+                        isDeleted: false,
+                    } }, pageValues), { orderBy: {
                         dateOfPayment: "desc",
                     } }));
                 return transactionDeatilsAll;
@@ -220,29 +224,33 @@ class transactionlistService {
             }));
         });
     }
-    softDeleteTransactionById(id, pack) {
-        const prisma = new client_1.PrismaClient();
-        const updateById = () => __awaiter(this, void 0, void 0, function* () {
-            const transactionDetailsById = yield prisma.transactionsList.update({
-                where: {
-                    id: id,
-                },
-                data: pack,
+    softDeleteTransactionById(id) {
+        return __awaiter(this, void 0, void 0, function* () {
+            const prisma = new client_1.PrismaClient();
+            const updateById = () => __awaiter(this, void 0, void 0, function* () {
+                const transactionDetailsById = yield prisma.transactionsList.update({
+                    where: {
+                        id: id,
+                    },
+                    data: {
+                        isDeleted: true,
+                    },
+                });
+                return transactionDetailsById;
             });
-            return transactionDetailsById;
+            return updateById()
+                .then((result) => {
+                console.log(result);
+                return "Record Deleted Successfully";
+            })
+                .catch((e) => {
+                console.error(e);
+                return new Error("failed to delete transaction details");
+            })
+                .finally(() => __awaiter(this, void 0, void 0, function* () {
+                yield prisma.$disconnect();
+            }));
         });
-        return updateById()
-            .then((result) => {
-            console.log(result);
-            return "Record Deleted Successfully";
-        })
-            .catch((e) => {
-            console.error(e);
-            return new Error("failed to delete transaction details");
-        })
-            .finally(() => __awaiter(this, void 0, void 0, function* () {
-            yield prisma.$disconnect();
-        }));
     }
 }
 exports.transactionlistService = transactionlistService;

@@ -123,6 +123,12 @@
             },
             "%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_": {
                 "properties": {
+                    "transactionMode": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
                     "transactionCategories": {
                         "items": {
                             "type": "string"
@@ -174,6 +180,7 @@
                     }
                 },
                 "required": [
+                    "transactionMode",
                     "transactionCategories",
                     "transactionTypes",
                     "transactionsCategoryTypes",
@@ -810,17 +817,6 @@
                     "debit",
                     "credit",
                     "category"
-                ],
-                "type": "object"
-            },
-            "TransactionSoftDelete": {
-                "properties": {
-                    "isDeleted": {
-                        "type": "boolean"
-                    }
-                },
-                "required": [
-                    "isDeleted"
                 ],
                 "type": "object"
             }
@@ -1708,17 +1704,7 @@
                             "type": "number"
                         }
                     }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/TransactionSoftDelete"
-                            }
-                        }
-                    }
-                }
+                ]
             }
         }
     },

@@ -3,7 +3,6 @@ import { PrismaClient, TransactionsList } from "@prisma/client";
 import { PageResponse } from "../Interfaces/PageInfo";
 import {
   TransactionCategory,
-  TransactionSoftDelete,
   transactionlistInterface,
   transactionlistUpdateInterface,
 } from "../Interfaces/transactionlistInterface";
@@ -50,7 +49,10 @@ export class transactionlistService {
 
     const getAll = async () => {
       const transactionDeatilsAll = await prisma.transactionsList.findMany({
-        ...FilterData.data,
+        // ...FilterData.data,
+        where: {
+          isDeleted: false,
+        },
         ...pageValues,
         orderBy: {
           dateOfPayment: "desc",
@@ -239,17 +241,16 @@ export class transactionlistService {
       });
   }
 
-  public softDeleteTransactionById(
-    id: number,
-    pack: TransactionSoftDelete
-  ): Promise<any | Error> {
+  public async softDeleteTransactionById(id: number): Promise<any | Error> {
     const prisma = new PrismaClient();
     const updateById = async () => {
       const transactionDetailsById = await prisma.transactionsList.update({
         where: {
           id: id,
         },
-        data: pack,
+        data: {
+          isDeleted: true,
+        },
       });
       return transactionDetailsById;
     };
