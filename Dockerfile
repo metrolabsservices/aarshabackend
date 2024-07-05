@@ -1,65 +1,62 @@
 # Stage 1: Build Backend
 FROM node:16-alpine AS backend
 
-WORKDIR /app
+# Set working directory
+WORKDIR /usr/src/app
 
-# Install dependencies required for Yarn
-RUN apk add --no-cache bash curl
+# Copy backend package.json and package-lock.json files
+COPY package*.json ./
 
-# Install Yarn globally using the official Yarn package repository
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
-ENV PATH="/root/.yarn/bin:/root/.config/yarn/global/node_modules/.bin:${PATH}"
+# Install backend dependencies
+RUN npm install
 
-COPY package.json yarn.lock ./
-
-# Debugging step to show Node and Yarn versions
-RUN node -v && yarn -v
-
-# Install backend dependencies with retries
-RUN yarn install --network-timeout 100000
-
+# Copy backend source code
 COPY . .
 
-RUN yarn build
+# Push operation (as per your provided command)
+RUN npm run push
+
+# Build backend
+RUN npm run build
 
 # Stage 2: Build Frontend
-FROM node:16-alpine AS frontend
+FROM node:14-alpine AS frontend
 
+# Set working directory
 WORKDIR /app
 
-# Install dependencies required for Yarn
-RUN apk add --no-cache bash curl git
+# Install git
+RUN apk add --no-cache git
 
-# Install Yarn globally using the official Yarn package repository
-RUN curl -o- -L https://yarnpkg.com/install.sh | bash
-ENV PATH="/root/.yarn/bin:/root/.config/yarn/global/node_modules/.bin:${PATH}"
-
+# Clone frontend repository
 RUN git clone -b dev-prod-frontned https://github.com/metrolabsservices/aarshafrontend.git frontend
 
+# Navigate to frontend directory
 WORKDIR /app/frontend
 
-# Copy the package.json and yarn.lock files to the working directory
-COPY frontend/package.json frontend/yarn.lock ./
+# Copy frontend package.json and package-lock.json files
+COPY frontend/package*.json ./
 
-# Debugging step to show Node and Yarn versions
-RUN node -v && yarn -v
+# Install frontend dependencies
+RUN npm install
 
-# Install frontend dependencies with retries
-RUN yarn install --network-timeout 100000
+# Copy frontend source code
+COPY frontend/ .
 
-COPY frontend/ ./
-
-RUN yarn build
+# Build frontend
+RUN npm run build
 
 # Stage 3: Final image
-FROM node:16-alpine
+FROM nginx:alpine
 
-WORKDIR /app
+# Copy built backend files from backend stage
+COPY --from=backend /usr/src/app /usr/src/app
 
-COPY --from=backend /app /app
+# Copy built frontend files from frontend stage
+COPY --from=frontend /app/frontend/build /usr/share/nginx/html
 
-COPY --from=frontend /app/frontend/build /app/public
-
+# Expose the port your backend app runs on
 EXPOSE 3000
 
-CMD ["node", "build/src/server.js"]
+# Start the backend application
+CMD ["node", "/usr/src/app/build/src/server.js"]
