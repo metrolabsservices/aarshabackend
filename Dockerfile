@@ -38,7 +38,7 @@ RUN git clone -b dev-prod-frontned https://github.com/metrolabsservices/aarshafr
 WORKDIR /app/frontend
 
 # Install frontend dependencies
-RUN yarn install --production
+RUN yarn install --ignore-engines
 
 # Copy frontend source code
 COPY frontend/ .
