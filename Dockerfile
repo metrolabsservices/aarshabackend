@@ -5,19 +5,16 @@ WORKDIR /app
 
 RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 
-# Copy backend package.json and yarn.lock files
 COPY package.json yarn.lock ./
 
 # Debugging step to show Node and Yarn versions
 RUN node -v && yarn -v
 
 # Install backend dependencies with verbose output
-RUN yarn install --verbose
+RUN yarn install --verbose || { cat /root/.cache/node/corepack/yarn/1.22.22/logs/yarn-error.log; exit 1; }
 
-# Copy backend source code
 COPY . .
 
-# Build backend
 RUN yarn build
 
 # Stage 2: Build Frontend
@@ -37,12 +34,10 @@ WORKDIR /app/frontend
 RUN node -v && yarn -v
 
 # Install frontend dependencies with verbose output
-RUN yarn install --verbose
+RUN yarn install --verbose || { cat /root/.cache/node/corepack/yarn/1.22.22/logs/yarn-error.log; exit 1; }
 
-# Copy frontend source code
 COPY frontend/ .
 
-# Build frontend
 RUN yarn build
 
 # Stage 3: Final image
