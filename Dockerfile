@@ -5,7 +5,8 @@ WORKDIR /app
 
 RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 
-COPY package*.json ./
+# Copy backend package.json and yarn.lock files
+COPY package.json yarn.lock ./
 
 # Debugging step to show Node and Yarn versions
 RUN node -v && yarn -v
@@ -13,8 +14,10 @@ RUN node -v && yarn -v
 # Install backend dependencies with verbose output
 RUN yarn install --verbose
 
+# Copy backend source code
 COPY . .
 
+# Build backend
 RUN yarn build
 
 # Stage 2: Build Frontend
@@ -30,10 +33,16 @@ RUN git clone -b dev-prod-frontned https://github.com/metrolabsservices/aarshafr
 
 WORKDIR /app/frontend
 
+# Debugging step to show Node and Yarn versions
+RUN node -v && yarn -v
+
+# Install frontend dependencies with verbose output
 RUN yarn install --verbose
 
+# Copy frontend source code
 COPY frontend/ .
 
+# Build frontend
 RUN yarn build
 
 # Stage 3: Final image
