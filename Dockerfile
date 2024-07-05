@@ -1,3 +1,4 @@
+
 # Stage 1: Build Backend
 FROM node:16-alpine AS backend
 
@@ -32,31 +33,38 @@ RUN apk add --no-cache git
 RUN git clone -b dev-prod-frontned https://github.com/metrolabsservices/aarshafrontend.git frontend
 
 # Navigate to frontend directory
-WORKDIR /app/frontend
+# WORKDIR /app/frontend
+# RUN ls
 
 # Copy frontend package.json and package-lock.json files
-COPY frontend/package*.json ./
+RUN cp frontend/package*.json ./
 
 # Install frontend dependencies
 RUN npm install
 
-# Copy frontend source code
-COPY frontend/ .
+# # Copy frontend source code
+RUN cp -r frontend/* ./
 
-# Build frontend
+# # Build frontend
 RUN npm run build
 
 # Stage 3: Final image
-FROM nginx:alpine
+FROM node:16-alpine
+
+# Set working directory
+WORKDIR /usr/src/app
 
 # Copy built backend files from backend stage
 COPY --from=backend /usr/src/app /usr/src/app
 
 # Copy built frontend files from frontend stage
-COPY --from=frontend /app/frontend/build /usr/share/nginx/html
+COPY --from=frontend /app/build /usr/src/app/public
 
-# Expose the port your backend app runs on
-EXPOSE 3000
+# Install serve to serve the frontend
+RUN npm install -g serve
 
-# Start the backend application
-CMD ["node", "/usr/src/app/build/src/server.js"]
+# Expose the ports for backend and frontend
+EXPOSE 3000 5000
+
+# Start the backend and serve the frontend
+CMD ["sh", "-c", "node build/src/server.js & serve -s public -l 5000"]
