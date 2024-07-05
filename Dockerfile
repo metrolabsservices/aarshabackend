@@ -4,8 +4,8 @@ FROM node:14 AS backend
 # Set working directory
 WORKDIR /app
 
-# Install specific yarn version
-RUN npm install -g yarn@1.22.22
+# Enable corepack and install specific yarn version
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 
 # Copy backend package.json and yarn.lock files
 COPY package*.json ./
@@ -28,17 +28,14 @@ WORKDIR /app
 # Install git
 RUN apt-get update && apt-get install -y git
 
-# Install specific yarn version
-RUN npm install -g yarn@1.22.22
+# Enable corepack and install specific yarn version
+RUN corepack enable && corepack prepare yarn@1.22.22 --activate
 
 # Clone frontend repository
 RUN git clone -b dev-prod-frontned https://github.com/metrolabsservices/aarshafrontend.git frontend
 
 # Navigate to frontend directory
 WORKDIR /app/frontend
-
-# Copy frontend package.json and yarn.lock files
-COPY frontend/package*.json ./
 
 # Install frontend dependencies
 RUN yarn install
