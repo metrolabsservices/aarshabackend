@@ -164,7 +164,7 @@ export function RegisterRoutes(app: Router) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-        app.get('/transaction/all/items',
+        app.get('/api/transaction/all/items',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.getAllTransaction)),
 
@@ -195,7 +195,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/transaction/:id',
+        app.get('/api/transaction/:id',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.getTransactionById)),
 
@@ -225,7 +225,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/transaction/create',
+        app.post('/api/transaction/create',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.createStudent)),
 
@@ -255,7 +255,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/transaction/:id',
+        app.put('/api/transaction/:id',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.updateTransactionById)),
 
@@ -286,7 +286,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/transaction/chartdata',
+        app.post('/api/transaction/chartdata',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.pieChartTransactionData)),
 
@@ -316,7 +316,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/transaction/:id',
+        app.delete('/api/transaction/:id',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.deleteStudentById)),
 
@@ -346,7 +346,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/transaction/softdelete/:id',
+        app.delete('/api/transaction/softdelete/:id',
             ...(fetchMiddlewares<RequestHandler>(transactionlistController)),
             ...(fetchMiddlewares<RequestHandler>(transactionlistController.prototype.softDeleteStudentById)),
 
@@ -376,7 +376,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/student/all/items',
+        app.get('/api/student/all/items',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.getAllStudents)),
 
@@ -407,7 +407,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/student/feedetails',
+        app.get('/api/student/feedetails',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.getAllFeeDeatails)),
 
@@ -438,7 +438,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/student/getbyname',
+        app.post('/api/student/getbyname',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.getStudentByName)),
 
@@ -468,7 +468,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/student/:id',
+        app.get('/api/student/:id',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.getStudentById)),
 
@@ -498,7 +498,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/student/create',
+        app.post('/api/student/create',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.createStudent)),
 
@@ -528,7 +528,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.post('/student/newfee',
+        app.post('/api/student/newfee',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.addStudentFee)),
 
@@ -558,7 +558,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/student/:id',
+        app.put('/api/student/:id',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.updateStudentById)),
 
@@ -589,7 +589,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/student/:id',
+        app.delete('/api/student/:id',
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController)),
             ...(fetchMiddlewares<RequestHandler>(StudentmanagementController.prototype.deleteStudentById)),
 
@@ -619,7 +619,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/selector/getlist',
+        app.get('/api/selector/getlist',
             ...(fetchMiddlewares<RequestHandler>(OptionmasterController)),
             ...(fetchMiddlewares<RequestHandler>(OptionmasterController.prototype.getSelectorList)),
 
@@ -648,7 +648,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/selector/update/:id',
+        app.put('/api/selector/update/:id',
             ...(fetchMiddlewares<RequestHandler>(OptionmasterController)),
             ...(fetchMiddlewares<RequestHandler>(OptionmasterController.prototype.updateSelector)),
 
@@ -679,7 +679,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/loginregister/login',
+        app.put('/api/loginregister/login',
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController)),
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController.prototype.getSelectorList)),
 
@@ -709,7 +709,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.get('/loginregister/all',
+        app.get('/api/loginregister/all',
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController)),
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController.prototype.getAllLogins)),
 
@@ -738,7 +738,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.put('/loginregister/:id',
+        app.put('/api/loginregister/:id',
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController)),
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController.prototype.updateLogin)),
 
@@ -769,7 +769,7 @@ export function RegisterRoutes(app: Router) {
             }
         });
         // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-        app.delete('/loginregister/:id',
+        app.delete('/api/loginregister/:id',
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController)),
             ...(fetchMiddlewares<RequestHandler>(LoginRegisterController.prototype.deleteLogin)),
 

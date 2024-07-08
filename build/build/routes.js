@@ -168,7 +168,7 @@ function RegisterRoutes(app) {
     //  NOTE: If you do not see routes for all of your controllers in this file, then you might not have informed tsoa of where to look
     //      Please look into the "controllerPathGlobs" config option described in the readme: https://github.com/lukeautry/tsoa
     // ###########################################################################################################
-    app.get('/transaction/all/items', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getAllTransaction)), function transactionlistController_getAllTransaction(request, response, next) {
+    app.get('/api/transaction/all/items', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getAllTransaction)), function transactionlistController_getAllTransaction(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 Pagination: { "in": "query", "name": "Pagination", "dataType": "any" },
@@ -194,7 +194,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getTransactionById)), function transactionlistController_getTransactionById(request, response, next) {
+    app.get('/api/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.getTransactionById)), function transactionlistController_getTransactionById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -219,7 +219,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/transaction/create', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.createStudent)), function transactionlistController_createStudent(request, response, next) {
+    app.post('/api/transaction/create', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.createStudent)), function transactionlistController_createStudent(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 pack: { "in": "body", "name": "pack", "required": true, "ref": "transactionlistInterface" },
@@ -244,7 +244,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.put('/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.updateTransactionById)), function transactionlistController_updateTransactionById(request, response, next) {
+    app.put('/api/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.updateTransactionById)), function transactionlistController_updateTransactionById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -270,7 +270,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/transaction/chartdata', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.pieChartTransactionData)), function transactionlistController_pieChartTransactionData(request, response, next) {
+    app.post('/api/transaction/chartdata', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.pieChartTransactionData)), function transactionlistController_pieChartTransactionData(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 pack: { "in": "body", "name": "pack", "required": true, "dataType": "nestedObjectLiteral", "nestedProperties": { "to": { "dataType": "string", "required": true }, "from": { "dataType": "string", "required": true } } },
@@ -295,7 +295,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.delete('/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.deleteStudentById)), function transactionlistController_deleteStudentById(request, response, next) {
+    app.delete('/api/transaction/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.deleteStudentById)), function transactionlistController_deleteStudentById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -320,7 +320,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.delete('/transaction/softdelete/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.softDeleteStudentById)), function transactionlistController_softDeleteStudentById(request, response, next) {
+    app.delete('/api/transaction/softdelete/:id', ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController)), ...((0, runtime_1.fetchMiddlewares)(transactionlistController_1.transactionlistController.prototype.softDeleteStudentById)), function transactionlistController_softDeleteStudentById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -345,7 +345,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/student/all/items', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getAllStudents)), function StudentmanagementController_getAllStudents(request, response, next) {
+    app.get('/api/student/all/items', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getAllStudents)), function StudentmanagementController_getAllStudents(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 Pagination: { "in": "query", "name": "Pagination", "dataType": "any" },
@@ -371,7 +371,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/student/feedetails', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getAllFeeDeatails)), function StudentmanagementController_getAllFeeDeatails(request, response, next) {
+    app.get('/api/student/feedetails', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getAllFeeDeatails)), function StudentmanagementController_getAllFeeDeatails(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 PageData: { "in": "query", "name": "PageData", "dataType": "any" },
@@ -397,7 +397,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/student/getbyname', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getStudentByName)), function StudentmanagementController_getStudentByName(request, response, next) {
+    app.post('/api/student/getbyname', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getStudentByName)), function StudentmanagementController_getStudentByName(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 vlv: { "in": "body", "name": "vlv", "required": true, "dataType": "nestedObjectLiteral", "nestedProperties": { "searchIput": { "dataType": "string", "required": true } } },
@@ -422,7 +422,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/student/:id', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getStudentById)), function StudentmanagementController_getStudentById(request, response, next) {
+    app.get('/api/student/:id', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.getStudentById)), function StudentmanagementController_getStudentById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -447,7 +447,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/student/create', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.createStudent)), function StudentmanagementController_createStudent(request, response, next) {
+    app.post('/api/student/create', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.createStudent)), function StudentmanagementController_createStudent(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 pack: { "in": "body", "name": "pack", "required": true, "ref": "studentCreateInterface" },
@@ -472,7 +472,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.post('/student/newfee', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.addStudentFee)), function StudentmanagementController_addStudentFee(request, response, next) {
+    app.post('/api/student/newfee', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.addStudentFee)), function StudentmanagementController_addStudentFee(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 pack: { "in": "body", "name": "pack", "required": true, "ref": "studentFeeInterface" },
@@ -497,7 +497,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.put('/student/:id', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.updateStudentById)), function StudentmanagementController_updateStudentById(request, response, next) {
+    app.put('/api/student/:id', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.updateStudentById)), function StudentmanagementController_updateStudentById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -523,7 +523,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.delete('/student/:id', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.deleteStudentById)), function StudentmanagementController_deleteStudentById(request, response, next) {
+    app.delete('/api/student/:id', ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController)), ...((0, runtime_1.fetchMiddlewares)(studentmanagementController_1.StudentmanagementController.prototype.deleteStudentById)), function StudentmanagementController_deleteStudentById(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -548,7 +548,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/selector/getlist', ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController)), ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController.prototype.getSelectorList)), function OptionmasterController_getSelectorList(request, response, next) {
+    app.get('/api/selector/getlist', ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController)), ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController.prototype.getSelectorList)), function OptionmasterController_getSelectorList(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {};
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -571,7 +571,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.put('/selector/update/:id', ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController)), ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController.prototype.updateSelector)), function OptionmasterController_updateSelector(request, response, next) {
+    app.put('/api/selector/update/:id', ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController)), ...((0, runtime_1.fetchMiddlewares)(optionsmasterController_1.OptionmasterController.prototype.updateSelector)), function OptionmasterController_updateSelector(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "string" },
@@ -597,7 +597,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.put('/loginregister/login', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.getSelectorList)), function LoginRegisterController_getSelectorList(request, response, next) {
+    app.put('/api/loginregister/login', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.getSelectorList)), function LoginRegisterController_getSelectorList(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 pack: { "in": "body", "name": "pack", "required": true, "ref": "loginInterface" },
@@ -622,7 +622,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.get('/loginregister/all', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.getAllLogins)), function LoginRegisterController_getAllLogins(request, response, next) {
+    app.get('/api/loginregister/all', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.getAllLogins)), function LoginRegisterController_getAllLogins(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {};
             // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
@@ -645,7 +645,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.put('/loginregister/:id', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.updateLogin)), function LoginRegisterController_updateLogin(request, response, next) {
+    app.put('/api/loginregister/:id', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.updateLogin)), function LoginRegisterController_updateLogin(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
@@ -671,7 +671,7 @@ function RegisterRoutes(app) {
         });
     });
     // WARNING: This file was auto-generated with tsoa. Please do not modify it. Re-run tsoa to re-generate this file: https://github.com/lukeautry/tsoa
-    app.delete('/loginregister/:id', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.deleteLogin)), function LoginRegisterController_deleteLogin(request, response, next) {
+    app.delete('/api/loginregister/:id', ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController)), ...((0, runtime_1.fetchMiddlewares)(loginregisterController_1.LoginRegisterController.prototype.deleteLogin)), function LoginRegisterController_deleteLogin(request, response, next) {
         return __awaiter(this, void 0, void 0, function* () {
             const args = {
                 id: { "in": "path", "name": "id", "required": true, "dataType": "double" },
