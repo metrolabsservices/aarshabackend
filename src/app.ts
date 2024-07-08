@@ -18,9 +18,9 @@ app.use(
   })
 );
 app.use(json());
-app.use("/swagger.json", express.static("./build/swagger.json"));
+app.use("/api/swagger.json", express.static("./build/swagger.json"));
 app.use(
-  "/swagger",
+  "/api/swagger",
   swaggerUi.serve,
   async (_req: ExRequest, res: ExResponse) => {
     return res.send(
@@ -28,5 +28,6 @@ app.use(
     );
   }
 );
+
 
 RegisterRoutes(app);

@@ -48,8 +48,8 @@ exports.app.use((0, express_1.urlencoded)({
     extended: true,
 }));
 exports.app.use((0, express_1.json)());
-exports.app.use("/swagger.json", express_1.default.static("./build/swagger.json"));
-exports.app.use("/swagger", swagger_ui_express_1.default.serve, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.app.use("/api/swagger.json", express_1.default.static("./build/swagger.json"));
+exports.app.use("/api/swagger", swagger_ui_express_1.default.serve, (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     return res.send(swagger_ui_express_1.default.generateHTML(yield Promise.resolve().then(() => __importStar(require("../build/swagger.json")))));
 }));
 (0, routes_1.RegisterRoutes)(exports.app);

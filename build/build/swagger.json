@@ -1,4 +1,5 @@
 {
+    "openapi": "3.0.0",
     "components": {
         "examples": {},
         "headers": {},
@@ -6,6 +7,75 @@
         "requestBodies": {},
         "responses": {},
         "schemas": {
+            "DefaultSelection_Prisma._36_TransactionsListPayload_": {
+                "properties": {
+                    "isDeleted": {
+                        "type": "boolean"
+                    },
+                    "transactionMode": {
+                        "type": "string"
+                    },
+                    "modeOfPayment": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "dateOfPayment": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "itemName": {
+                        "type": "string"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "isDeleted",
+                    "transactionMode",
+                    "modeOfPayment",
+                    "amount",
+                    "dateOfPayment",
+                    "category",
+                    "description",
+                    "itemName",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "TransactionsList": {
+                "$ref": "#/components/schemas/DefaultSelection_Prisma._36_TransactionsListPayload_",
+                "description": "Model TransactionsList"
+            },
+            "PageResponse_TransactionsList_": {
+                "properties": {
+                    "items": {
+                        "items": {
+                            "$ref": "#/components/schemas/TransactionsList"
+                        },
+                        "type": "array"
+                    },
+                    "totalCount": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "items",
+                    "totalCount"
+                ],
+                "type": "object"
+            },
             "ErrorStore": {
                 "properties": {
                     "ErrorMessage": {
@@ -17,235 +87,106 @@
                 ],
                 "type": "object"
             },
-            "loginInterface": {
+            "ServiceResponse": {
                 "properties": {
-                    "password": {
-                        "type": "string"
-                    },
-                    "userMail": {
+                    "data": {},
+                    "response": {
                         "type": "string"
                     }
                 },
                 "required": [
-                    "password",
-                    "userMail"
+                    "data",
+                    "response"
                 ],
                 "type": "object"
             },
-            "%24Result.DefaultSelection_Prisma.%24LoginRegisterPayload_": {
-                "properties": {
-                    "isApproved": {
-                        "type": "boolean"
-                    },
-                    "role": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "userMail": {
-                        "type": "string"
-                    },
-                    "userName": {
-                        "type": "string"
-                    },
-                    "id": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                },
-                "required": [
-                    "isApproved",
-                    "role",
-                    "password",
-                    "userMail",
-                    "userName",
-                    "id"
-                ],
-                "type": "object"
-            },
-            "LoginRegister": {
-                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24LoginRegisterPayload_",
-                "description": "Model LoginRegister"
-            },
-            "loginregisterUpdateInterface": {
-                "properties": {
-                    "isApproved": {
-                        "type": "boolean"
-                    },
-                    "role": {
-                        "type": "string"
-                    },
-                    "password": {
-                        "type": "string"
-                    },
-                    "userMail": {
-                        "type": "string"
-                    },
-                    "userName": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "JsonObject": {
-                "properties": {},
-                "type": "object",
-                "description": "From https://github.com/sindresorhus/type-fest/\nMatches a JSON object.\nThis type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from."
-            },
-            "JsonArray": {
-                "description": "From https://github.com/sindresorhus/type-fest/\nMatches a JSON array.",
-                "properties": {},
-                "type": "object",
-                "additionalProperties": false
-            },
-            "JsonValue": {
-                "anyOf": [
-                    {
-                        "type": "string"
-                    },
-                    {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    {
-                        "type": "boolean"
-                    },
-                    {
-                        "$ref": "#/components/schemas/JsonObject"
-                    },
-                    {
-                        "$ref": "#/components/schemas/JsonArray"
-                    }
-                ],
-                "nullable": true,
-                "description": "From https://github.com/sindresorhus/type-fest/\nMatches any valid JSON value."
-            },
-            "%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_": {
+            "transactionlistInterface": {
                 "properties": {
                     "transactionMode": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                        "type": "string"
                     },
-                    "transactionCategories": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "modeOfPayment": {
+                        "type": "string"
                     },
-                    "transactionTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "transactionsCategoryTypes": {
-                        "$ref": "#/components/schemas/JsonValue"
-                    },
-                    "paymentTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "gradeTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "studentStatusTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "subjectTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "boardTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
-                    },
-                    "id": {
+                    "amount": {
                         "type": "number",
                         "format": "double"
+                    },
+                    "dateOfPayment": {
+                        "type": "string",
+                        "format": "date-time"
+                    },
+                    "category": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "itemName": {
+                        "type": "string"
                     }
                 },
                 "required": [
                     "transactionMode",
-                    "transactionCategories",
-                    "transactionTypes",
-                    "transactionsCategoryTypes",
-                    "paymentTypes",
-                    "gradeTypes",
-                    "studentStatusTypes",
-                    "subjectTypes",
-                    "boardTypes",
-                    "id"
+                    "modeOfPayment",
+                    "amount",
+                    "dateOfPayment",
+                    "category",
+                    "description",
+                    "itemName"
                 ],
                 "type": "object"
             },
-            "OptionsMaster": {
-                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24OptionsMasterPayload_",
-                "description": "Model OptionsMaster"
-            },
-            "OptionsMasterUpdate": {
+            "transactionlistUpdateInterface": {
                 "properties": {
                     "transactionMode": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                        "type": "string"
                     },
-                    "transactionTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "modeOfPayment": {
+                        "type": "string"
                     },
-                    "transactionsCategoryTypes": {},
-                    "paymentTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "amount": {
+                        "type": "number",
+                        "format": "double"
                     },
-                    "gradeTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "dateOfPayment": {
+                        "type": "string",
+                        "format": "date-time"
                     },
-                    "studentStatusTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "category": {
+                        "type": "string"
                     },
-                    "subjectTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "description": {
+                        "type": "string"
                     },
-                    "boardTypes": {
-                        "items": {
-                            "type": "string"
-                        },
-                        "type": "array"
+                    "itemName": {
+                        "type": "string"
                     }
                 },
                 "type": "object"
             },
-            "%24Result.DefaultSelection_Prisma.%24StudentPayload_": {
+            "TransactionCategory": {
+                "properties": {
+                    "debit": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "credit": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "category": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "debit",
+                    "credit",
+                    "category"
+                ],
+                "type": "object"
+            },
+            "DefaultSelection_Prisma._36_StudentPayload_": {
                 "properties": {
                     "dueAmount": {
                         "type": "number",
@@ -320,7 +261,7 @@
                 "type": "object"
             },
             "Student": {
-                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24StudentPayload_",
+                "$ref": "#/components/schemas/DefaultSelection_Prisma._36_StudentPayload_",
                 "description": "Model Student"
             },
             "PageResponse_Student_": {
@@ -462,19 +403,6 @@
                     "pagination",
                     "items",
                     "totalCount"
-                ],
-                "type": "object"
-            },
-            "ServiceResponse": {
-                "properties": {
-                    "data": {},
-                    "response": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "data",
-                    "response"
                 ],
                 "type": "object"
             },
@@ -665,32 +593,196 @@
                 },
                 "type": "object"
             },
-            "%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_": {
-                "properties": {
-                    "isDeleted": {
-                        "type": "boolean"
-                    },
-                    "transactionMode": {
+            "Prisma.JsonValue": {
+                "anyOf": [
+                    {
                         "type": "string"
                     },
-                    "modeOfPayment": {
-                        "type": "string"
-                    },
-                    "amount": {
+                    {
                         "type": "number",
                         "format": "double"
                     },
-                    "dateOfPayment": {
-                        "type": "string",
-                        "format": "date-time"
+                    {
+                        "type": "boolean"
                     },
-                    "category": {
+                    {
+                        "$ref": "#/components/schemas/Prisma.JsonObject"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Prisma.JsonArray"
+                    }
+                ],
+                "nullable": true,
+                "description": "From https://github.com/sindresorhus/type-fest/\nMatches any valid JSON value."
+            },
+            "Prisma.JsonObject": {
+                "properties": {},
+                "additionalProperties": {
+                    "$ref": "#/components/schemas/Prisma.JsonValue"
+                },
+                "type": "object",
+                "description": "From https://github.com/sindresorhus/type-fest/\nMatches a JSON object.\nThis type can be useful to enforce some input to be JSON-compatible or as a super-type to be extended from."
+            },
+            "Prisma.JsonArray": {
+                "description": "From https://github.com/sindresorhus/type-fest/\nMatches a JSON array.",
+                "properties": {},
+                "type": "object",
+                "additionalProperties": false
+            },
+            "DefaultSelection_Prisma._36_OptionsMasterPayload_": {
+                "properties": {
+                    "transactionMode": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionCategories": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionsCategoryTypes": {
+                        "$ref": "#/components/schemas/Prisma.JsonValue"
+                    },
+                    "paymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "gradeTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "studentStatusTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "subjectTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "boardTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "id": {
+                        "type": "number",
+                        "format": "double"
+                    }
+                },
+                "required": [
+                    "transactionMode",
+                    "transactionCategories",
+                    "transactionTypes",
+                    "transactionsCategoryTypes",
+                    "paymentTypes",
+                    "gradeTypes",
+                    "studentStatusTypes",
+                    "subjectTypes",
+                    "boardTypes",
+                    "id"
+                ],
+                "type": "object"
+            },
+            "OptionsMaster": {
+                "$ref": "#/components/schemas/DefaultSelection_Prisma._36_OptionsMasterPayload_",
+                "description": "Model OptionsMaster"
+            },
+            "OptionsMasterUpdate": {
+                "properties": {
+                    "transactionMode": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "transactionsCategoryTypes": {},
+                    "paymentTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "gradeTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "studentStatusTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "subjectTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    },
+                    "boardTypes": {
+                        "items": {
+                            "type": "string"
+                        },
+                        "type": "array"
+                    }
+                },
+                "type": "object"
+            },
+            "loginInterface": {
+                "properties": {
+                    "password": {
                         "type": "string"
                     },
-                    "description": {
+                    "userMail": {
+                        "type": "string"
+                    }
+                },
+                "required": [
+                    "password",
+                    "userMail"
+                ],
+                "type": "object"
+            },
+            "DefaultSelection_Prisma._36_LoginRegisterPayload_": {
+                "properties": {
+                    "isApproved": {
+                        "type": "boolean"
+                    },
+                    "role": {
                         "type": "string"
                     },
-                    "itemName": {
+                    "password": {
+                        "type": "string"
+                    },
+                    "userMail": {
+                        "type": "string"
+                    },
+                    "userName": {
                         "type": "string"
                     },
                     "id": {
@@ -699,125 +791,37 @@
                     }
                 },
                 "required": [
-                    "isDeleted",
-                    "transactionMode",
-                    "modeOfPayment",
-                    "amount",
-                    "dateOfPayment",
-                    "category",
-                    "description",
-                    "itemName",
+                    "isApproved",
+                    "role",
+                    "password",
+                    "userMail",
+                    "userName",
                     "id"
                 ],
                 "type": "object"
             },
-            "TransactionsList": {
-                "$ref": "#/components/schemas/%24Result.DefaultSelection_Prisma.%24TransactionsListPayload_",
-                "description": "Model TransactionsList"
+            "LoginRegister": {
+                "$ref": "#/components/schemas/DefaultSelection_Prisma._36_LoginRegisterPayload_",
+                "description": "Model LoginRegister"
             },
-            "PageResponse_TransactionsList_": {
+            "loginregisterUpdateInterface": {
                 "properties": {
-                    "items": {
-                        "items": {
-                            "$ref": "#/components/schemas/TransactionsList"
-                        },
-                        "type": "array"
+                    "isApproved": {
+                        "type": "boolean"
                     },
-                    "totalCount": {
-                        "type": "number",
-                        "format": "double"
-                    }
-                },
-                "required": [
-                    "items",
-                    "totalCount"
-                ],
-                "type": "object"
-            },
-            "transactionlistInterface": {
-                "properties": {
-                    "transactionMode": {
+                    "role": {
                         "type": "string"
                     },
-                    "modeOfPayment": {
+                    "password": {
                         "type": "string"
                     },
-                    "amount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "dateOfPayment": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "category": {
+                    "userMail": {
                         "type": "string"
                     },
-                    "description": {
-                        "type": "string"
-                    },
-                    "itemName": {
+                    "userName": {
                         "type": "string"
                     }
                 },
-                "required": [
-                    "transactionMode",
-                    "modeOfPayment",
-                    "amount",
-                    "dateOfPayment",
-                    "category",
-                    "description",
-                    "itemName"
-                ],
-                "type": "object"
-            },
-            "transactionlistUpdateInterface": {
-                "properties": {
-                    "transactionMode": {
-                        "type": "string"
-                    },
-                    "modeOfPayment": {
-                        "type": "string"
-                    },
-                    "amount": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "dateOfPayment": {
-                        "type": "string",
-                        "format": "date-time"
-                    },
-                    "category": {
-                        "type": "string"
-                    },
-                    "description": {
-                        "type": "string"
-                    },
-                    "itemName": {
-                        "type": "string"
-                    }
-                },
-                "type": "object"
-            },
-            "TransactionCategory": {
-                "properties": {
-                    "debit": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "credit": {
-                        "type": "number",
-                        "format": "double"
-                    },
-                    "category": {
-                        "type": "string"
-                    }
-                },
-                "required": [
-                    "debit",
-                    "credit",
-                    "category"
-                ],
                 "type": "object"
             }
         },
@@ -834,48 +838,10 @@
             "email": "nakka.kranthi@metrolabsservices.com"
         }
     },
-    "openapi": "3.0.0",
     "paths": {
-        "/loginregister/login": {
-            "put": {
-                "operationId": "GetSelectorList",
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "anyOf": [
-                                        {},
-                                        {
-                                            "$ref": "#/components/schemas/ErrorStore"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Logins & Registers"
-                ],
-                "security": [],
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/loginInterface"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/loginregister/all": {
+        "/transaction/all/items": {
             "get": {
-                "operationId": "GetAllLogins",
+                "operationId": "GetAllTransaction",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -884,10 +850,7 @@
                                 "schema": {
                                     "anyOf": [
                                         {
-                                            "items": {
-                                                "$ref": "#/components/schemas/LoginRegister"
-                                            },
-                                            "type": "array"
+                                            "$ref": "#/components/schemas/PageResponse_TransactionsList_"
                                         },
                                         {
                                             "$ref": "#/components/schemas/ErrorStore"
@@ -899,15 +862,69 @@
                     }
                 },
                 "tags": [
-                    "Logins & Registers"
+                    "Expanses Transactions"
                 ],
                 "security": [],
-                "parameters": []
+                "parameters": [
+                    {
+                        "in": "query",
+                        "name": "Pagination",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "in": "query",
+                        "name": "Filters",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ]
             }
         },
-        "/loginregister/{id}": {
+        "/transaction/{id}": {
+            "get": {
+                "operationId": "GetTransactionById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "$ref": "#/components/schemas/TransactionsList"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ]
+            },
             "put": {
-                "operationId": "UpdateLogin",
+                "operationId": "UpdateTransactionById",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -928,7 +945,7 @@
                     }
                 },
                 "tags": [
-                    "Logins & Registers"
+                    "Expanses Transactions"
                 ],
                 "security": [],
                 "parameters": [
@@ -947,14 +964,14 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/loginregisterUpdateInterface"
+                                "$ref": "#/components/schemas/transactionlistUpdateInterface"
                             }
                         }
                     }
                 }
             },
             "delete": {
-                "operationId": "DeleteLogin",
+                "operationId": "DeleteStudentById",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -975,7 +992,7 @@
                     }
                 },
                 "tags": [
-                    "Logins & Registers"
+                    "Expanses Transactions"
                 ],
                 "security": [],
                 "parameters": [
@@ -991,9 +1008,9 @@
                 ]
             }
         },
-        "/selector/getlist": {
-            "get": {
-                "operationId": "GetSelectorList",
+        "/transaction/create": {
+            "post": {
+                "operationId": "CreateStudent",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1001,9 +1018,11 @@
                             "application/json": {
                                 "schema": {
                                     "anyOf": [
-                                        {},
                                         {
-                                            "$ref": "#/components/schemas/OptionsMaster"
+                                            "$ref": "#/components/schemas/ServiceResponse"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
                                         }
                                     ]
                                 }
@@ -1012,15 +1031,25 @@
                     }
                 },
                 "tags": [
-                    "Selectors Master List"
+                    "Expanses Transactions"
                 ],
                 "security": [],
-                "parameters": []
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/transactionlistInterface"
+                            }
+                        }
+                    }
+                }
             }
         },
-        "/selector/update/{id}": {
-            "put": {
-                "operationId": "UpdateSelector",
+        "/transaction/chartdata": {
+            "post": {
+                "operationId": "PieChartTransactionData",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1028,9 +1057,66 @@
                             "application/json": {
                                 "schema": {
                                     "anyOf": [
-                                        {},
                                         {
-                                            "$ref": "#/components/schemas/OptionsMaster"
+                                            "items": {
+                                                "$ref": "#/components/schemas/TransactionCategory"
+                                            },
+                                            "type": "array"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        },
+                                        {}
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Expanses Transactions"
+                ],
+                "security": [],
+                "parameters": [],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "to": {
+                                        "type": "string"
+                                    },
+                                    "from": {
+                                        "type": "string"
+                                    }
+                                },
+                                "required": [
+                                    "to",
+                                    "from"
+                                ],
+                                "type": "object"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/transaction/softdelete/{id}": {
+            "delete": {
+                "operationId": "SoftDeleteStudentById",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
                                         }
                                     ]
                                 }
@@ -1039,7 +1125,7 @@
                     }
                 },
                 "tags": [
-                    "Selectors Master List"
+                    "Expanses Transactions"
                 ],
                 "security": [],
                 "parameters": [
@@ -1048,20 +1134,11 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "type": "string"
+                            "format": "double",
+                            "type": "number"
                         }
                     }
-                ],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/OptionsMasterUpdate"
-                            }
-                        }
-                    }
-                }
+                ]
             }
         },
         "/student/all/items": {
@@ -1405,9 +1482,9 @@
                 }
             }
         },
-        "/transaction/all/items": {
+        "/selector/getlist": {
             "get": {
-                "operationId": "GetAllTransaction",
+                "operationId": "GetSelectorList",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1415,11 +1492,9 @@
                             "application/json": {
                                 "schema": {
                                     "anyOf": [
+                                        {},
                                         {
-                                            "$ref": "#/components/schemas/PageResponse_TransactionsList_"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ErrorStore"
+                                            "$ref": "#/components/schemas/OptionsMaster"
                                         }
                                     ]
                                 }
@@ -1428,69 +1503,15 @@
                     }
                 },
                 "tags": [
-                    "Expanses Transactions"
+                    "Selectors Master List"
                 ],
                 "security": [],
-                "parameters": [
-                    {
-                        "in": "query",
-                        "name": "Pagination",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
-                    {
-                        "in": "query",
-                        "name": "Filters",
-                        "required": false,
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                ]
+                "parameters": []
             }
         },
-        "/transaction/{id}": {
-            "get": {
-                "operationId": "GetTransactionById",
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/TransactionsList"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ErrorStore"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Expanses Transactions"
-                ],
-                "security": [],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "format": "double",
-                            "type": "number"
-                        }
-                    }
-                ]
-            },
+        "/selector/update/{id}": {
             "put": {
-                "operationId": "UpdateTransactionById",
+                "operationId": "UpdateSelector",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1498,11 +1519,9 @@
                             "application/json": {
                                 "schema": {
                                     "anyOf": [
+                                        {},
                                         {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ErrorStore"
+                                            "$ref": "#/components/schemas/OptionsMaster"
                                         }
                                     ]
                                 }
@@ -1511,7 +1530,7 @@
                     }
                 },
                 "tags": [
-                    "Expanses Transactions"
+                    "Selectors Master List"
                 ],
                 "security": [],
                 "parameters": [
@@ -1520,8 +1539,7 @@
                         "name": "id",
                         "required": true,
                         "schema": {
-                            "format": "double",
-                            "type": "number"
+                            "type": "string"
                         }
                     }
                 ],
@@ -1530,53 +1548,16 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/transactionlistUpdateInterface"
+                                "$ref": "#/components/schemas/OptionsMasterUpdate"
                             }
                         }
                     }
                 }
-            },
-            "delete": {
-                "operationId": "DeleteStudentById",
-                "responses": {
-                    "200": {
-                        "description": "Ok",
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "anyOf": [
-                                        {
-                                            "type": "string"
-                                        },
-                                        {
-                                            "$ref": "#/components/schemas/ErrorStore"
-                                        }
-                                    ]
-                                }
-                            }
-                        }
-                    }
-                },
-                "tags": [
-                    "Expanses Transactions"
-                ],
-                "security": [],
-                "parameters": [
-                    {
-                        "in": "path",
-                        "name": "id",
-                        "required": true,
-                        "schema": {
-                            "format": "double",
-                            "type": "number"
-                        }
-                    }
-                ]
             }
         },
-        "/transaction/create": {
-            "post": {
-                "operationId": "CreateStudent",
+        "/loginregister/login": {
+            "put": {
+                "operationId": "GetSelectorList",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1584,9 +1565,7 @@
                             "application/json": {
                                 "schema": {
                                     "anyOf": [
-                                        {
-                                            "$ref": "#/components/schemas/ServiceResponse"
-                                        },
+                                        {},
                                         {
                                             "$ref": "#/components/schemas/ErrorStore"
                                         }
@@ -1597,7 +1576,7 @@
                     }
                 },
                 "tags": [
-                    "Expanses Transactions"
+                    "Logins & Registers"
                 ],
                 "security": [],
                 "parameters": [],
@@ -1606,16 +1585,16 @@
                     "content": {
                         "application/json": {
                             "schema": {
-                                "$ref": "#/components/schemas/transactionlistInterface"
+                                "$ref": "#/components/schemas/loginInterface"
                             }
                         }
                     }
                 }
             }
         },
-        "/transaction/chartdata": {
-            "post": {
-                "operationId": "PieChartTransactionData",
+        "/loginregister/all": {
+            "get": {
+                "operationId": "GetAllLogins",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1625,14 +1604,13 @@
                                     "anyOf": [
                                         {
                                             "items": {
-                                                "$ref": "#/components/schemas/TransactionCategory"
+                                                "$ref": "#/components/schemas/LoginRegister"
                                             },
                                             "type": "array"
                                         },
                                         {
                                             "$ref": "#/components/schemas/ErrorStore"
-                                        },
-                                        {}
+                                        }
                                     ]
                                 }
                             }
@@ -1640,37 +1618,15 @@
                     }
                 },
                 "tags": [
-                    "Expanses Transactions"
+                    "Logins & Registers"
                 ],
                 "security": [],
-                "parameters": [],
-                "requestBody": {
-                    "required": true,
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "properties": {
-                                    "to": {
-                                        "type": "string"
-                                    },
-                                    "from": {
-                                        "type": "string"
-                                    }
-                                },
-                                "required": [
-                                    "to",
-                                    "from"
-                                ],
-                                "type": "object"
-                            }
-                        }
-                    }
-                }
+                "parameters": []
             }
         },
-        "/transaction/softdelete/{id}": {
-            "delete": {
-                "operationId": "SoftDeleteStudentById",
+        "/loginregister/{id}": {
+            "put": {
+                "operationId": "UpdateLogin",
                 "responses": {
                     "200": {
                         "description": "Ok",
@@ -1691,7 +1647,54 @@
                     }
                 },
                 "tags": [
-                    "Expanses Transactions"
+                    "Logins & Registers"
+                ],
+                "security": [],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "format": "double",
+                            "type": "number"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/loginregisterUpdateInterface"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "operationId": "DeleteLogin",
+                "responses": {
+                    "200": {
+                        "description": "Ok",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "anyOf": [
+                                        {
+                                            "type": "string"
+                                        },
+                                        {
+                                            "$ref": "#/components/schemas/ErrorStore"
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    }
+                },
+                "tags": [
+                    "Logins & Registers"
                 ],
                 "security": [],
                 "parameters": [
