@@ -6,7 +6,4 @@ const port = process.env.PORT || 3000;
 app.listen(port, () =>
   // console.log(`Backend Host URL http://localhost:${port}`)
 console.log(`Backend Host URL http://aarsha.dev.vaaradhiitservices.com`)
-
-
-
 );
